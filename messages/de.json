@@ -1,0 +1,2646 @@
+{
+  " ": " ",
+  ",": ",",
+  "-": "-",
+  "2d": "2D",
+  ";": ";",
+  "; ${name}=": "; ${name}=",
+  "@": "@",
+  "Click me": "Click me",
+  "Cookie": "Cookie",
+  "Daten abgerufen": {
+    " Siehe Konsole f\\u00FCr Details": {
+      "\\n\\nE-Mail: ${data": {
+        "email}\\nRollen in DB: ${JSON": {
+          "stringify(data": {
+            "dbData, null, 2)}": "Daten abgerufen. Siehe Konsole f\\u00FCr Details.\\n\\nE-Mail: ${data.email}\\nRollen in DB: ${JSON.stringify(data.dbData, null, 2)}"
+          }
+        }
+      }
+    }
+  },
+  "Error interno del servidor": "Interner Serverfehler",
+  "Fehler bei der Diagnose": "Fehler bei der Diagnose",
+  "Fehler beim Abfragen der DB": "Fehler beim Abfragen der DB",
+  "Fehler beim Abfragen von Stack Auth": "Fehler beim Abfragen von Stack Auth",
+  "Fehler beim Abrufen der Daten": "Fehler beim Abrufen der Daten",
+  "Fehler beim Aktualisieren des Rolle": "Fehler beim Aktualisieren des Rolle",
+  "Fehler beim Synchronisieren der Rollen": "Fehler beim Synchronisieren der Rollen",
+  "Fehler beim Zuweisen der Rolle": "Fehler beim Zuweisen der Rolle",
+  "Fehler: ${data": {
+    "error}": "Fehler: ${data.error}"
+  },
+  "RelayState": "Relay-Status",
+  "Rolle GLOBAL_ADMIN zugewiesen": {
+    " Seite neu laden": {
+      "": "Rolle GLOBAL_ADMIN zugewiesen. Seite neu laden."
+    }
+  },
+  "Rolle TEAM_LEADER zugewiesen": {
+    " Seite neu laden": {
+      "": "Rolle TEAM_LEADER zugewiesen. Seite neu laden."
+    }
+  },
+  "SAMLResponse": "SAML-Antwort",
+  "\\n": "\\n",
+  "accessibility": {
+    "skipToContent": "Zum Hauptinhalt springen",
+    "loading": "Laden",
+    "error": "Fehler",
+    "success": "Erfolg",
+    "announcement": "Ankündigung",
+    "navigation": "Navigation",
+    "mainContent": "Hauptinhalt",
+    "search": "Suche",
+    "menu": "Menü",
+    "close": "Schließen",
+    "open": "Öffnen",
+    "previous": "Zurück",
+    "next": "Weiter",
+    "first": "Erste",
+    "last": "Letzte",
+    "page": "Seite",
+    "of": "von",
+    "escape-press": "Drücken Sie Esc zum Schließen"
+  },
+  "action": "Aktion",
+  "activePackages": "{count} aktive Pakete",
+  "addedAsContext": "als Kontext hinzugefügt",
+  "admin": {
+    "teams": {
+      "title": "Teamverwaltung",
+      "description": "Verwalten Sie alle Teams und deren Unternehmensauthentifizierungseinstellungen",
+      "searchPlaceholder": "Teams nach Name oder Slug suchen...",
+      "table": {
+        "name": "Teamname",
+        "slug": "Slug",
+        "members": "Mitglieder",
+        "sso": "SSO",
+        "scim": "SCIM",
+        "ssoType": "SSO-Typ",
+        "enterpriseAuth": "Unternehmensauthentifizierung",
+        "actions": "Aktionen",
+        "view": "Anzeigen",
+        "noResults": "Keine Teams gefunden"
+      },
+      "ssoType": {
+        "none": "Keiner",
+        "saml": "SAML",
+        "oidc": "OIDC",
+        "both": "Beide"
+      },
+      "status": {
+        "configured": "Konfiguriert",
+        "notConfigured": "Nicht konfiguriert"
+      }
+    },
+    "saml": {
+      "title": "SAML-Konfiguration",
+      "description": "Verwalten Sie SAML 2.0 Single Sign-On für dieses Team",
+      "viewTeam": "Team anzeigen",
+      "backToTeams": "Zurück zu Teams",
+      "migration": {
+        "title": "SAML zu OIDC Migration",
+        "status": "Migrationsstatus",
+        "mode": "Migrationsmodus",
+        "canaryPercent": "Canary-Prozentsatz",
+        "startedAt": "Gestartet am",
+        "completedAt": "Abgeschlossen am",
+        "actions": {
+          "startMigration": "Migration starten",
+          "rollback": "Zu SAML zurückrollen"
+        }
+      }
+    },
+    "scim": {
+      "title": "SCIM-Konfiguration",
+      "description": "Verwalten Sie SCIM 2.0-Bereitstellung für dieses Team",
+      "viewTeam": "Team anzeigen",
+      "backToTeams": "Zurück zu Teams",
+      "tokens": {
+        "title": "SCIM-Tokens",
+        "name": "Token-Name",
+        "lastUsed": "Zuletzt verwendet",
+        "expiresAt": "Läuft ab am",
+        "actions": "Aktionen",
+        "create": "Token erstellen",
+        "revoke": "Widerrufen",
+        "copy": "Kopieren",
+        "revokeConfirm": {
+          "title": "SCIM-Token widerrufen?",
+          "description": "Dies wird den Token sofort ungültig machen. Systeme, die diesen Token verwenden, müssen aktualisiert werden.",
+          "confirm": "Widerrufen",
+          "cancel": "Abbrechen"
+        }
+      },
+      "logs": {
+        "title": "SCIM-Synchronisierungsprotokolle",
+        "operation": "Vorgang",
+        "resourceType": "Ressourcentyp",
+        "resourceId": "Ressourcen-ID",
+        "status": "Status",
+        "errorMessage": "Fehlermeldung",
+        "timestamp": "Zeitstempel",
+        "noResults": "Keine Synchronisierungsprotokolle gefunden"
+      }
+    }
+  },
+  "apiKeys": {
+    "confirmDelete": "Sind Sie sicher, dass Sie diesen API-Schlüssel löschen möchten? \nDiese Aktion kann nicht rückgängig gemacht werden.",
+    "confirmRevoke": "Sind Sie sicher, dass Sie diesen API-Schlüssel widerrufen möchten? \nSie können es bei Bedarf später wieder aktivieren.",
+    "create": "Neuer Schlüssel",
+    "createDialog": {
+      "cancel": "Stornieren",
+      "create": "API-Schlüssel erstellen",
+      "creating": "Erstellen...",
+      "description": "Generieren Sie einen API-Schlüssel, um Nexary in Ihre Anwendungen zu integrieren. \nDer Schlüssel wird nur einmal angezeigt.",
+      "expiration": {
+        "description": "Lassen Sie das Feld leer, damit der Schlüssel niemals abläuft",
+        "label": "Ablaufdatum (optional)"
+      },
+      "name": {
+        "description": "Ein beschreibender Name zur Identifizierung der Verwendung dieses Schlüssels",
+        "label": "Name *",
+        "placeholder": "Beispiel: Zapier-Integration, benutzerdefinierter Bot"
+      },
+      "scopes": {
+        "description": "Wählen Sie die Berechtigungen für diesen API-Schlüssel aus",
+        "label": "Bereiche *"
+      },
+      "title": "Erstellen Sie einen neuen API-Schlüssel"
+    },
+    "createFirst": "Erstellen Sie den ersten Schlüssel",
+    "description": "Verwalten Sie API-Schlüssel, um Nexary mit anderen Anwendungen zu integrieren",
+    "generatedKey": {
+      "copy": "Kopie",
+      "description": "Dieser Schlüssel wird nur einmal angezeigt. \nKopieren Sie es jetzt und bewahren Sie es an einem sicheren Ort auf.",
+      "title": "Speichern Sie Ihren API-Schlüssel!"
+    },
+    "info": {
+      "auth": "Authentifizierung: Fügen Sie den Schlüssel in den Autorisierungsheader ein: Bearer nxak_...",
+      "endpoints": "Verfügbare Endpunkte: Chat, Dokumente, RAG-Abfragen und mehr, je nach Umfang",
+      "rateLimit": "Ratenbegrenzung: Für jeden Schlüssel gelten Grenzwerte von 60 Anfragen/Minute und 1000/Stunde",
+      "title": "Wie verwende ich API-Schlüssel?"
+    },
+    "nav": "API-Schlüssel",
+    "noKeys": "Keine API-Schlüssel",
+    "noKeysDescription": "Erstellen Sie Ihren ersten API-Schlüssel, um mit der Integration von Nexary in Ihre Anwendungen zu beginnen.",
+    "scopes": {
+      "admin": {
+        "description": "Voller Zugriff",
+        "label": "Administrator"
+      },
+      "read:chat": {
+        "description": "Gespräche anzeigen",
+        "label": "Chat lesen"
+      },
+      "read:documents": {
+        "description": "Dokumente ansehen",
+        "label": "Dokumente lesen"
+      },
+      "read:teams": {
+        "description": "Teaminformationen anzeigen",
+        "label": "Lesen Sie Teams"
+      },
+      "write:chat": {
+        "description": "Erstellen Sie Nachrichten",
+        "label": "Chat schreiben"
+      },
+      "write:documents": {
+        "description": "Dokumente hochladen/bearbeiten",
+        "label": "Schreiben Sie Dokumente"
+      },
+      "write:teams": {
+        "description": "Konfiguration bearbeiten",
+        "label": "Teams verwalten"
+      },
+      "${scope": {
+        "value}": {
+          "label": "apiKeys.scopes.${scope.value}.label",
+          "description": "apiKeys.scopes.${scope.value}.description"
+        }
+      }
+    },
+    "status": {
+      "active": "Aktiv",
+      "revoked": "Widerrufen"
+    },
+    "table": {
+      "actions": "Aktionen",
+      "created": "Erstellt",
+      "key": "Schlüssel",
+      "name": "Name",
+      "scopes": "Bereiche",
+      "status": "Status",
+      "usage": "Nutzung (30 Tage)"
+    },
+    "title": "API-Schlüssel",
+    "toast": {
+      "copied": "Kopiert",
+      "copiedDescription": "Der Schlüssel wurde in die Zwischenablage kopiert",
+      "created": "API-Schlüssel erstellt",
+      "createdDescription": "Kopieren Sie jetzt den Schlüssel. \nEs wird nicht erneut angezeigt.",
+      "deleted": "API-Schlüssel gelöscht",
+      "deletedDescription": "Der Schlüssel wurde endgültig gelöscht",
+      "error": "Fehler",
+      "errorCreate": "API-Schlüssel konnte nicht erstellt werden",
+      "errorDelete": "Der API-Schlüssel konnte nicht gelöscht werden",
+      "errorLoad": "API-Schlüssel konnten nicht geladen werden",
+      "errorRevoke": "Der API-Schlüssel konnte nicht widerrufen werden",
+      "nameRequired": "Name erforderlich",
+      "nameRequiredDescription": "Bitte geben Sie einen Namen für den API-Schlüssel ein",
+      "revoked": "API-Schlüssel widerrufen",
+      "revokedDescription": "Der Schlüssel wurde deaktiviert",
+      "scopesRequired": "Bereiche erforderlich",
+      "scopesRequiredDescription": "Bitte wählen Sie mindestens einen Bereich aus"
+    },
+    "usage": "{count} Anfragen",
+    "read_only": "Nur lesen",
+    "custom": "Benutzerdefiniert",
+    ":": "apiKeys.:"
+  },
+  "attachFile": "Datei anhängen",
+  "audioRecordingDescription": "Sie können abbrechen, indem Sie den Cursor wegbewegen, bevor Sie loslassen",
+  "audioRecordingPending": "Loslassen, um die Aufnahme zu senden",
+  "auditLogs": {
+    "title": "Audit-Logs",
+    "description": "Audit-Logs für Sicherheitsüberwachung und Compliance anzeigen und exportieren",
+    "accessDenied": {
+      "title": "Zugriff verweigert",
+      "description": "Sie haben keine Berechtigung, Audit-Logs anzuzeigen"
+    },
+    "filters": {
+      "title": "Filter",
+      "dateRange": {
+        "label": "Zeitraum"
+      },
+      "dateRanges": {
+        "24h": "Letzte 24 Stunden",
+        "7d": "Letzte 7 Tage",
+        "30d": "Letzte 30 Tage",
+        "90d": "Letzte 90 Tage",
+        "1y": "Letztes Jahr",
+        "all": "Alle Zeit"
+      },
+      "startDate": {
+        "label": "Startdatum",
+        "placeholder": "Datum wählen"
+      },
+      "endDate": {
+        "label": "Enddatum",
+        "placeholder": "Datum wählen"
+      },
+      "action": {
+        "label": "Aktion",
+        "placeholder": "z.B. user.login"
+      },
+      "targetType": {
+        "label": "Ressourcentyp",
+        "placeholder": "z.B. document"
+      },
+      "refresh": "Filter anwenden"
+    },
+    "logs": {
+      "title": "Audit-Logs",
+      "showing": "{count} von {total} Logs anzeigen",
+      "timestamp": "Zeitstempel",
+      "action": "Aktion",
+      "resource": "Ressource",
+      "user": "Benutzer-ID",
+      "ipAddress": "IP-Adresse",
+      "loading": "Lade Logs...",
+      "noLogs": "Keine Logs für die ausgewählten Filter gefunden",
+      "pageInfo": "Seite {page} von {totalPages} ({total} gesamt)",
+      "previous": "Zurück",
+      "next": "Weiter"
+    },
+    "actions": {
+      "TEAM_CREATE": "Team erstellt",
+      "TEAM_UPDATE": "Team aktualisiert",
+      "TEAM_DELETE": "Team gelöscht",
+      "USER_LOGIN": "Benutzer-Anmeldung",
+      "USER_LOGOUT": "Benutzer-Abmeldung",
+      "USER_CREATE": "Benutzer erstellt",
+      "USER_UPDATE": "Benutzer aktualisiert",
+      "USER_DELETE": "Benutzer gelöscht",
+      "DOCUMENT_UPLOAD": "Dokument hochgeladen",
+      "DOCUMENT_DELETE": "Dokument gelöscht",
+      "RAG_QUERY": "RAG-Abfrage",
+      "API_KEY_CREATE": "API-Schlüssel erstellt",
+      "API_KEY_DELETE": "API-Schlüssel gelöscht",
+      "SAML_LOGIN": "SAML-Anmeldung",
+      "SCIM_PROVISION": "SCIM-Bereitstellung"
+    },
+    "export": {
+      "button": "Logs exportieren",
+      "exporting": "Exportiere...",
+      "formatLabel": "Exportformat",
+      "success": "Export gestartet",
+      "downloading": "Lade {filename} herunter...",
+      "failed": "Export fehlgeschlagen",
+      "info": {
+        "title": "Exportformate",
+        "json": "JSON: Strukturiertes Format mit Metadaten, ideal für programmatische Verarbeitung und API-Integration",
+        "csv": "CSV: Kommagetrennte Werte, kompatibel mit Excel und Tabellenkalkulationsanwendungen",
+        "syslog": "SYSLOG: RFC 5424-konformes Format, kompatibel mit Log-Aggregationssystemen wie Splunk, ELK"
+      }
+    },
+    "errors": {
+      "fetchFailed": "Audit-Logs konnten nicht abgerufen werden",
+      "unknown": "Ein unbekannter Fehler ist aufgetreten"
+    },
+    "Content-Disposition": "Inhaltszuordnung"
+  },
+  "auth": {
+    "login": "Anmelden",
+    "loginDescription": "Authentifizieren Sie sich mit Ihren Stack Auth-Anmeldeinformationen.",
+    "email": "E-Mail-Adresse",
+    "password": "Passwort",
+    "emailPlaceholder": "user@team.com",
+    "passwordPlaceholder": "Geben Sie Ihr Passwort ein",
+    "loginWithStackAuth": "Mit Stack Auth anmelden",
+    "loggingIn": "Wird angemeldet...",
+    "loginSuccess": "Anmeldung erfolgreich",
+    "redirecting": "Sie werden weitergeleitet...",
+    "loginFailed": "Anmeldung fehlgeschlagen",
+    "tryAgain": "Bitte versuchen Sie es erneut.",
+    "backToHome": "Zurück zur Startseite",
+    "noAccountRegister": "Kein Konto? Registrieren und Team erstellen",
+    "continueWithGoogle": "Mit Google fortfahren",
+    "orDivider": "oder",
+    "validation": {
+      "invalidEmail": "Please enter a valid email address.",
+      "passwordMin": "Passwort muss mindestens {count} Zeichen lang sein."
+    },
+    "rateLimitExceeded": "Ratenlimit überschritten",
+    "rateLimitMessage": "Zu viele Versuche. Bitte versuchen Sie es später erneut.",
+    "callbackUrl": "Callback-URL"
+  },
+  "baa": "BAA",
+  "before": "Vorher",
+  "canvas": "Leinwand",
+  "category": "Kategorie",
+  "chat": {
+    "title": "Chat",
+    "nexarySmart": "Nexary Smart Chat",
+    "azureOpenAI": "Azure Open AI",
+    "sidebar": {
+      "openConversations": "Offene Gespräche"
+    },
+    "openMenu": "Chat-Menü öffnen",
+    "howCanWeHelp": "Wie können wir helfen?",
+    "attachFile": "Datei anhängen",
+    "recordAudio": "Audio aufnehmen",
+    "audioRecordingPending": "Loslassen, um die Aufnahme zu senden",
+    "audioRecordingDescription": "Sie können abbrechen, indem Sie den Cursor wegbewegen, bevor Sie loslassen",
+    "ragDocuments": "RAG-Dokumente",
+    "sendMessageOrDropFiles": "Nachricht schreiben oder Dateien ablegen...",
+    "pressEnterToSend": "Enter drücken zum Senden",
+    "filesLater": "Dateien können später im Chat hinzugefügt werden",
+    "dropFiles": "Dateien hier ablegen",
+    "pdfDocumentsAsContext": "PDF-Dokumente werden als Chat-Kontext verwendet",
+    "noConversation": "Keine Konversation",
+    "startConversation": "Beginnen Sie eine Konversation, laden Sie Dokumente hoch und teilen Sie Wissen mit Ihrem Team.",
+    "startConversationBeforeUpload": "Beginnen Sie eine Konversation, bevor Sie Dokumente hochladen.",
+    "documentsUploaded": "Chat-Dokumente hochgeladen",
+    "of": "von",
+    "file(s)": "Datei(en)",
+    "addedAsContext": "als Kontext hinzugefügt",
+    "uploadError": "Fehler beim Hochladen",
+    "noFilesUploaded": "Keine Dateien hochgeladen",
+    "unexpectedError": "Ein unerwarteter Fehler ist aufgetreten",
+    "llmDisclaimer": "Große Sprachmodelle (LLM) können Fehler machen. Überprüfen Sie immer wichtige Informationen.",
+    "thinking": "Denke nach...",
+    "reasoning": "Reasoniere...",
+    "generatingResponse": "Antwort wird generiert",
+    "copy": "Kopieren",
+    "copied": "Kopiert",
+    "regenerate": "Regenerieren",
+    "responseCopied": "Antwort in die Zwischenablage kopiert",
+    "autoSmartSelector": "Auto (Smart Selector)",
+    "comingSoon": "Demnächst",
+    "modelSettings": "Modelleinstellungen",
+    "ragManagement": "RAG-Verwaltung",
+    "files": "Dateien",
+    "uploadDocuments": "Dokumente hochladen",
+    "dragPdfOr": "PDF-Dateien hierher ziehen oder",
+    "selectFile": "Dateien auswählen",
+    "pdfOnlyMax10mb": "Nur PDF-Dateien, maximal 10 MB pro Datei",
+    "uploadedDocuments": "Hochgeladene Dokumente ({count})",
+    "noKnowledgePackages": "Keine Wissenspakete verfügbar",
+    "createPackagesInDashboard": "Pakete im Dashboard erstellen",
+    "activePackages": "{count} aktive Pakete",
+    "documentsCount": "{count} Dokumente",
+    "chunksCount": "{count} Chunks",
+    "noActiveConversation": "Keine aktive Konversation",
+    "notPdf": "Nur PDF-Dateien sind erlaubt: {name}",
+    "tooLarge": "Datei zu groß (max 10MB): {name}",
+    "uploadFailed": "Hochladen fehlgeschlagen {name}",
+    "processed": "Dokument {name} erfolgreich verarbeitet",
+    "deleted": "Gelöscht",
+    "documentRemoved": "Dokument entfernt",
+    "deleteError": "Dokument konnte nicht gelöscht werden",
+    "success": "Erfolg",
+    "error": "Fehler",
+    "generationStopped": "Generierung gestoppt",
+    "generationStoppedDesc": "Die Antwortgenerierung wurde abgebrochen",
+    "stop": "Stoppen",
+    "sources": "Quellen",
+    "messagePinned": "Nachricht angeheftet",
+    "messageUnpinned": "Nachricht gelöst",
+    "pinMessage": "Nachricht anheften",
+    "unpinMessage": "Nachricht lösen",
+    "exportConversation": "Gespräch exportieren",
+    "exportMarkdown": "Als Markdown exportieren",
+    "exportJSON": "Als JSON exportieren",
+    "exportPDF": "Als PDF drucken",
+    "exportSuccess": "Export erfolgreich",
+    "printDialogOpened": "Druckdialog geöffnet",
+    "fileDownloaded": "Datei heruntergeladen",
+    "helpfulResponse": "Hilfreiche Antwort",
+    "notHelpfulResponse": "Nicht hilfreiche Antwort",
+    "codeBlock": {
+      "copyCode": "Code kopieren",
+      "copied": "Kopiert!",
+      "\\n": "chat.codeBlock.\\n"
+    },
+    "mermaid": {
+      "zoomIn": "Vergrößern",
+      "zoomOut": "Verkleinern",
+      "resetZoom": "Zoom zurücksetzen",
+      "fullscreen": "Vollbild",
+      "exitFullscreen": "Vollbild beenden",
+      "errorRendering": "Fehler beim Rendern des Diagramms",
+      "loading": "Diagramm wird geladen...",
+      "mermaid": "Mermaid-Diagramm"
+    },
+    "samplePromptsIntro": "Schnelle Vorschläge:",
+    "contextQuestionsIntro": "Um Ihnen besser zu helfen, beantworten Sie zuerst:",
+    "showWhatFound": "Zeig mir, was du gefunden hast",
+    "sourcesAnalysis": "Analyse & Quellen",
+    "references": "Refs",
+    "context": "Kontext",
+    "graph": "Graph",
+    "similarity": "Relevanz",
+    "open": "Anzeigen",
+    "jumpToDocument": "Im Document Hub anzeigen",
+    "copyContext": "Kopieren",
+    "showMore": "Mehr anzeigen",
+    "showLess": "Weniger anzeigen",
+    "webSearch": "Websuche",
+    "webSearchEnabled": "Websuche aktiviert",
+    "webSearchDisabled": "Websuche deaktiviert",
+    "webSearchEnabledDesc": "Antworten enthalten Informationen aus dem Web",
+    "webSearchDisabledDesc": "Websuche ist jetzt aus",
+    "searchingWeb": "Suche im Internet...",
+    "webResults": "Web-Ergebnisse",
+    "rateLimitExceeded": "Ratenlimit überschritten",
+    "rateLimitMessage": "Sie haben das Nachrichtenlimit erreicht. Bitte versuchen Sie es später erneut.",
+    "modelSelector": {
+      "smartSelector": "Auto / Smart Selector",
+      "smartSelectorDesc": "Wählt automatisch das beste Modell basierend auf Aufgabenkomplexität und -typ.",
+      "searchPlaceholder": "Modell suchen...",
+      "capabilities": "Fähigkeiten",
+      "contextWindow": "Kontextfenster",
+      "pricing": "Preise",
+      "provider": "Anbieter",
+      "model": "Modell"
+    },
+    "generateReport": "Generate Report",
+    "viewReport": "View Report",
+    "downloadReport": "Download Report",
+    "reportPreview": "Report Preview",
+    "downloadPDF": "Download PDF",
+    "meetingReport": "Meeting Report",
+    "participants": "Participants",
+    "present": "Present",
+    "guests": "Guests",
+    "absent": "Absent",
+    "agenda": "Sections / Agenda",
+    "summary": "Summary",
+    "openTasks": "Action Items / Recommendations",
+    "task": "Task",
+    "assignee": "Assignee",
+    "deadline": "Due",
+    "status": "Status",
+    "nextMeeting": "Next Steps / Follow-up",
+    "reportModeEnabled": "Smart Report Mode",
+    "reportModeDisabled": "Smart Report Mode Disabled",
+    "reportModeEnabledDesc": "Your next message will generate a structured report or analysis.",
+    "reportModeDisabledDesc": "Standard chat mode active.",
+    "generatingReport": "Generating Report...",
+    "generatingReportDesc": "AI is structuring the content",
+    "smartReport": "Structured Report",
+    "assistant": "Assistent",
+    "\\n": "chat.\\n",
+    "titleUpdated": "Titel aktualisiert",
+    "titleUpdatedDesc": "Gesprächstitel wurde automatisch aktualisiert",
+    "titleUpdateFailed": "Titelaktualisierung fehlgeschlagen",
+    "titleUpdateFailedDesc": "Konnte den Titel nicht automatisch aktualisieren",
+    "exportFailed": "Export fehlgeschlagen",
+    "exportFailedDesc": "Konnte das Gespräch nicht exportieren",
+    "newChat": "Neuer Chat",
+    "export": "Exportieren",
+    "showAdvancedSearch": "Erweiterte Suche",
+    "hideAdvancedSearch": "Erweiterte Suche ausblenden",
+    "searchError": "Suchfehler",
+    "searchErrorDesc": "Erweiterte Suche fehlgeschlagen",
+    "insufficientCredits": "Unzureichende Guthaben",
+    "modelNotAvailable": "Modell Nicht Verfügbar",
+    "modelDeprecated": "Modell Veraltet",
+    "aiProviderError": "AI-Anbieter Fehler",
+    "contentFilter": "Inhalt Gefiltert",
+    "contextLengthExceeded": "Gespräch Zu Lang",
+    "authenticationError": "Authentifizierungsfehler",
+    "errorMessage": "Etwas ist schiefgelaufen. Bitte versuchen Sie es erneut.",
+    "insufficientCreditsMessage": "Bitte überprüfen Sie Ihr Guthaben und versuchen Sie es erneut.",
+    "modelNotAvailableMessage": "Bitte versuchen Sie ein anderes Modell oder kontaktieren Sie den Support.",
+    "modelDeprecatedMessage": "Bitte wählen Sie ein neueres Modell in den Einstellungen.",
+    "aiProviderErrorMessage": "Es gibt ein Problem mit dem AI-Dienst. Bitte versuchen Sie es erneut.",
+    "contentFilterMessage": "Bitte formulieren Sie Ihre Nachricht um und versuchen Sie es erneut.",
+    "contextLengthExceededMessage": "Bitte starten Sie eine neue Unterhaltung, um fortzufahren.",
+    "authenticationErrorMessage": "Bitte melden Sie sich erneut an, um fortzufahren."
+  },
+  "chunksCount": "{count} Chunks",
+  "citations": {
+    "citations": "Zitate",
+    "collapseAll": "Alle einklappen",
+    "viewDocument": "Dokument anzeigen",
+    "copyCitation": "Kopieren",
+    "showMore": "Mehr anzeigen",
+    "showLess": "Weniger anzeigen"
+  },
+  "code": "Code",
+  "collection": "Sammlung",
+  "common": {
+    "loading": "Laden...",
+    "save": "Speichern",
+    "cancel": "Abbrechen",
+    "delete": "Löschen",
+    "edit": "Bearbeiten",
+    "create": "Erstellen",
+    "search": "Suchen",
+    "settings": "Einstellungen",
+    "preferences": "Präferenzen",
+    "dashboard": "Armaturenbrett",
+    "admin": "Administrator",
+    "chat": "Chat",
+    "prompts": "Eingabeaufforderungen",
+    "analytics": "Analysen",
+    "team": "Team",
+    "rag": "RAG",
+    "documents": "Dokumente",
+    "logout": "Abmelden",
+    "profile": "Profil",
+    "language": "Sprache",
+    "languages": {
+      "en": "Englisch",
+      "de": "Deutsch",
+      "es": "Spanisch"
+    },
+    "showMore": "Mehr anzeigen",
+    "showLess": "Weniger anzeigen"
+  },
+  "confirm": "Bestätigen",
+  "contextQuestionsIntro": "Um Ihnen besser zu helfen, antworten Sie zunächst:",
+  "conversationId": "Gesprächs-ID",
+  "copied": "Kopiert",
+  "copy": "Kopieren",
+  "costAnalytics": {
+    "alert": {
+      "dismiss": "Warnung verwerfen",
+      "message": "Sie haben {percentage} % Ihres Monatsbudgets erreicht (${spent} von ${budget})",
+      "title": "Budgetalarm"
+    },
+    "budget": {
+      "close": "Schließen",
+      "configure": "Konfigurieren",
+      "configureButton": "Budget konfigurieren",
+      "current": "Aktuelle Ausgaben",
+      "description": "Aktuelle Budgetverfolgung",
+      "notSet": "Sie haben kein Monatsbudget konfiguriert",
+      "of": "von",
+      "settings": {
+        "alertThreshold": "Alarm bei Erreichen (%)",
+        "monthlyBudget": "Monatsbudget (USD)",
+        "placeholder": "Beispiel: 100",
+        "save": "Speichern",
+        "saving": "Sparen..."
+      },
+      "status": {
+        "exceeded": "Übertroffen",
+        "ok": "OK",
+        "warning": "Warnung"
+      },
+      "title": "Monatsbudget",
+      "used": "{percentage} % verwendet"
+    },
+    "byModel": {
+      "description": "Detaillierte Aufschlüsselung der Ausgaben nach Modell",
+      "noData": "Keine Daten verfügbar",
+      "table": {
+        "average": "Durchschnitt",
+        "model": "Modell",
+        "provider": "Anbieter",
+        "requests": "Anfragen",
+        "spend": "Ausgeben"
+      },
+      "title": "Kosten nach Modell"
+    },
+    "charts": {
+      "byProvider": {
+        "description": "Kostenverteilung durch KI",
+        "title": "Ausgaben nach Anbieter"
+      },
+      "dailySpend": {
+        "description": "KI-Kosten pro Tag",
+        "title": "Tägliche Ausgaben"
+      }
+    },
+    "description": "Nutzung, Statistiken und KI-Kosten",
+    "nav": "KI-Kosten",
+    "noData": {
+      "description": "Die KI-Kosten werden ab Ihrer ersten Abfrage erfasst",
+      "title": "Keine Kostendaten"
+    },
+    "summary": {
+      "avgPerRequest": "Durchschn./Anfrage",
+      "avgPerRequestDescription": "Kosten pro Abfrage",
+      "requests": "Anfragen",
+      "requestsDescription": "Gesamtzahl der Abfragen",
+      "tokens": "Token",
+      "tokensDescription": "Token verarbeitet",
+      "totalSpend": "Gesamtausgaben ({days} Tage)",
+      "totalSpendDescription": "Kumulierte KI-Kosten"
+    },
+    "tabs": {
+      "costs": "KI-Kosten",
+      "usage": "Verwendung"
+    },
+    "timeRange": {
+      "30days": "30 Tage",
+      "7days": "7 Tage",
+      "90days": "90 Tage"
+    },
+    "title": "Teamanalyse",
+    "toast": {
+      "alertDismissed": "Warnung abgewiesen",
+      "alertDismissedDescription": "Die Warnung wurde entfernt",
+      "error": "Fehler",
+      "errorSave": "Die Einstellungen konnten nicht gespeichert werden",
+      "settingsSaved": "Einstellungen gespeichert",
+      "settingsSavedDescription": "Die Budgeteinstellungen wurden aktualisiert"
+    }
+  },
+  "count": "Anzahl",
+  "createPackagesInDashboard": "Pakete im Dashboard erstellen",
+  "dashboard": {
+    "appTitle": "Nexary",
+    "openMenu": "Menü öffnen",
+    "overview": "Übersicht",
+    "chat": "Chat",
+    "ragPackages": "RAG-Pakete",
+    "promptLibrary": "Prompt-Bibliothek",
+    "analytics": "Analysen",
+    "team": "Team",
+    "profile": "Profil",
+    "teamManagement": "Team-Verwaltung",
+    "manageMembersInvitationsRequests": "Verwalten Sie Teammitglieder, Einladungslinks und Beitrittsanfragen",
+    "teamMembers": "Teammitglieder",
+    "manageTeamMembersRolesPermissions": "Verwalten Sie Teammitglieder, Rollen und Berechtigungen",
+    "active": "Aktiv",
+    "suspended": "Ausgesetzt",
+    "removed": "Entfernt",
+    "owner": "Besitzer",
+    "teamLeader": "Teamleiter",
+    "member": "Mitglied",
+    "joined": "Beigetreten",
+    "lastActive": "Zuletzt aktiv",
+    "suspendedAt": "Ausgesetzt am",
+    "reason": "Grund",
+    "promoteToTeamLeader": "Zu Teamleiter befördern",
+    "demoteToMember": "Zu Mitglied herabstufen",
+    "suspendMember": "Mitglied aussetzen",
+    "suspendMemberTitle": "Mitglied aussetzen",
+    "suspendMemberDescription": "Sind Sie sicher, dass Sie dieses Mitglied aussetzen möchten? Es verliert den Zugriff auf Teamressourcen.",
+    "suspend": "Aussetzen",
+    "removeMember": "Mitglied entfernen",
+    "removeMemberTitle": "Mitglied entfernen",
+    "removeMemberDescription": "Sind Sie sicher, dass Sie dieses Mitglied entfernen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "remove": "Entfernen",
+    "reactivate": "Reaktivieren",
+    "noTeamMembers": "Keine Teammitglieder gefunden",
+    "createInvitationLink": "Einladungslink erstellen",
+    "createNewInvitationLink": "Erstellen Sie einen neuen Einladungslink, um ihn mit potenziellen Teammitgliedern zu teilen",
+    "expiresInHours": "Läuft ab in (Stunden)",
+    "expiresInHoursPlaceholder": "z.B. 24",
+    "maxUses": "Max. Nutzungen",
+    "maxUsesPlaceholder": "z.B. 5",
+    "notesOptional": "Notizen (Optional)",
+    "notesPlaceholder": "Interne Notizen für diesen Link",
+    "createLink": "Link erstellen",
+    "activeLinks": "Aktive Links",
+    "created": "Erstellt",
+    "expires": "Läuft ab",
+    "uses": "Nutzungen",
+    "unlimited": "Unbegrenzt",
+    "revokeLink": "Link widerrufen",
+    "revokeLinkDescription": "Sind Sie sicher, dass Sie diesen Einladungslink widerrufen möchten? Er ist nicht mehr nutzbar.",
+    "revoke": "Widerrufen",
+    "noActiveLinks": "Keine aktiven Einladungslinks",
+    "pending": "Ausstehend",
+    "usedApproved": "Genutzt/Genehmigt",
+    "expiredRejected": "Abgelaufen/Abgelehnt",
+    "requested": "Angefordert",
+    "reviewed": "Geprüft",
+    "approve": "Genehmigen",
+    "reject": "Ablehnen",
+    "noPendingRequests": "Keine ausstehenden Beitrittsanfragen",
+    "linkCreated": "Link erstellt",
+    "invitationLinkCreated": "Einladungslink erfolgreich erstellt",
+    "linkRevokeFailed": "Link konnte nicht widerrufen werden",
+    "copied": "Kopiert",
+    "invitationLinkCopied": "Einladungslink in die Zwischenablage kopiert",
+    "copyFailed": "Link konnte nicht kopiert werden",
+    "requestApproved": "Anfrage genehmigt",
+    "requestApprovedDescription": "Die Beitrittsanfrage wurde genehmigt",
+    "requestRejected": "Anfrage abgelehnt",
+    "requestRejectedDescription": "Die Beitrittsanfrage wurde abgelehnt",
+    "requestReviewFailed": "Anfrage konnte nicht geprüft werden",
+    "memberActionFailed": "Mitgliederaktion fehlgeschlagen",
+    "loadingTeam": "Teamdaten werden geladen...",
+    "addPrompt": "Add prompt",
+    "allTime": "All time",
+    "allUsers": "All users",
+    "analyticsDescription": "Track how your team uses Nexary over time.",
+    "cancel": "Cancel",
+    "category": "Category",
+    "categoryPlaceholder": "e.g. Support, Sales, Engineering",
+    "commaSeparated": "comma separated",
+    "community": "Community",
+    "confirmDelete": "Confirm delete",
+    "confirmDeleteDescription": "Are you sure you want to delete this prompt? This action cannot be undone.",
+    "content": "Content",
+    "contentPlaceholder": "Write the prompt text...",
+    "create": "Create",
+    "createPrompt": "Create prompt",
+    "createPromptDescription": "Save a reusable prompt for later.",
+    "currentMonth": "Current month",
+    "customRange": "Custom range",
+    "dashboard": "Dashboard",
+    "delete": "Delete",
+    "description": "Description",
+    "descriptionPlaceholder": "Short description of how this prompt should be used...",
+    "docsProcessed": "Docs processed",
+    "edit": "Edit",
+    "editPrompt": "Edit prompt",
+    "editPromptDescription": "Update the prompt fields below.",
+    "error": "Error",
+    "favoriteFailed": "Couldn't update favorite",
+    "filterUser": "Filter user",
+    "from": "From",
+    "invitationLinks": "Invitation links",
+    "joinRequests": "Join requests",
+    "last24h": "Last 24 hours",
+    "last30d": "Last 30 days",
+    "last7d": "Last 7 days",
+    "linkCreateFailed": "Couldn't create invitation link",
+    "linkRevoked": "Link revoked",
+    "linkRevokedSuccessfully": "Invitation link revoked",
+    "loadFailed": "Couldn't load data",
+    "logout": "Sign out",
+    "manageRag": "Manage RAG",
+    "manageRagDescription": "Upload documents and control team knowledge packages.",
+    "mustBelongToTeam": "You must belong to a team to view analytics. If you are a global admin, visit /admin/analytics.",
+    "noActiveTeam": "No active team",
+    "noCommunityPrompts": "No community prompts yet",
+    "noData": "No data",
+    "noPrivatePrompts": "You haven't created any private prompts yet",
+    "noPromptsFound": "No prompts found",
+    "noTeam": "No team",
+    "noTeamPrompts": "Your team hasn't shared any prompts yet",
+    "onlyOwnerLeader": "Only the team owner or leader can access this section.",
+    "optional": "optional",
+    "period": "Period",
+    "private": "Private",
+    "promptCopied": "Prompt copied to clipboard",
+    "promptCopyFailed": "Couldn't copy prompt",
+    "promptCreateFailed": "Couldn't create prompt",
+    "promptCreated": "Prompt created",
+    "promptDeleteFailed": "Couldn't delete prompt",
+    "promptDeleted": "Prompt deleted",
+    "promptLibraryDescription": "Create and reuse prompts across your team.",
+    "promptUpdateFailed": "Couldn't update prompt",
+    "promptUpdated": "Prompt updated",
+    "queries": "Queries",
+    "quickAccess": "Quick access",
+    "restrictedAccess": "Restricted access",
+    "searchPrompts": "Search prompts...",
+    "selectPeriod": "Select period",
+    "settings": "Settings",
+    "startChat": "Start a chat",
+    "startChatDescription": "Open a conversation with your team knowledge.",
+    "success": "Success",
+    "tags": "Tags",
+    "tagsPlaceholder": "e.g. python, onboarding, tone",
+    "teamAnalytics": "Team analytics",
+    "teamDescription": "Members and roles for your current team.",
+    "title": "Title",
+    "titlePlaceholder": "e.g. Weekly status summary",
+    "to": "To",
+    "topRags": "Top RAGs",
+    "topUsers": "Top users",
+    "update": "Update",
+    "usageAndStats": "Usage and stats",
+    "use": "Use",
+    "user": "User",
+    "visibility": "Visibility",
+    "welcomeBack": "Welcome back",
+    "assistantsPage": {
+      "title": "Assistenten-Bibliothek",
+      "description": "Erstellen und verwalten Sie spezialisierte KI-Assistenten für Ihr Team",
+      "createAssistant": "Assistent erstellen",
+      "searchPlaceholder": "Assistenten suchen...",
+      "noAssistantsFound": "Keine Assistenten gefunden",
+      "noPrivateAssistants": "Sie haben noch keine privaten Assistenten erstellt",
+      "noTeamAssistants": "Ihr Team hat noch keine Assistenten geteilt",
+      "noCommunityAssistants": "Keine Community-Assistenten verfügbar",
+      "useAssistant": "Assistent verwenden",
+      "duplicate": "Duplizieren",
+      "createDialog": {
+        "title": "Neuen Assistenten erstellen",
+        "description": "Erstellen Sie einen spezialisierten KI-Assistenten mit benutzerdefinierten Anweisungen",
+        "nameLabel": "Name",
+        "namePlaceholder": "z.B. Rechtlicher Firmenassistent",
+        "systemPromptLabel": "System Prompt",
+        "systemPromptPlaceholder": "Detaillierte Anweisungen für den Assistenten...",
+        "descriptionLabel": "Beschreibung",
+        "descriptionPlaceholder": "Kurze Beschreibung des Zwecks des Assistenten...",
+        "categoryLabel": "Kategorie",
+        "categoryPlaceholder": "z.B. Recht, Vertrieb, Support",
+        "tagsLabel": "Tags",
+        "avatarColorLabel": "Avatar-Farbe",
+        "welcomeMessageLabel": "Begrüßungsnachricht",
+        "welcomeMessagePlaceholder": "Hallo, ich bin Ihr spezialisierter Assistent. Wie kann ich Ihnen heute helfen?",
+        "samplePromptsLabel": "Vorgeschlagene Prompts",
+        "samplePromptsPlaceholder": "Schreiben Sie einen Prompt pro Zeile\nz.B. Analysieren Sie diesen Vertrag\nFassen Sie die wichtigsten Punkte zusammen",
+        "samplePromptsHint": "Diese erscheinen als klickbare Buttons am Anfang des Chats",
+        "contextQuestionsLabel": "Kontext-Fragen",
+        "contextQuestionsPlaceholder": "Schreiben Sie eine Frage pro Zeile\nz.B. Was ist Ihr Budget?\nWas ist die Projektfrist?",
+        "contextQuestionsHint": "Der Assistent stellt diese Fragen vor Beginn der Aufgabe"
+      },
+      "editDialog": {
+        "title": "Assistent bearbeiten",
+        "description": "Aktualisieren Sie die Einstellungen Ihres Assistenten"
+      },
+      "deleteDialog": {
+        "description": "Sind Sie sicher, dass Sie diesen Assistenten löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden."
+      },
+      "toast": {
+        "created": "Assistent erfolgreich erstellt",
+        "updated": "Assistent erfolgreich aktualisiert",
+        "deleted": "Assistent erfolgreich gelöscht",
+        "duplicated": "Assistent erfolgreich dupliziert",
+        "createFailed": "Assistent konnte nicht erstellt werden",
+        "updateFailed": "Assistent konnte nicht aktualisiert werden",
+        "deleteFailed": "Assistent konnte nicht gelöscht werden",
+        "duplicateFailed": "Assistent konnte nicht dupliziert werden"
+      }
+    },
+    "rag": {
+      "accessRestricted": "Access restricted",
+      "back": "Back",
+      "cancel": "Cancel",
+      "chunksCount": "{count} chunks",
+      "collection": "Collection",
+      "confirmEmptyTrash": "Empty the trash?",
+      "confirmPermanentDelete": "Permanently delete this package?",
+      "confirmPermanentDeleteDocument": "Permanently delete this document?",
+      "confirmPermanentDeleteDocuments": "Permanently delete all selected documents?",
+      "confirmSendToTrash": "Send \"{name}\" to trash?",
+      "connectionError": "Connection error",
+      "couldNotConnectToServer": "Could not connect to the server.",
+      "couldNotCreatePackage": "Couldn't create the package.",
+      "couldNotDelete": "Couldn't delete.",
+      "couldNotEmptyTrash": "Couldn't empty the trash.",
+      "couldNotLoadTrash": "Couldn't load trash contents.",
+      "couldNotMoveToTrash": "Couldn't move to trash.",
+      "couldNotProcessAnyFileCheckFormat": "We couldn't process any files. Check the format and try again.",
+      "couldNotRestore": "Couldn't restore.",
+      "couldNotRestoreDocument": "Couldn't restore the document.",
+      "couldNotRestoreDocuments": "Couldn't restore the selected documents.",
+      "couldNotUploadFile": "Couldn't upload the file.",
+      "createFirstRagPackageToVectorizeTeamDocuments": "Create your first RAG package to vectorize team documents.",
+      "createPackage": "Create package",
+      "createRagPackage": "Create RAG package",
+      "creating": "Creating...",
+      "delete": "Delete",
+      "deleted": "Deleted",
+      "deletedCount": "{count} deleted",
+      "description": "Description",
+      "documentMovedToTrash": "Document moved to trash",
+      "documentRestored": "Document restored",
+      "documentRestoredSuccessfully": "Document restored successfully.",
+      "documentSentToTrash": "The document was moved to the trash.",
+      "documentationAndGuidelinesForSupportArea": "Documentation and guidelines for the support area.",
+      "documentsCount": "{count} documents",
+      "documentsRestored": "Documents restored",
+      "documentsTrash": "Trash",
+      "emptyAllTrash": "Empty entire trash",
+      "emptyTrash": "Empty trash",
+      "error": "Error",
+      "errorUploadingDocument": "Error uploading document.",
+      "errorUploadingDocuments": "Error uploading documents.",
+      "file": "File",
+      "fileExceedsSize": "\"{name}\" exceeds the {max} MB limit.",
+      "groupVectorizedDocumentsByAreaDomainOrCustomer": "Group vectorized documents by area, domain, or customer.",
+      "hide": "Hide",
+      "hideTrash": "Hide trash",
+      "lastUpdate": "Last update",
+      "loadingDeletedDocuments": "Loading deleted documents...",
+      "loadingRagPackages": "Loading RAG packages...",
+      "mainDashboard": "main dashboard",
+      "name": "Name",
+      "networkError": "Network error",
+      "newRagPackage": "New RAG package",
+      "noDocumentsInTrash": "No documents in the trash.",
+      "noDocumentsUploaded": "No documents uploaded yet.",
+      "noPackagesConfigured": "No packages configured",
+      "nowYouCanUploadDocuments": "You can now upload documents to this package.",
+      "onlyTeamAdminsCanManageRagPackages": "Only team admins can manage RAG packages.",
+      "packageCreated": "Package created",
+      "packageWithoutDescription": "No description provided.",
+      "permanentlyDeleted": "Permanently deleted",
+      "permanentlyDeletedCount": "{count} permanently deleted",
+      "pleaseAskAdminForPermissionsOrReturnTo": "Ask an admin for access or return to the",
+      "pleaseCheckDataAndTryAgain": "Please check the data and try again.",
+      "pleaseTryAgain": "Please try again.",
+      "pleaseTryAgainInAFewMoments": "Please try again in a few moments.",
+      "processDocuments": "Process {count} document(s)",
+      "processedCount": "{count} file(s) processed.",
+      "processingError": "Processing error",
+      "ragDataLoadError": "Couldn't load RAG data.",
+      "ragPackageManagement": "RAG package management",
+      "removeDocument": "Remove document",
+      "removeFile": "Remove file",
+      "restore": "Restore",
+      "restored": "Restored",
+      "restoredCount": "{count} restored",
+      "selected": "{count} selected",
+      "sentToTrash": "Sent to trash",
+      "serverCouldNotBeReached": "The server could not be reached.",
+      "show": "Show",
+      "showTrash": "Show trash",
+      "someFilesNotSelected": "Some files could not be selected.",
+      "supportRepository": "Support repository",
+      "supportedTextFilesTxtMdJsonPdfDocDocxEmbeddingsCreatedAutomaticallyInQdrant": "Supported text files: TXT, MD, JSON, PDF, DOC, DOCX. Embeddings are created automatically in Qdrant.",
+      "teamLabel": "Team: {teamSlug}",
+      "trash": "Trash",
+      "trashAlreadyEmpty": "Trash is already empty.",
+      "trashEmptied": "Trash emptied",
+      "unknownError": "Unknown error",
+      "unsupportedFileType": "\"{name}\" is not a supported file type.",
+      "uploadCompleted": "Upload completed",
+      "uploadDocuments": "Upload documents",
+      "uploadDocumentsCreateEmbeddingsForCompanyChat": "Upload documents to create embeddings for the company chat.",
+      "uploadError": "Upload error",
+      "uploadedDocuments": "Uploaded documents",
+      "uploadingIndexing": "Uploading and indexing...",
+      "vectorizedChunks": "Vectorized chunks",
+      "packages": {
+        "loadError": "Failed to load RAG packages",
+        "loadRetry": "Please try again later."
+      },
+      "mindmap": {
+        "title": "Wissensgraph",
+        "viewMindmap": "Graph Ansehen",
+        "similarityThreshold": "Ähnlichkeitsschwelle",
+        "documentNode": "Dokument",
+        "chunkNode": "Fragment",
+        "similarity": "Ähnlichkeit",
+        "showDetails": "Details Anzeigen",
+        "closePanel": "Panel Schließen",
+        "noData": "Keine Dokumente zum Visualisieren",
+        "loading": "Graph wird geladen...",
+        "error": "Fehler beim Laden des Graphs",
+        "filterByType": "Nach Typ filtern",
+        "searchNodes": "Knoten suchen",
+        "layoutAlgorithm": "Layout",
+        "exportImage": "Export as Image"
+      },
+      "showing": "Zeige",
+      "previous": "Zurück",
+      "next": "Weiter",
+      "viewGraph": "Graph Ansehen",
+      "of": "von"
+    },
+    "documentsPage": {
+      "title": "Dokumenten-Hub",
+      "description": "Verwalten Sie alle Ihre Dokumente und RAG-Zuweisungen an einem Ort",
+      "searchPlaceholder": "Dokumente suchen...",
+      "noDocuments": "Noch keine Dokumente",
+      "uploadFirst": "Laden Sie Dokumente über RAG-Pakete hoch, um sie hier zu sehen",
+      "goToRag": "Zur RAG-Verwaltung",
+      "manageRags": "RAGs verwalten",
+      "assignedTo": "Zugewiesen an",
+      "notAssigned": "Keinem RAG zugewiesen",
+      "none": "Keine",
+      "filename": "Dateiname",
+      "size": "Größe",
+      "status": "Status",
+      "assignments": "Zuweisungen",
+      "actions": "Aktionen",
+      "statusProcessing": "Verarbeitung",
+      "statusReady": "Bereit",
+      "statusFailed": "Fehlgeschlagen",
+      "selectedCount": "{count} Dokument(e) ausgewählt",
+      "assignToRag": "Zu RAG zuweisen",
+      "clearSelection": "Auswahl löschen",
+      "manageAssignments": "Zuweisungen verwalten",
+      "delete": "Löschen",
+      "confirmDelete": "Sind Sie sicher, dass Sie dieses Dokument löschen möchten?",
+      "documentDeleted": "Dokument erfolgreich gelöscht",
+      "deleteError": "Dokument konnte nicht gelöscht werden",
+      "loadError": "Fehler beim Laden der Dokumente",
+      "couldNotLoadDocuments": "Dokumente konnten nicht geladen werden. Bitte erneut versuchen.",
+      "connectionError": "Verbindungsfehler",
+      "assignmentSuccess": "Dokument erfolgreich zugewiesen",
+      "assignmentError": "Dokument konnte nicht zugewiesen werden",
+      "removalSuccess": "Dokument aus RAG entfernt",
+      "removalError": "Dokument konnte nicht aus RAG entfernt werden",
+      "selectRagsToAssign": "Wählen Sie die RAG-Pakete aus, denen dieses Dokument zugewiesen werden soll",
+      "noRagsAvailable": "Keine RAG-Pakete verfügbar. Erstellen Sie zuerst eines.",
+      "currentlyAssigned": "Zugewiesen",
+      "cancel": "Abbrechen",
+      "saveAssignments": "Zuweisungen speichern",
+      "accessRestricted": "Zugriff eingeschränkt",
+      "noPermission": "Sie haben keine Berechtigung, auf diesen Bereich zuzugreifen",
+      "backToDashboard": "Zurück zum Dashboard",
+      "uploadDocument": "Dokument hochladen",
+      "uploadDescription": "Laden Sie Dokumente in Ihre Bibliothek hoch und weisen Sie sie später RAG-Paketen zu",
+      "uploadSuccess": "Upload erfolgreich",
+      "uploadedCount": "{count} Dokument(e) hochgeladen",
+      "uploadError": "Upload fehlgeschlagen",
+      "uploading": "Wird hochgeladen...",
+      "upload": "Hochladen",
+      "filesTooLarge": "Einige Dateien sind zu groß",
+      "gridView": "Rasteransicht",
+      "listView": "Listenansicht",
+      "compactView": "Kompaktansicht",
+      "manageTags": "Tags verwalten",
+      "manageTagsDescription": "Fügen Sie Tags hinzu oder entfernen Sie sie, um Ihre Dokumente zu organisieren.",
+      "addTag": "Tag hinzufügen",
+      "tagPlaceholder": "z.B. Finanzen, Dringend...",
+      "noTags": "Keine Tags zugewiesen",
+      "tags": "Tags",
+      "preview": "Vorschau",
+      "editContent": "Inhalt bearbeiten",
+      "content": "Inhalt",
+      "details": "Details",
+      "saveChanges": "Änderungen speichern",
+      "contentUpdated": "Inhalt erfolgreich aktualisiert",
+      "updateFailed": "Fehler beim Aktualisieren",
+      "search": "Dokumente suchen...",
+      "save": "Änderungen speichern"
+    },
+    "documents": "Documents",
+    ",": "dashboard.,",
+    "\\n": "dashboard.\\n",
+    "assistants": "Assistenten",
+    "teamStats": "Team-Statistiken",
+    "expandMenu": "Menü erweitern"
+  },
+  "dateRange": "Datumsbereich",
+  "days": "Tage",
+  "deleteError": "Dokument konnte nicht gelöscht werden",
+  "deleted": "Gelöscht",
+  "documentRemoved": "Dokument entfernt",
+  "documentsCount": "{count} Dokumente",
+  "documentsUploaded": "Chat-Dokumente hochgeladen",
+  "download": "Herunterladen",
+  "dragPdfOr": "PDF-Dateien hierher ziehen oder",
+  "dropFiles": "Dateien hier ablegen",
+  "ediscovery": {
+    "title": "eDiscovery",
+    "subtitle": "Suchen und exportieren Sie Daten für rechtliche Discovery und Compliance-Audits",
+    "refresh": "Aktualisieren",
+    "summary": {
+      "totalDocuments": "Gesamtdokumente",
+      "uniqueUsers": "Eindeutige Benutzer",
+      "uniqueTeams": "Eindeutige Teams",
+      "dateRange": "Datumsbereich"
+    },
+    "search": {
+      "title": "Suche",
+      "description": "Suchen Sie in Unterhaltungen, Dokumenten und Audit-Protokollen",
+      "placeholder": "Suchbegriff eingeben...",
+      "button": "Suchen"
+    },
+    "filters": {
+      "resourceTypes": "Ressourcentypen",
+      "dateRange": "Datumsbereich",
+      "exportFormat": "Exportformat",
+      "actions": "Aktionen"
+    },
+    "export": {
+      "button": "Ergebnisse exportieren"
+    },
+    "results": {
+      "title": "Suchergebnisse",
+      "count": "${count} Ergebnisse gefunden"
+    },
+    "noResults": "Keine Ergebnisse gefunden. Passen Sie Ihre Suchfilter an.",
+    "to": "bis",
+    "info": {
+      "title": "Über eDiscovery",
+      "line1": "eDiscovery ermöglicht es Administratoren, Daten für Rechtsstreitigkeiten, interne Untersuchungen und Compliance-Audits zu durchsuchen und zu exportieren.",
+      "line2": "Alle Suchanfragen und Exporte werden zu Audit-Zwecken protokolliert. Der Zugriff auf eDiscovery erfordert globale Administratorrechte.",
+      "line3": "Verwenden Sie Datumsbereichsfilter und spezifische Suchbegriffe, um Ergebnisse einzugrenzen. Große Exporte können einige Zeit benötigen."
+    }
+  },
+  "endDate": "Enddatum",
+  "enterpriseAuth": {
+    "title": "Unternehmensauthentifizierung",
+    "description": "Konfigurieren Sie SAML 2.0 oder OIDC für Single Sign-On",
+    "unifiedRouter": {
+      "title": "Authentifizierungsmethode",
+      "description": "Wählen Sie, wie Ihre Teammitglieder sich authentifizieren",
+      "saml": "SAML 2.0",
+      "oidc": "OpenID Connect (OIDC)",
+      "both": "Beide (Router entscheidet)",
+      "migration": {
+        "title": "Migrationsstatus",
+        "off": "Keine Migration",
+        "shadow": "Schattenmodus",
+        "canary": "Canary-Test",
+        "full": "Vollständiges OIDC"
+      }
+    },
+    "login": {
+      "ssoButton": "Mit SSO anmelden",
+      "redirecting": "Weiterleitung zum Identitätsanbieter...",
+      "errors": {
+        "notConfigured": "SSO ist für dieses Team nicht konfiguriert",
+        "failed": "Authentifizierung fehlgeschlagen",
+        "denied": "Zugriff verweigert",
+        "expired": "Authentifizierungssitzung abgelaufen"
+      }
+    }
+  },
+  "error": "Fehler",
+  "export": "Exportieren",
+  "featureKey": "Feature-Key",
+  "featured": "Hervorgehoben",
+  "file": "Datei",
+  "file(s)": "Datei(en)",
+  "files": "Dateien",
+  "filesLater": "Dateien können später im Chat hinzugefügt werden",
+  "filter": "Filter",
+  "format": "Format",
+  "framework": "Framework",
+  "gdpr": {
+    "title": "Privatsphäre & Datenschutzrechte",
+    "description": "Verwalten Sie Ihre Datenschutzrechte unter der DSGVO (Datenschutz-Grundverordnung)",
+    "rights": {
+      "title": "Ihre DSGVO-Rechte",
+      "description": "Als EU-Bürger haben Sie folgende Rechte unter der DSGVO:",
+      "access": {
+        "title": "Auskunftsrecht (Artikel 15)",
+        "description": "Fordern Sie eine Kopie aller persönlichen Daten an, die wir über Sie gespeichert haben."
+      },
+      "erasure": {
+        "title": "Recht auf Löschung (Artikel 17)",
+        "description": "Fordern Sie die Löschung Ihrer persönlichen Daten ('Recht auf Vergessenwerden')."
+      },
+      "portability": {
+        "title": "Recht auf Datenübertragbarkeit (Artikel 20)",
+        "description": "Exportieren Sie Ihre Daten in einem maschinenlesbaren Format zur Übertragung an einen anderen Dienst."
+      },
+      "rectification": {
+        "title": "Recht auf Berichtigung (Artikel 16)",
+        "description": "Fordern Sie die Korrektur ungenauer oder unvollständiger Daten."
+      },
+      "restriction": {
+        "title": "Recht auf Einschränkung der Verarbeitung (Artikel 18)",
+        "description": "Fordern Sie die Einschränkung der Verarbeitung Ihrer Daten."
+      },
+      "object": {
+        "title": "Widerspruchsrecht (Artikel 21)",
+        "description": "Widersprechen Sie der Verarbeitung Ihrer persönlichen Daten."
+      }
+    },
+    "dataAccess": {
+      "title": "Meine Daten",
+      "description": "Alle persönlichen Daten anzeigen, die wir über Sie gespeichert haben",
+      "requestButton": "Meine Daten anfordern",
+      "downloading": "Daten werden vorbereitet...",
+      "downloadButton": "Daten herunterladen",
+      "sections": {
+        "profile": "Profilinformationen",
+        "teams": "Team-Mitgliedschaften",
+        "conversations": "Chat-Gespräche",
+        "documents": "Hochgeladene Dokumente",
+        "apiKeys": "API-Schlüssel",
+        "auditLogs": "Aktivitätsprotokolle",
+        "consents": "Einwilligungsaufzeichnungen"
+      }
+    },
+    "dataExport": {
+      "title": "Daten exportieren",
+      "description": "Laden Sie Ihre Daten in einem portablen Format herunter",
+      "formatLabel": "Exportformat",
+      "formats": {
+        "json": "JSON (Empfohlen)",
+        "csv": "CSV (Tabellenkalkulation)"
+      },
+      "exportButton": "Daten exportieren",
+      "exporting": "Exportiere...",
+      "info": "Ihre Daten werden in einem strukturierten, maschinenlesbaren Format exportiert, das Sie an einen anderen Dienst übertragen können."
+    },
+    "dataErasure": {
+      "title": "Meine Daten löschen",
+      "description": "Löschung Ihrer persönlichen Daten anfordern",
+      "warning": "Diese Aktion kann nicht rückgängig gemacht werden. Einige Daten können aus rechtlichen oder Sicherheitsgründen in anonymisierter Form gespeichert werden.",
+      "checkButton": "Prüfen, ob ich löschen kann",
+      "checking": "Überprüfung läuft...",
+      "deleteButton": "Datenlöschung anfordern",
+      "deleting": "Verarbeitung läuft...",
+      "canDelete": "Ihre Daten können gelöscht werden.",
+      "cannotDelete": "Ihre Daten können nicht gelöscht werden, weil:",
+      "reasons": {
+        "soleOwner": "Sie sind der einzige Eigentümer aktiver Team(s). Übertragen Sie das Eigentum oder löschen Sie zuerst die Teams."
+      },
+      "confirmTitle": "Datenlöschung bestätigen",
+      "confirmDescription": "Möchten Sie wirklich die Löschung Ihrer persönlichen Daten anfordern? Diese Aktion kann nicht rückgängig gemacht werden.",
+      "confirmButton": "Ja, Löschung anfordern",
+      "cancelButton": "Abbrechen"
+    },
+    "consents": {
+      "title": "Einwilligungseinstellungen",
+      "description": "Verwalten Sie Ihre Einwilligung zur Verarbeitung Ihrer Daten",
+      "types": {
+        "marketing": {
+          "title": "Marketing-Kommunikation",
+          "description": "Erlauben Sie uns, Ihnen Marketing-E-Mails und Produkt-Updates zu senden"
+        },
+        "analytics": {
+          "title": "Analyse & Nutzungsdaten",
+          "description": "Helfen Sie uns, unsere Dienste durch Analyse von Nutzungsmustern zu verbessern"
+        },
+        "cookies": {
+          "title": "Essentielle Cookies",
+          "description": "Erforderlich für die ordnungsgemäße Funktion der Anwendung",
+          "required": true
+        },
+        "thirdParty": {
+          "title": "Drittanbieter-Freigabe",
+          "description": "Erlauben Sie die Weitergabe anonymisierter Daten an vertrauenswürdige Partner"
+        },
+        "email": {
+          "title": "E-Mail-Kommunikation",
+          "description": "Erhalten Sie wichtige Updates zu Ihrem Konto"
+        }
+      },
+      "granted": "Gewährt",
+      "revoked": "Widerrufen",
+      "grant": "Einwilligung erteilen",
+      "revoke": "Einwilligung widerrufen"
+    },
+    "requests": {
+      "title": "Meine Anfragen",
+      "description": "Verfolgen Sie Ihre DSGVO-Datenanfragen",
+      "status": {
+        "pending": "Ausstehend",
+        "processing": "In Bearbeitung",
+        "completed": "Abgeschlossen",
+        "rejected": "Abgelehnt",
+        "${status}": "gdpr.requests.status.${status}",
+        "failed": "Fehlgeschlagen"
+      },
+      "types": {
+        "access": "Datenauskunft",
+        "erasure": "Datenlöschung",
+        "portability": "Datenexport",
+        "${request": {
+          "requestType}": "gdpr.requests.types.${request.requestType}"
+        },
+        "export": "Datenexport",
+        "deletion": "Löschung"
+      },
+      "createButton": "Neue Anfrage",
+      "requestDetails": "Anfragedetails",
+      "submittedAt": "Eingereicht",
+      "processedAt": "Verarbeitet",
+      "rejectionReason": "Grund"
+    },
+    "tabs": {
+      "rights": "Meine Rechte",
+      "data": "Meine Daten",
+      "consents": "Einwilligungen",
+      "requests": "Anfragen"
+    },
+    "messages": {
+      "consentGranted": "Einwilligung erfolgreich erteilt",
+      "consentRevoked": "Einwilligung erfolgreich widerrufen",
+      "dataLoaded": "Ihre Daten wurden erfolgreich geladen",
+      "dataExported": "Ihre Daten wurden erfolgreich exportiert",
+      "requestCreated": "Anfrage erfolgreich erstellt",
+      "loading": "Wird geladen...",
+      "required": "Erforderlich",
+      "noRequests": "Noch keine Anfragen"
+    },
+    "errors": {
+      "fetchFailed": "DSGVO-Daten konnten nicht abgerufen werden",
+      "requestFailed": "Anfrage konnte nicht erstellt werden",
+      "deleteFailed": "Löschanfrage konnte nicht verarbeitet werden",
+      "consentFailed": "Einwilligungseinstellungen konnten nicht aktualisiert werden",
+      "updateConsentFailed": "Einwilligung konnte nicht aktualisiert werden",
+      "processingFailed": "Löschanfrage konnte nicht verarbeitet werden",
+      "unknown": "Unbekannter Fehler"
+    },
+    "${consentKey}": {
+      "title": "gdpr.${consentKey}.title",
+      "description": "gdpr.${consentKey}.description"
+    },
+    "access": "Datenzugriff",
+    "portability": "Datenübertragbarkeit",
+    "erasure": "Recht auf Löschung"
+  },
+  "hard": "Hart",
+  "health": {
+    "database": {
+      "error": "Datenbankfehler"
+    },
+    "redis": {
+      "error": "Redis-Fehler"
+    },
+    "storage": {
+      "error": "Speicherfehler"
+    },
+    "qdrant": {
+      "error": "Vector-DB-Fehler"
+    }
+  },
+  "health_check": {
+    "error": "Health-Check-Fehler"
+  },
+  "health_check_ping": "Ping",
+  "id": "ID",
+  "include": "Einschließen",
+  "keyId": "Schlüssel-ID",
+  "limit": "Limit",
+  "linkId": "Link-ID",
+  "llmDisclaimer": "Große Sprachmodelle (LLM) können Fehler machen. Überprüfen Sie immer wichtige Informationen.",
+  "marketplace": {
+    "title": "Template Marketplace",
+    "subtitle": "Spezialisierte Assistenten sofort einsatzbereit",
+    "searchPlaceholder": "Templates suchen...",
+    "allFilter": "Alle",
+    "featured": "Highlights",
+    "categories": {
+      "legal": "Rechtliches",
+      "finance": "Finanzen",
+      "hr": "Personal",
+      "sales": "Vertrieb",
+      "tech": "Technik",
+      "support": "Support",
+      "research": "Forschung",
+      "marketing": "Marketing",
+      "data": "Daten",
+      "project": "Projekte"
+    },
+    "card": {
+      "featured": "Empfohlen",
+      "uses": "Verwendungen",
+      "preview": "Vorschau",
+      "use": "Verwenden"
+    },
+    "preview": {
+      "systemPrompt": "System Prompt",
+      "samplePrompts": "Beispielfragen",
+      "tags": "Tags",
+      "export": "Exportieren",
+      "useTemplate": "Template verwenden"
+    },
+    "toast": {
+      "addedToFavorites": "Zu Favoriten hinzugefügt",
+      "removedFromFavorites": "Von Favoriten entfernt",
+      "error": "Fehler",
+      "couldNotUpdateFavorites": "Favoriten konnten nicht aktualisiert werden",
+      "templateExported": "Template exportiert",
+      "jsonDownloaded": "Die JSON-Datei wurde heruntergeladen"
+    },
+    "noResults": "Keine Templates gefunden"
+  },
+  "mode": "Modus",
+  "monitoring": {
+    "title": "Überwachung",
+    "description": "Systemgesundheit, Leistungsmetriken und Geschäftskennzahlen überwachen",
+    "systemHealth": "Systemgesundheit",
+    "lastChecked": "Zuletzt geprüft",
+    "uptime": "Betriebszeit",
+    "cpuUsage": "CPU-Auslastung",
+    "memoryUsage": "Speicherauslastung",
+    "serviceStatus": "Dienststatus",
+    "serviceStatusDescription": "Gesundheitsstatus aller Systemkomponenten",
+    "database": "Datenbank",
+    "storage": "Speicher",
+    "latency": "Latenz",
+    "healthy": "Gesund",
+    "unhealthy": "Ungesund",
+    "degraded": "Eingeschränkt",
+    "refresh": "Aktualisieren",
+    "noData": "Keine Daten verfügbar",
+    "settings": "Einstellungen",
+    "autoRefresh": "Automatische Aktualisierung",
+    "autoRefreshDescription": "Dashboard alle 30 Sekunden automatisch aktualisieren",
+    "enabled": "Aktiviert",
+    "disabled": "Deaktiviert"
+  },
+  "month": "Monat",
+  "navigation": {
+    "home": "Startseite",
+    "dashboard": "Dashboard",
+    "analytics": "Analysen",
+    "prompts": "Prompts",
+    "team": "Team",
+    "settings": "Einstellungen",
+    "admin": "Admin",
+    "chat": "Chat",
+    "rag": "RAG",
+    "documents": "Dokumente",
+    "features": "Funktionen",
+    "technology": "Technologie",
+    "login": "Anmelden",
+    "logout": "Abmelden",
+    "register": "Registrieren",
+    "menu": "Menü",
+    "pricing": "Preise",
+    "security": "Sicherheit",
+    "about": "Über uns",
+    "contact": "Kontakt"
+  },
+  "noActiveConversation": "Keine aktive Konversation",
+  "noConversation": "Keine Konversation",
+  "noFilesUploaded": "Keine Dateien hochgeladen",
+  "noKnowledgePackages": "Keine Wissenspakete verfügbar",
+  "notPdf": "Nur PDF-Dateien erlaubt: {name}",
+  "of": "von",
+  "offset": "Offset",
+  "oidc": {
+    "title": "OpenID Connect (OIDC)",
+    "description": "Konfigurieren Sie OIDC-Authentifizierung für Ihr Team",
+    "configured": "Konfiguriert",
+    "notConfigured": "Nicht konfiguriert",
+    "configureButton": "OIDC konfigurieren",
+    "status": {
+      "configured": "OIDC ist für Ihr Team konfiguriert",
+      "notConfigured": "OIDC ist für dieses Team nicht konfiguriert",
+      "disabled": "OIDC ist derzeit deaktiviert"
+    },
+    "form": {
+      "enabled": "OIDC-Authentifizierung aktivieren",
+      "issuer": "Issuer-URL",
+      "issuerPlaceholder": "https://ak.mokka-dev.de/application/o/nexary-enterprise/",
+      "issuerDescription": "OpenID Connect Issuer-URL",
+      "clientId": "Client-ID",
+      "clientIdPlaceholder": "Ihre OAuth2-Client-ID",
+      "clientIdDescription": "Die Client-ID Ihres OIDC-Anbieters",
+      "clientSecret": "Client-Secret",
+      "clientSecretPlaceholder": "Ihr OAuth2-Client-Secret",
+      "clientSecretDescription": "Das Client-Secret Ihres OIDC-Anbieters (wird vertraulich behandelt)",
+      "scope": "Bereiche",
+      "scopeDescription": "OIDC-Bereiche zum Anfordern",
+      "claimsMapping": "Claims-Zuordnung",
+      "emailClaim": "E-Mail-Claim",
+      "emailClaimDescription": "Claim-Name für E-Mail",
+      "nameClaim": "Name-Claim",
+      "nameClaimDescription": "Claim-Name für Anzeigename"
+    },
+    "endpoints": {
+      "title": "OIDC-Endpunkte",
+      "authorization": "Autorisierungs-Endpunkt",
+      "token": "Token-Endpunkt",
+      "userInfo": "Benutzerinfo-Endpunkt",
+      "jwks": "JWKS-URI",
+      "endSession": "Sitzungsende-Endpunkt"
+    },
+    "actions": {
+      "save": "OIDC-Konfiguration speichern",
+      "saving": "Speichern...",
+      "update": "Konfiguration aktualisieren",
+      "delete": "OIDC-Konfiguration löschen",
+      "testConnection": "Verbindung testen",
+      "deleteConfirm": {
+        "title": "OIDC-Konfiguration löschen?",
+        "description": "Dies deaktiviert die OIDC-Authentifizierung für Ihr Team. Benutzer müssen sich mit anderen Methoden anmelden. Diese Aktion kann nicht rückgängig gemacht werden.",
+        "confirm": "Löschen",
+        "cancel": "Abbrechen"
+      }
+    },
+    "errors": {
+      "notConfigured": "OIDC ist für dieses Team nicht konfiguriert",
+      "notOwner": "Nur Teambesitzer können OIDC-Einstellungen verwalten",
+      "notMember": "Sie sind kein Mitglied dieses Teams",
+      "invalidIssuer": "Ungültige Issuer-URL",
+      "discoveryFailed": "OIDC-Konfiguration konnte nicht entdeckt werden",
+      "tokenExchangeFailed": "Autorisierungscode konnte nicht ausgetauscht werden",
+      "invalidIdToken": "Ungültiges ID-Token",
+      "validationFailed": "ID-Token-Validierung fehlgeschlagen",
+      "saveFailed": "Fehler beim Speichern der OIDC-Konfiguration",
+      "deleteFailed": "Fehler beim Löschen der OIDC-Konfiguration",
+      "testFailed": "Verbindungstest fehlgeschlagen"
+    },
+    "success": {
+      "saved": "OIDC-Konfiguration erfolgreich gespeichert",
+      "deleted": "OIDC-Konfiguration erfolgreich gelöscht",
+      "testSuccess": "Verbindungstest erfolgreich"
+    }
+  },
+  "onboarding": {
+    "preferences": {
+      "title": "Erlebnis konfigurieren",
+      "subtitle": "Wählen Sie Ihre bevorzugte Sprache, um zu beginnen.",
+      "languageLabel": "Oberflächensprache",
+      "continueButton": "Weiter",
+      "note": "Sie können dies später in den Einstellungen ändern."
+    },
+    "welcome": {
+      "title": "Willkommen bei Nexary!",
+      "subtitle": "Deine KI-Unternehmensplattform. Wir führen dich in 4 schnellen Schritten durch alle Funktionen von Nexary.",
+      "benefits": {
+        "chat": "Chat mit mehreren KI-Modellen",
+        "rag": "RAG für Dokumentenanalyse",
+        "templates": "Branchenspezialisierte Templates",
+        "sources": "Antworten mit zitierten Quellen",
+        "dsgvo": "100% DSGVO-konform"
+      },
+      "videoPlaceholder": "Einführungsvideo (demnächst)",
+      "startButton": "Beginnen"
+    },
+    "upload": {
+      "title": "Lade dein erstes Dokument hoch",
+      "subtitle": "Nexary kann PDFs, Word, Excel, PowerPoint und mehr analysieren. Lade ein Dokument hoch, um zu sehen, wie es funktioniert.",
+      "uploaded": "Dokument hochgeladen!",
+      "exampleDocument": "Beispiel: Vertrag_2024.pdf",
+      "dragHere": "Ziehe eine Datei hierher",
+      "or": "oder klicke zum Auswählen",
+      "useExample": "Beispieldokument verwenden",
+      "nextButton": "Weiter"
+    },
+    "query": {
+      "title": "Stelle deine erste Frage",
+      "subtitle": "Teste die Kraft von RAG: Stelle eine Frage zum hochgeladenen Dokument",
+      "suggestedQuestions": "Vorgeschlagene Fragen:",
+      "placeholder": "Schreibe deine Frage hier...",
+      "askButton": "Fragen",
+      "generating": "Antwort wird generiert...",
+      "continueButton": "Weiter",
+      "sampleQuestion1": "What are the key points?",
+      "sampleQuestion2": "Summarize in 3 paragraphs",
+      "sampleQuestion3": "Analyze risks",
+      "mockResponse": "Based on the document 'Contract_2024.pdf', here is the analysis:\n\nThis contract establishes terms between parties A and B, lasting 12 months. Key points include:\n\n1. Monthly delivery obligations\n2. Automatic renewal clause\n3. Penalties for non-compliance\n\n📚 Source: Contract_2024.pdf (Pages 1-3)"
+    },
+    "templates": {
+      "title": "Entdecke spezialisierte Templates",
+      "subtitle": "Nutze vorkonfigurierte Assistenten für verschiedene Branchen. Jeder optimiert für spezifische Aufgaben.",
+      "stats": {
+        "templates": "Templates",
+        "industries": "Branchen",
+        "customizable": "Anpassbar"
+      },
+      "startChat": "Neuen Chat starten",
+      "exploreMarketplace": "Marketplace erkunden",
+      "close": "Schließen",
+      "samplePromptsTitle": "Oder versuchen Sie diese Prompts:",
+      "prompts": {
+        "summarize": "Dieses Dokument zusammenfassen",
+        "legal": "Rechtsklausel entwerfen",
+        "email": "Follow-up-E-Mail schreiben"
+      },
+      "items": {
+        "legal": {
+          "name": "Rechtsassistent",
+          "description": "Vertragsanalyse und Rechtsdokumente"
+        },
+        "financial": {
+          "name": "Finanzanalyst",
+          "description": "Finanzanalyse und Berichte"
+        },
+        "sales": {
+          "name": "Vertriebs-Copilot",
+          "description": "Verkaufsangebote und Follow-up"
+        }
+      }
+    },
+    "skipButton": "Überspringen",
+    "backButton": "Zurück",
+    "progress": "Schritt {current} von {total}",
+    "nextButton": "Weiter",
+    "finishButton": "Fertigstellen",
+    "tourTitle": "Geführte Tour",
+    "tourStep": "Schritt {current} von {total}",
+    "tourComplete": "Tour abgeschlossen!"
+  },
+  "packageId": "Paket-ID",
+  "page": "Seite",
+  "pageSize": "Seitengröße",
+  "pattern": "Muster",
+  "pdf-parse": "PDF-Inhalt",
+  "pdfDocumentsAsContext": "PDF-Dokumente werden als Chat-Kontext verwendet",
+  "pdfOnlyMax10mb": "Nur PDF-Dateien, maximal 10 MB pro Datei",
+  "period": "period",
+  "permanent": "Dauerhaft",
+  "phi-logs": "PHI-Protokolle",
+  "phi-resources": "PHI-Ressourcen",
+  "policyId": "Richtlinien-ID",
+  "preferences": {
+    "title": "Einstellungen",
+    "theme": {
+      "title": "Thema",
+      "description": "Wählen Sie das Aussehen der Oberfläche",
+      "light": "Hell",
+      "dark": "Dunkel",
+      "system": "System"
+    },
+    "language": {
+      "title": "Sprache",
+      "description": "Wählen Sie die Interface-Sprache",
+      "de": "Deutsch",
+      "en": "Englisch",
+      "es": "Spanisch",
+      "fr": "Französisch"
+    },
+    "timezone": {
+      "title": "Zeitzone",
+      "description": "Wählen Sie Ihre Zeitzone"
+    },
+    "dateFormat": {
+      "title": "Datumsformat",
+      "description": "Wählen Sie, wie Daten angezeigt werden"
+    },
+    "ai": {
+      "title": "KI-Einstellungen",
+      "description": "Konfigurieren Sie Ihren Standard-KI-Anbieter und das Modell.",
+      "provider": "Anbieter",
+      "model": "Modell"
+    },
+    "additional": {
+      "title": "Zusätzliche Einstellungen",
+      "description": "Zusätzliche Anpassungen für Ihr Konto"
+    },
+    "errors": {
+      "loadFailed": "Laden der Einstellungen fehlgeschlagen",
+      "saveFailed": "Speichern der Einstellungen fehlgeschlagen"
+    },
+    "saveButton": "Vorlieben speichern",
+    "loading": "Änderungen werden gespeichert...",
+    "success": {
+      "savedTitle": "Vorlieben gespeichert",
+      "savedDescription": "Wir verwenden diese Auswahlen beim nächsten Besuch.",
+      "themeChanged": "Thema geändert",
+      "languageChanged": "Sprache geändert",
+      "timezoneUpdated": "Zeitzone aktualisiert",
+      "dateFormatUpdated": "Datumsformat aktualisiert"
+    }
+  },
+  "pressEnterToSend": "Enter drücken zum Senden",
+  "processed": "Dokument {name} erfolgreich verarbeitet",
+  "quarter": "Quartal",
+  "query": "Abfrage",
+  "ragDocuments": "RAG-Dokumente",
+  "ragId": "RAG-ID",
+  "ragManagement": "RAG-Verwaltung",
+  "ragPackageId": "RAG-Paket-ID",
+  "ragPackageIds": "RAG-Paket-IDs",
+  "rateLimitExceeded": "Rate Limit überschritten",
+  "rateLimitMessage": "Sie haben das Anfragelimit überschritten. Bitte versuchen Sie es später erneut.",
+  "recordAudio": "Audio aufnehmen",
+  "regenerate": "Regenerieren",
+  "register": {
+    "backToLogin": "Ich habe bereits ein Konto",
+    "signUpWithGoogle": "Mit Google registrieren",
+    "orDivider": "oder",
+    "card": {
+      "title": "Registrierung",
+      "description": "Erstellen Sie Ihr Stack Auth-Konto und verwalten Sie Ihr Team.",
+      "footer": "Die Registrierung erstellt Ihren Benutzer in Stack Auth und synchronisiert ihn mit unserem internen System."
+    },
+    "inviteLink": {
+      "title": "Sie wurden zu einem Team eingeladen!",
+      "description": "Vervollständigen Sie Ihre Registrierung, um automatisch beizutreten."
+    },
+    "tabs": {
+      "create": "Team erstellen",
+      "joinRequest": "Beitritt anfordern"
+    },
+    "fields": {
+      "name": {
+        "label": "Ihr Name",
+        "placeholder": "Vor- und Nachname"
+      },
+      "email": {
+        "label": "Arbeits-E-Mail",
+        "placeholder": "user@company.com"
+      },
+      "password": {
+        "label": "Passwort",
+        "placeholder": "********",
+        "description": "Starkes Passwort (mind. 12 Zeichen, Groß- und Kleinbuchstaben sowie Zahlen)."
+      },
+      "teamName": {
+        "label": "Teamname",
+        "placeholder": "Analytics-Team"
+      },
+      "teamSlug": {
+        "label": "Team-Identifikator",
+        "placeholder": "my-team",
+        "description": "Einzigartiger Identifikator für das Team, das Sie beitreten möchten."
+      },
+      "message": {
+        "label": "Nachricht (optional)",
+        "placeholder": "Sagen Sie uns, warum Sie diesem Team beitreten möchten...",
+        "description": "Geben Sie Kontext für die Teamadministratoren."
+      },
+      "notes": {
+        "label": "Optionale Notizen",
+        "placeholder": "Beschreiben Sie Anforderungen oder zusätzlichen Kontext für das Team"
+      }
+    },
+    "buttons": {
+      "submitting": "Wird übermittelt...",
+      "joinViaInvite": "Registrieren und Team beitreten",
+      "createTeam": "Team und Konto erstellen",
+      "sendRequest": "Anfrage senden",
+      "joinWithCode": "Mit Einladungscode beitreten"
+    },
+    "tips": {
+      "title": "Sicherheitstipps",
+      "description": "Best Practices während der Registrierung.",
+      "item1": "Passwörter werden über Stack Auth verwaltet. Aktivieren Sie MFA in Ihrem Profil.",
+      "item2": "Teams verwenden Einladungscodes. Teilen Sie diese nicht öffentlich.",
+      "item3": "Team-Erstellung ist pro Benutzer begrenzt, um Missbrauch zu verhindern.",
+      "badge": "Stack Auth integriert"
+    },
+    "toast": {
+      "successTitle": "Team konfiguriert",
+      "successDescription": "Ihr Konto ist bereit. Melden Sie sich an, um fortzufahren.",
+      "errorTitle": "Registrierungsfehler",
+      "errorDescriptionDefault": "Bitte versuchen Sie es erneut."
+    },
+    "loading": "Registrierung wird vorbereitet...",
+    "validation": {
+      "invalidEmail": "Bitte geben Sie eine gültige E-Mail-Adresse ein.",
+      "nameMin": "Name muss mindestens {count} Zeichen lang sein.",
+      "teamNameMin": "Teamname muss mindestens {count} Zeichen lang sein.",
+      "notesMax": "Notizen dürfen maximal {count} Zeichen haben.",
+      "teamSlugMin": "Team-Identifikator muss mindestens {count} Zeichen lang sein.",
+      "messageMax": "Nachricht darf maximal {count} Zeichen haben.",
+      "inviteCodeMin": "Einladungscode muss mindestens {count} Zeichen lang sein.",
+      "inviteTokenRequired": "Einladungstoken ist erforderlich.",
+      "teamSlugRequired": "Team-Identifikator ist erforderlich.",
+      "password": {
+        "minLength": "Passwort muss mindestens {count} Zeichen lang sein.",
+        "uppercase": "Passwort muss mindestens einen Großbuchstaben enthalten.",
+        "lowercase": "Passwort muss mindestens einen Kleinbuchstaben enthalten.",
+        "number": "Passwort muss mindestens eine Zahl enthalten."
+      }
+    },
+    "teamSlug": "Team-Kennung"
+  },
+  "reportId": "Berichts-ID",
+  "resourceId": "Ressourcen-ID",
+  "resourceTypes": "Ressourcentypen",
+  "responseCopied": "Antwort in die Zwischenablage kopiert",
+  "returnUrl": "Rückgabe-URL",
+  "risks": "Risiken",
+  "role": "Rolle",
+  "samplePromptsIntro": "Schnelle Vorschläge:",
+  "scim": {
+    "title": "SCIM 2.0-Bereitstellung",
+    "description": "Konfigurieren Sie die automatische Benutzerbereitstellung von Ihrem Identitätsanbieter",
+    "enabled": "SCIM aktiviert",
+    "tokens": {
+      "title": "Bearer-Tokens",
+      "description": "Generieren Sie Bearer-Tokens, um Ihrem Identitätsanbieter den Zugriff auf die SCIM-API zu ermöglichen",
+      "createButton": "Neues Token generieren",
+      "name": "Token-Name",
+      "namePlaceholder": "Produktion - Okta",
+      "nameDescription": "Geben Sie diesem Token einen erkennbaren Namen",
+      "tokenCreated": "Token erfolgreich erstellt",
+      "tokenRevokeWarning": "Nach dem Erzeugen wird das Token nur einmal angezeigt. Speichern Sie es sicher.",
+      "copyToken": "Token kopieren",
+      "tokenCopied": "Token in die Zwischenablage kopiert",
+      "revokeButton": "Widerrufen",
+      "revokeConfirm": "Möchten Sie dieses Token wirklich widerrufen?",
+      "revokeSuccess": "Token erfolgreich widerrufen",
+      "noTokens": "Keine Tokens vorhanden. Generieren Sie Ihr erstes Token, um SCIM zu aktivieren.",
+      "lastUsed": "Zuletzt verwendet",
+      "never": "Nie",
+      "expiresAt": "Läuft ab am",
+      "neverExpires": "Läuft nie ab",
+      "createdBy": "Erstellt von",
+      "createdAt": "Erstellt am",
+      "actions": {
+        "copy": "Token kopieren",
+        "revoke": "Widerrufen",
+        "revokeConfirm": {
+          "cancel": "Stornieren",
+          "confirm": "Widerrufen",
+          "description": "Dadurch wird der Token sofort ungültig. \nIhr Identitätsanbieter kann keine Benutzer mehr bereitstellen.",
+          "title": "Token widerrufen?"
+        }
+      },
+      "copySuccess": "Token in die Zwischenablage kopiert",
+      "createSuccess": "Token erfolgreich erstellt"
+    },
+    "setup": {
+      "title": "Einrichtungsanweisungen",
+      "description": "Befolgen Sie diese Schritte, um SCIM mit Ihrem Identitätsanbieter einzurichten",
+      "step1": {
+        "title": "1. Generieren Sie ein Bearer-Token",
+        "description": "Erstellen Sie ein sicheres Token, das Ihr Identitätsanbieter verwendet, um auf die SCIM-API zuzugreifen. Dieses Token wird nur einmal angezeigt."
+      },
+      "step2": {
+        "title": "2. Konfigurieren Sie SCIM in Ihrem Identitätsanbieter",
+        "description": "Geben Sie die folgende SCIM 2.0-URL und das Bearer-Token in Ihren Identitätsanbieter ein.",
+        "scimUrl": "SCIM 2.0-URL",
+        "bearerToken": "Bearer-Token",
+        "copyUrl": "URL kopieren",
+        "urlCopied": "URL in die Zwischenablage kopiert",
+        "authentication": "Authentifizierung",
+        "fullUrl": "Vollständige SCIM-URL"
+      },
+      "step3": {
+        "title": "3. Testen Sie die Verbindung",
+        "description": "Die meisten Identitätsanbieter bieten eine Testverbindungsfunktion. Stellen Sie sicher, dass die Verbindung erfolgreich hergestellt wird.",
+        "features": {
+          "createUsers": "Benutzer erstellen",
+          "deactivateUsers": "Benutzer deaktivieren",
+          "syncGroups": "Gruppen synchronisieren",
+          "updateUsers": "Benutzerattribute aktualisieren"
+        }
+      },
+      "step4": {
+        "description": "Konfigurieren Sie die folgenden Attributzuordnungen in Ihrem Identitätsanbieter:",
+        "mappings": {
+          "active": "aktiv → Kontostatus",
+          "emails": "emails[0].value → primäre E-Mail",
+          "name": "name.givenName name.familyName → displayName",
+          "userName": "Benutzername → primäre E-Mail"
+        },
+        "title": "4. Attributzuordnung"
+      },
+      "test": {
+        "description": "Testen Sie nach der Konfiguration die Bereitstellung, indem Sie einen Benutzer in Ihrem Identitätsanbieter hinzufügen oder aktualisieren.",
+        "testButton": "Testverbindung",
+        "testFailed": "Der SCIM-Verbindungstest ist fehlgeschlagen. \nBitte überprüfen Sie Ihre Konfiguration.",
+        "testSuccess": "SCIM-Verbindung funktioniert!",
+        "title": "Testbereitstellung"
+      }
+    },
+    "sync": {
+      "title": "Synchronisierungsverlauf",
+      "description": "Verfolgen Sie SCIM-Synchronisierungsoperationen",
+      "operation": "Vorgang",
+      "resource": "Ressource",
+      "status": {
+        "success": "Erfolg",
+        "failed": "Fehlgeschlagen",
+        "pending": "Ausstehend"
+      },
+      "timestamp": "Zeitstempel",
+      "error": "Fehler",
+      "operations": {
+        "create": "Erstellen",
+        "update": "Aktualisieren",
+        "delete": "Löschen",
+        "patch": "Patch"
+      },
+      "noLogs": "Keine Synchronisierungsprotokolle verfügbar"
+    },
+    "errors": {
+      "unauthorized": "Nicht autorisiert. Sie benötigen Team-Besitzerrechte.",
+      "tokenRequired": "Token-Name ist erforderlich",
+      "teamRequired": "Team-Slug ist erforderlich",
+      "createFailed": "Fehler beim Erstellen des Tokens",
+      "revokeFailed": "Fehler beim Widerrufen des Tokens",
+      "fetchFailed": "SCIM-Konfiguration konnte nicht abgerufen werden",
+      "invalidToken": "Ungültiges oder abgelaufenes Token",
+      "notConfigured": "SCIM ist für dieses Team nicht konfiguriert",
+      "notMember": "Kein Mitglied dieses Teams",
+      "notOwner": "Nur Teambesitzer können SCIM-Einstellungen verwalten",
+      "syncFailed": "Benutzer konnte nicht synchronisiert werden"
+    },
+    "idpGuides": {
+      "title": "Identitätsanbieter-Anleitungen",
+      "description": "Wählen Sie Ihren Identitätsanbieter für detaillierte Einrichtungsanweisungen",
+      "okta": {
+        "title": "Okta SCIM-Einrichtung",
+        "steps": [
+          "Gehen Sie zu Apps > Applications > Browse App Integration",
+          "Suchen Sie nach \"SCIM\" und wählen Sie \"SCIM Provisioner\" oder erstellen Sie eine benutzerdefinierte App",
+          "Navigieren Sie zum Tab \"Provisioning\"",
+          "Klicken Sie auf \"Configure API Integration\"",
+          "Geben Sie die SCIM 2.0-URL und das Bearer-Token ein",
+          "Klicken Sie auf \"Test API Credentials\"",
+          "Aktivieren Sie die gewünschten Provisioning-Features",
+          "Klicken Sie auf \"Save\""
+        ]
+      },
+      "azure": {
+        "title": "Azure AD SCIM-Einrichtung",
+        "steps": [
+          "Gehen Sie zu Azure Active Directory > Enterprise Applications",
+          "Klicken Sie auf \"New Application\"",
+          "Suchen Sie nach \"SCIM\" und wählen Sie \"GitHub SCIM Provisioner\" oder ähnliche Vorlage",
+          "Navigieren Sie zu \"Provisioning\"",
+          "Wählen Sie \"Automatic\" als Provisioning Mode",
+          "Geben Sie die SCIM 2.0-URL und das Bearer-Token ein",
+          "Klicken Sie auf \"Test Connection\"",
+          "Wählen Sie die zu synchronisierenden Attribute",
+          "Klicken Sie auf \"Save\" und starten Sie die Provisioning"
+        ],
+        "steps[9]": "Speichern Sie die Konfiguration"
+      },
+      "google": {
+        "title": "Google Workspace SCIM-Einrichtung",
+        "steps": [
+          "Gehen Sie zu Admin Console > Apps > Web and mobile apps",
+          "Klicken Sie auf \"Add app > Add custom SAML app\"",
+          "Nach dem Erstellen gehen Sie zu \"SCIM\"-Tab",
+          "Geben Sie die SCIM 2.0-URL und das Bearer-Token ein",
+          "Klicken Sie auf \"Verify\"",
+          "Konfigurieren Sie die Benutzerzuordnung",
+          "Speichern Sie die Konfiguration"
+        ],
+        "steps[7]": "Speichern Sie die Konfiguration"
+      },
+      "${selectedIdpGuide}": {
+        "title": "scim.idpGuides.${selectedIdpGuide}.title"
+      }
+    },
+    "configureButton": "Konfigurieren Sie SCIM",
+    "configured": "Konfiguriert",
+    "notConfigured": "Nicht konfiguriert",
+    "status": {
+      "configured": "SCIM ist für Ihr Team konfiguriert",
+      "notConfigured": "SCIM ist für dieses Team nicht konfiguriert"
+    },
+    "syncLogs": {
+      "description": "Aktuelle Bereitstellungsereignisse von Ihrem Identitätsanbieter",
+      "errorMessage": "Fehler",
+      "noLogs": "Noch keine Synchronisierungsereignisse",
+      "operation": "Betrieb",
+      "operations": {
+        "create": "Erstellen",
+        "delete": "Löschen",
+        "patch": "Patch",
+        "update": "Aktualisieren"
+      },
+      "resourceType": "Ressource",
+      "resourceTypes": {
+        "Group": "Gruppe",
+        "User": "Benutzer"
+      },
+      "status": "Status",
+      "statuses": {
+        "failed": "Fehlgeschlagen",
+        "pending": "Ausstehend",
+        "success": "Erfolg"
+      },
+      "timestamp": "Zeit",
+      "title": "Verlauf synchronisieren"
+    }
+  },
+  "search": {
+    "searchPlaceholder": "Dokumente durchsuchen...",
+    "advancedFilters": "Erweiterte Filter",
+    "clearAll": "Alle löschen",
+    "packages": "Pakete",
+    "documentType": "Dokumenttyp",
+    "author": "Autor",
+    "dateRange": "Datumsbereich",
+    "from": "Von",
+    "to": "Bis",
+    "searchMethod": "Suchmethode",
+    "minRelevance": "Min. Relevanz",
+    "activeFilters": "aktive Filter",
+    "showAdvancedSearch": "Erweiterte Suche",
+    "hideAdvancedSearch": "Erweiterte Suche ausblenden",
+    "search": "Suche",
+    "searchError": "Suchfehler",
+    "searchErrorDesc": "Erweiterte Suche fehlgeschlagen"
+  },
+  "searchTerm": "search",
+  "selectFile": "Dateien auswählen",
+  "sendMessageOrDropFiles": "Nachricht schreiben oder Dateien ablegen...",
+  "settings": {
+    "layout": {
+      "title": "Kontoeinstellungen",
+      "navSectionTitle": "Kontoeinstellungen",
+      "navSectionAccount": "Konto",
+      "navSectionPreferences": "Einstellungen",
+      "navSectionSecurity": "Sicherheit",
+      "navSectionTeam": "Team",
+      "nav": {
+        "profile": "Mein Profil",
+        "auth": "E-Mails & Authentifizierung",
+        "sessions": "Aktive Sitzungen",
+        "notifications": "Benachrichtigungen",
+        "preferences": "Vorlieben",
+        "privacy": "Datenschutz",
+        "apiKeys": "API-Schlüssel",
+        "auditLogs": "Audit-Protokolle",
+        "sso": "Single Sign-On",
+        "scim": "SCIM-Bereitstellung",
+        "${item": {
+          "key}": "settings.layout.nav.${item.key}"
+        }
+      }
+    },
+    "pageTitles": {
+      "apiKeys": "API-Schlüssel",
+      "auditLogs": "Audit-Protokolle",
+      "auth": "E-Mails",
+      "notifications": "Benachrichtigungen",
+      "preferences": "Präferenzen",
+      "privacy": "Privatsphäre",
+      "profile": "Mein Profil",
+      "scim": "SCIM-Bereitstellung",
+      "sessions": "Aktive Sitzungen",
+      "sso": "Single Sign-On"
+    },
+    "profile": {
+      "title": "Mein Profil",
+      "fallbackEmail": "no-email@pending",
+      "toast": {
+        "errorTitle": "Fehler",
+        "profileUpdated": {
+          "title": "Profil aktualisiert",
+          "description": "Ihr Anzeigename wurde aktualisiert."
+        },
+        "profileUpdateError": "Wir konnten Ihr Profil nicht aktualisieren. Versuchen Sie es erneut.",
+        "invalidFileType": "Bitte wählen Sie eine Bilddatei aus.",
+        "fileTooLarge": "Bild muss kleiner als 5MB sein.",
+        "photoUpdated": {
+          "title": "Foto aktualisiert",
+          "description": "Ihr Profilbild wurde aktualisiert."
+        },
+        "photoUpdateError": "Wir konnten das Foto nicht hochladen.",
+        "fileReadError": "Wir konnten die ausgewählte Datei nicht lesen."
+      },
+      "photo": {
+        "uploading": "Wird hochgeladen...",
+        "upload": "Foto hochladen",
+        "supportedFormats": "JPG, PNG oder GIF. Max 5MB.",
+        "title": "Profilbild",
+        "description": "Laden Sie Ihr eigenes Bild als Avatar hoch."
+      },
+      "name": {
+        "label": "Anzeigename",
+        "description": "Dieser Name wird anderen Benutzern angezeigt und dient nicht der Authentifizierung.",
+        "empty": "Kein Name",
+        "placeholder": "Geben Sie Ihren Namen ein",
+        "saving": "Wird gespeichert...",
+        "save": "Name speichern"
+      },
+      "email": {
+        "label": "E-Mail",
+        "description": "Ihre primäre E-Mail-Adresse"
+      },
+      "dangerZone": {
+        "deleteButton": "Konto löschen",
+        "description": "Irreversible und destruktive Handlungen",
+        "dialog": {
+          "confirmButton": "Konto löschen",
+          "confirmHint": "Geben Sie Ihre E-Mail-Adresse ein, um den Löschvorgang zu bestätigen",
+          "confirmLabel": "Geben Sie zur Bestätigung Ihre E-Mail-Adresse ein",
+          "deleting": "Löschen...",
+          "description": "Diese Aktion kann nicht rückgängig gemacht werden. \nDadurch werden Ihr Konto und alle damit verbundenen Daten dauerhaft gelöscht.",
+          "title": "Konto löschen",
+          "warning": "Sobald Sie Ihr Konto gelöscht haben, gibt es kein Zurück mehr. \nBitte seien Sie sicher."
+        },
+        "title": "Gefahrenzone",
+        "toast": {
+          "accountDeleted": {
+            "description": "Ihr Konto wurde erfolgreich gelöscht.",
+            "title": "Konto gelöscht"
+          },
+          "deleteError": {
+            "description": "Wir konnten Ihr Konto nicht löschen. \nBitte versuchen Sie es erneut oder wenden Sie sich an den Support.",
+            "title": "Löschvorgang fehlgeschlagen"
+          },
+          "emailMismatch": {
+            "description": "Die von Ihnen eingegebene E-Mail-Adresse stimmt nicht mit der E-Mail-Adresse Ihres Kontos überein.",
+            "title": "E-Mail-Konflikt"
+          }
+        }
+      },
+      "auth": {
+        "title": "E-Mails & Authentifizierung",
+        "emails": {
+          "title": "E-Mail-Adressen",
+          "description": "Verwalten Sie die E-Mail-Adressen, die Sie zur Anmeldung verwenden.",
+          "fallback": "no-email@pending",
+          "primaryBadge": "Primär",
+          "verified": "Verifiziert",
+          "addButton": "E-Mail-Adresse hinzufügen"
+        },
+        "password": {
+          "title": "Passwort",
+          "description": "Ändern Sie Ihr Passwort, um Ihr Konto sicher zu halten.",
+          "statusLabel": "Passwort",
+          "lastChanged": "Zuletzt geändert vor 30 Tagen",
+          "changeButton": "Ändern"
+        },
+        "mfa": {
+          "title": "Zwei-Faktor-Authentifizierung (2FA)",
+          "description": "Fügen Sie eine zusätzliche Sicherheitsebene zu Ihrem Konto hinzu.",
+          "method": "Authenticator-App",
+          "status": {
+            "enabled": "Aktiviert",
+            "disabled": "Nicht aktiviert"
+          }
+        },
+        "toast": {
+          "errorTitle": "Fehler",
+          "currentPasswordRequired": "Geben Sie Ihr aktuelles Passwort ein.",
+          "passwordMismatch": "Passwörter stimmen nicht überein.",
+          "passwordTooShort": "Passwort muss mindestens 8 Zeichen lang sein.",
+          "passwordUpdated": {
+            "title": "Passwort aktualisiert",
+            "description": "Ihr Passwort wurde geändert."
+          },
+          "passwordUpdateError": "Wir konnten das Passwort nicht ändern. Versuchen Sie es erneut.",
+          "mfaDisabled": {
+            "title": "MFA deaktiviert",
+            "description": "Zwei-Faktor-Authentifizierung wurde deaktiviert."
+          },
+          "mfaDisableError": "Wir konnten MFA nicht deaktivieren.",
+          "mfaCodeInvalid": "Geben Sie einen gültigen 6-stelligen Code ein.",
+          "mfaEnabled": {
+            "title": "MFA aktiviert",
+            "description": "Zwei-Faktor-Authentifizierung ist nun aktiv."
+          },
+          "mfaEnableError": "Wir konnten MFA nicht aktivieren."
+        },
+        "passwordDialog": {
+          "title": "Passwort ändern",
+          "description": "Geben Sie Ihr aktuelles Passwort ein und wählen Sie ein neues.",
+          "currentLabel": "Aktuelles Passwort",
+          "newLabel": "Neues Passwort",
+          "confirmLabel": "Passwort bestätigen",
+          "placeholder": "********",
+          "requirements": "Mindestens 8 Zeichen",
+          "submit": "Passwort ändern",
+          "submitting": "Wird aktualisiert..."
+        },
+        "mfaDialog": {
+          "title": "Zwei-Faktor-Authentifizierung aktivieren",
+          "description": "Scannen Sie den QR-Code mit Ihrer Authenticator-App und geben Sie den Code ein.",
+          "inputLabel": "Geben Sie den 6-stelligen Code ein",
+          "codeComplete": "Code vollständig",
+          "verifying": "Wird überprüft...",
+          "submit": "Aktivieren",
+          "submitting": "Wird aktiviert..."
+        }
+      },
+      "notifications": {
+        "title": "Benachrichtigungen",
+        "sectionTitle": "Benachrichtigungsvorlieben",
+        "sectionDescription": "Entscheiden Sie, wie und wann Sie benachrichtigt werden möchten.",
+        "toggles": {
+          "email": {
+            "label": "E-Mail-Benachrichtigungen",
+            "description": "Erhalten Sie wichtige Updates per E-Mail."
+          },
+          "team": {
+            "label": "Team-Updates",
+            "description": "Benachrichtigungen über Änderungen in Ihrem Team."
+          },
+          "security": {
+            "label": "Sicherheitsalarme",
+            "description": "Benachrichtigungen über ungewöhnliche Aktivitäten auf Ihrem Konto."
+          },
+          "rag": {
+            "label": "RAG-Updates",
+            "description": "Benachrichtigungen über Dokumentenverarbeitung und Abfragen."
+          }
+        }
+      },
+      "sessions": {
+        "title": "Aktive Sitzungen",
+        "sectionTitle": "Aktive Geräte",
+        "sectionDescription": "Verwalten Sie die Geräte, auf denen Sie angemeldet sind.",
+        "currentDeviceBadge": "Dieses Gerät",
+        "removeButton": "Abmelden",
+        "sessionsList": {
+          "current": {
+            "location": "37.20.118.13 (Frankfurt am Main, DE)",
+            "lastActive": "Heute um 21:10"
+          },
+          "secondary": {
+            "location": "2a02:8071:5112:2120:4cd:e926:8063:1f2 (Siegen, DE)",
+            "lastActive": "Heute um 15:55"
+          }
+        }
+      },
+      "img": "settings.profile.img",
+      "canvas": "settings.profile.canvas",
+      "2d": "settings.profile.2d"
+    },
+    "auth": {
+      "title": "Emails & Authentication",
+      "emails": {
+        "title": "Email addresses",
+        "description": "Manage the email addresses you use to sign in.",
+        "fallback": "no-email@pending",
+        "primaryBadge": "Primär",
+        "verified": "Verifiziert",
+        "notVerified": "Nicht verifiziert",
+        "addButton": "E-Mail-Adresse hinzufügen"
+      },
+      "password": {
+        "title": "Passwort",
+        "description": "Ändern Sie Ihr Passwort, um Ihr Konto zu schützen.",
+        "statusLabel": "Passwort konfiguriert",
+        "noPassword": "Kein Passwort festgelegt",
+        "lastChanged": "Zuletzt geändert vor 30 Tagen",
+        "oauthOnly": "Sie haben sich mit Google angemeldet",
+        "oauthInfo": "Sie verwenden derzeit Google zum Anmelden. Sie können optional ein Passwort festlegen, um sich auch mit E-Mail anzumelden.",
+        "changeButton": "Ändern",
+        "setButton": "Passwort festlegen"
+      },
+      "mfa": {
+        "title": "Two-factor authentication (2FA)",
+        "description": "Add an additional security layer to your account.",
+        "method": "Authenticator app",
+        "status": {
+          "enabled": "Enabled",
+          "disabled": "Not enabled"
+        }
+      },
+      "toast": {
+        "errorTitle": "Error",
+        "currentPasswordRequired": "Enter your current password.",
+        "passwordMismatch": "Passwords do not match.",
+        "passwordTooShort": "Password must be at least 8 characters long.",
+        "passwordUpdated": {
+          "title": "Password updated",
+          "description": "Your password has been changed."
+        },
+        "passwordUpdateError": "We couldn't change the password. Try again.",
+        "mfaDisabled": {
+          "title": "MFA disabled",
+          "description": "Two-factor authentication has been disabled."
+        },
+        "mfaDisableError": "We couldn't disable MFA.",
+        "mfaCodeInvalid": "Enter a valid 6-digit code.",
+        "mfaEnabled": {
+          "title": "MFA enabled",
+          "description": "Two-factor authentication is now active."
+        },
+        "mfaEnableError": "We couldn't enable MFA."
+      },
+      "passwordDialog": {
+        "title": "Change password",
+        "description": "Enter your current password and choose a new one.",
+        "currentLabel": "Current password",
+        "newLabel": "New password",
+        "confirmLabel": "Confirm password",
+        "placeholder": "********",
+        "requirements": "At least 8 characters",
+        "submit": "Change password",
+        "submitting": "Updating..."
+      },
+      "mfaDialog": {
+        "title": "Zwei-Faktor-Authentifizierung aktivieren",
+        "description": "Scannen Sie den QR-Code mit Ihrer Authenticator-App und geben Sie den Code ein.",
+        "inputLabel": "6-stelligen Code eingeben",
+        "codeComplete": "Code vollständig",
+        "verifying": "Überprüfung...",
+        "submit": "Aktivieren",
+        "submitting": "Aktiviere..."
+      },
+      "setPasswordDialog": {
+        "title": "Passwort festlegen",
+        "description": "Erstellen Sie ein Passwort, um sich zusätzlich zu Google auch mit Ihrer E-Mail anzumelden.",
+        "submit": "Passwort festlegen"
+      },
+      "mfaRequired": "MFA ist aus Sicherheitsgründen erforderlich"
+    },
+    "notifications": {
+      "title": "Benachrichtigungen",
+      "sectionTitle": "Benachrichtigungseinstellungen",
+      "sectionDescription": "Entscheiden Sie, wie und wann Sie benachrichtigt werden möchten.",
+      "toggles": {
+        "email": {
+          "label": "E-Mail-Benachrichtigungen",
+          "description": "Wichtige Updates per E-Mail erhalten."
+        },
+        "team": {
+          "label": "Team-Updates",
+          "description": "Benachrichtigungen über Änderungen in Ihrem Team."
+        },
+        "security": {
+          "label": "Sicherheitswarnungen",
+          "description": "Benachrichtigungen über ungewöhnliche Aktivitäten in Ihrem Konto."
+        },
+        "rag": {
+          "label": "RAG-Updates",
+          "description": "Benachrichtigungen über Dokumentenverarbeitung und Abfragen."
+        }
+      },
+      "toast": {
+        "saved": "Einstellungen gespeichert",
+        "savedDescription": "Ihre Benachrichtigungseinstellungen wurden aktualisiert.",
+        "error": "Fehler",
+        "errorDescription": "Einstellungen konnten nicht gespeichert werden. Bitte versuchen Sie es erneut."
+      }
+    },
+    "sessions": {
+      "title": "Aktive Sitzungen",
+      "sectionTitle": "Aktive Geräte",
+      "sectionDescription": "Verwalten Sie die Geräte, auf denen Sie angemeldet sind.",
+      "currentDeviceBadge": "Dieses Gerät",
+      "removeButton": "Abmelden",
+      "lastActive": "Zuletzt aktiv",
+      "noSessions": "Keine aktiven Sitzungen gefunden.",
+      "toast": {
+        "error": "Fehler",
+        "fetchError": "Sitzungen konnten nicht geladen werden.",
+        "revoked": "Sitzung beendet",
+        "revokedDescription": "Die Sitzung wurde abgemeldet.",
+        "revokeError": "Sitzung konnte nicht beendet werden."
+      }
+    }
+  },
+  "should apply size classes correctly": "should apply size classes correctly",
+  "should apply variant classes correctly": "should apply variant classes correctly",
+  "should be disabled when disabled prop is true": "should be disabled when disabled prop is true",
+  "should call onClick handler when clicked": "should call onClick handler when clicked",
+  "should render as child component when asChild is true": "should render as child component when asChild is true",
+  "should render button with text": "should render button with text",
+  "showArchived": "Archivierte anzeigen",
+  "sidebar": {
+    "common": {
+      "loading": "Laden...",
+      "save": "Speichern",
+      "cancel": "Abbrechen",
+      "delete": "Löschen",
+      "edit": "Bearbeiten",
+      "create": "Erstellen",
+      "search": "Suchen",
+      "settings": "Einstellungen",
+      "preferences": "Vorlieben",
+      "dashboard": "Dashboard",
+      "admin": "Admin",
+      "chat": "Chat",
+      "prompts": "Prompts",
+      "analytics": "Analysen",
+      "team": "Team",
+      "rag": "RAG",
+      "documents": "Dokumente",
+      "logout": "Abmelden",
+      "profile": "Profil",
+      "language": "Sprache",
+      "languages": {
+        "en": "Englisch",
+        "de": "Deutsch",
+        "es": "Spanisch"
+      }
+    },
+    "title": "Nexary",
+    "newChat": "Neuer Chat",
+    "backToChat": "Zurück zum Chat",
+    "search": "Suchen",
+    "promptLibrary": "Prompt-Bibliothek",
+    "assistants": "Assistenten",
+    "ragPackages": "RAG-Pakete",
+    "documents": "Documents",
+    "analytics": "Analysen",
+    "team": "Team",
+    "teamSettings": "Team-Einstellungen",
+    "user": "Benutzer",
+    "profile": "Profil",
+    "signOut": "Abmelden",
+    "searchChats": "Chats durchsuchen...",
+    "today": "Heute",
+    "noChatsFound": "Keine Chats gefunden",
+    "noChats": "Keine Chats verfügbar",
+    "renameDialogTitle": "Gespräch umbenennen",
+    "renameDialogDescription": "Geben Sie einen neuen Namen für dieses Gespräch ein.",
+    "renameDialogLabel": "Titel",
+    "renameDialogPlaceholder": "Neuer Titel...",
+    "renameDialogCancel": "Abbrechen",
+    "renameDialogConfirm": "Umbenennen",
+    "renameDialogLoading": "Wird umbenannt...",
+    "deleteDialogTitle": "Gespräch löschen",
+    "deleteDialogDescription": "Sind Sie sicher, dass Sie dieses Gespräch löschen möchten? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "deleteDialogCancel": "Abbrechen",
+    "deleteDialogConfirm": "Löschen",
+    "deleteDialogLoading": "Wird gelöscht...",
+    "toastRenamed": "Umbenannt",
+    "toastRenameSuccess": "Gespräch erfolgreich umbenannt",
+    "toastRenameError": "Gespräch konnte nicht umbenannt werden",
+    "toastDeleted": "Gelöscht",
+    "toastDeleteSuccess": "Gespräch erfolgreich gelöscht",
+    "toastDeleteError": "Gespräch konnte nicht gelöscht werden",
+    "error": "Fehler",
+    "renameConversation": "Gespräch umbenennen",
+    "enterNewName": "Neuen Namen eingeben",
+    "titleLabel": "Titel",
+    "newTitlePlaceholder": "Neuer Titel...",
+    "renaming": "Benenne um...",
+    "rename": "Umbenennen",
+    "deleteConversation": "Gespräch löschen",
+    "deleteWarning": "Möchten Sie dieses Gespräch wirklich löschen? Diese Aktion kann nicht rückgängig gemacht werden.",
+    "deleting": "Lösche...",
+    "delete": "Löschen",
+    "closeMenu": "Menü schließen",
+    "expandMenu": "Menü erweitern",
+    "collapseMenu": "Menü einklappen",
+    "toastError": "Error",
+    "link": "Link",
+    "renamed": "Umbenannt",
+    "renameSuccess": "Gespräch erfolgreich umbenannt",
+    "renameError": "Konnte Gespräch nicht umbenennen",
+    "deleted": "Gelöscht",
+    "deleteSuccess": "Gespräch erfolgreich gelöscht",
+    "deleteError": "Konnte Gespräch nicht löschen"
+  },
+  "sso": {
+    "title": "Single Sign-On (SSO)",
+    "description": "Konfigurieren Sie SAML 2.0 SSO für Ihr Team",
+    "configured": "Konfiguriert",
+    "notConfigured": "Nicht konfiguriert",
+    "configureButton": "SSO konfigurieren",
+    "status": {
+      "configured": "SAML ist für Ihr Team konfiguriert",
+      "notConfigured": "SAML ist für dieses Team nicht konfiguriert"
+    },
+    "form": {
+      "identityProvider": "Identitätsanbieter",
+      "selectIdp": "Wählen Sie Ihren Identitätsanbieter",
+      "manualConfiguration": "Manuelle Konfiguration",
+      "idpEntityId": "ID des Identitätsanbieters",
+      "idpEntityIdPlaceholder": "https://idp.beispiel.com/entityid",
+      "idpEntityIdDescription": "Die eindeutige Kennung Ihres Identitätsanbieters",
+      "idpSsoUrl": "Single Sign-On URL des IdP",
+      "idpSsoUrlPlaceholder": "https://idp.beispiel.com/sso",
+      "idpSsoUrlDescription": "Die URL, zu der Benutzer für die Authentifizierung weitergeleitet werden",
+      "idpSloUrl": "Single Logout URL des IdP",
+      "idpSloUrlPlaceholder": "https://idp.beispiel.com/slo",
+      "idpSloUrlDescription": "Optional: URL für Single-Logout-Funktionalität",
+      "idpCert": "X.509-Zertifikat des IdP",
+      "idpCertPlaceholder": "-----BEGIN CERTIFICATE-----\n...\n-----END CERTIFICATE-----",
+      "idpCertDescription": "Fügen Sie das vollständige X.509-Zertifikat Ihres Identitätsanbieters ein",
+      "nameIdFormat": "Name ID-Format",
+      "emailAddress": "E-Mail-Adresse",
+      "unspecified": "Nicht angegeben"
+    },
+    "spDetails": {
+      "title": "Service-Provider-Details",
+      "spEntityId": "SP-Entity-ID",
+      "acsUrl": "ACS-URL",
+      "metadataUrl": "Metadaten-URL",
+      "downloadMetadata": "Metadaten-XML herunterladen",
+      "copyMetadataUrl": "Metadaten-URL kopieren"
+    },
+    "actions": {
+      "save": "SAML-Konfiguration speichern",
+      "saving": "Speichern...",
+      "update": "Konfiguration aktualisieren",
+      "delete": "SAML-Konfiguration löschen",
+      "deleteConfirm": {
+        "title": "SAML-Konfiguration löschen?",
+        "description": "Dies deaktiviert SAML SSO für Ihr Team. Benutzer müssen sich mit anderen Methoden anmelden. Diese Aktion kann nicht rückgängig gemacht werden.",
+        "confirm": "Löschen",
+        "cancel": "Abbrechen"
+      }
+    },
+    "idpTemplates": {
+      "okta": "Okta",
+      "azure": "Azure AD / Microsoft Entra ID",
+      "google": "Google Workspace",
+      "onelogin": "OneLogin",
+      "adfs": "Active Directory Federation Services (ADFS)",
+      "authentik": "Authentik"
+    },
+    "errors": {
+      "notConfigured": "SAML ist für dieses Team nicht konfiguriert",
+      "notOwner": "Nur Teambesitzer können SSO-Einstellungen verwalten",
+      "notMember": "Sie sind kein Mitglied dieses Teams",
+      "alreadyConfigured": "SAML ist bereits für dieses Team konfiguriert. Verwenden Sie PUT zum Aktualisieren.",
+      "notFound": "SAML ist für dieses Team nicht konfiguriert. Verwenden Sie POST zum Erstellen.",
+      "invalidCertificate": "Ungültiges X.509-Zertifikatformat",
+      "saveFailed": "Fehler beim Speichern der SAML-Konfiguration",
+      "deleteFailed": "Fehler beim Löschen der SAML-Konfiguration",
+      "downloadFailed": "Fehler beim Herunterladen der Metadaten"
+    },
+    "success": {
+      "saved": "Konfiguration erfolgreich gespeichert",
+      "deleted": "SAML-Konfiguration erfolgreich gelöscht"
+    }
+  },
+  "startConversation": "Beginnen Sie eine Konversation, laden Sie Dokumente hoch und teilen Sie Wissen mit Ihrem Team.",
+  "startConversationBeforeUpload": "Beginnen Sie eine Konversation, bevor Sie Dokumente hochladen.",
+  "startDate": "Startdatum",
+  "startIndex": "Startindex",
+  "state": "Status",
+  "status": "Status",
+  "style": "Stil",
+  "success": "Erfolg",
+  "summary": "Zusammenfassung",
+  "tags": "Tags",
+  "targetId": "Ziel-ID",
+  "targetType": "Zieltyp",
+  "team": "Team",
+  "teamSlug": "Team-ID",
+  "team_slug": "Team-Slug",
+  "teams": {
+    "title": "Teamverwaltung",
+    "description": "SAML SSO und SCIM-Bereitstellung verwalten",
+    "list": {
+      "search": "Teams suchen...",
+      "table": {
+        "headers": {
+          "team": "Team",
+          "members": "Mitglieder",
+          "saml": "SAML SSO",
+          "scim": "SCIM",
+          "actions": "Aktionen",
+          "created": "Erstellt"
+        },
+        "actions": {
+          "configureSaml": "SAML konfigurieren",
+          "configureScim": "SCIM konfigurieren",
+          "viewSettings": "Einstellungen anzeigen"
+        }
+      }
+    }
+  },
+  "threshold": "Schwellenwert",
+  "token": "Token",
+  "tokenId": "Token-ID",
+  "tooLarge": "Datei zu groß (max 10 MB): {name}",
+  "unexpectedError": "Ein unerwarteter Fehler ist aufgetreten",
+  "uploadDocuments": "Dokumente hochladen",
+  "uploadError": "Fehler beim Hochladen",
+  "uploadFailed": "Hochladen fehlgeschlagen {name}",
+  "uploadedDocuments": "Hochgeladene Dokumente ({count})",
+  "user-agent": "User-Agent",
+  "userId": "Benutzer-ID",
+  "users": "Benutzer",
+  "verifyEmail": {
+    "title": "Bestätigen Sie Ihre E-Mail",
+    "description": "Wir haben einen Bestätigungslink an {email} gesendet. Bitte prüfen Sie Ihr Postfach und klicken Sie auf den Link, um fortzufahren.",
+    "resendEmail": "Bestätigungs-E-Mail erneut senden",
+    "resendIn": "Erneut senden in {seconds}s",
+    "emailSent": "E-Mail gesendet",
+    "checkInbox": "Bitte prüfen Sie Ihr Postfach für den Bestätigungslink.",
+    "checkSpam": "Vergessen Sie nicht, Ihren Spam-Ordner zu überprüfen.",
+    "error": "Fehler",
+    "tryAgain": "Bitte versuchen Sie es erneut.",
+    "signOut": "Abmelden",
+    "callbackUrl": "Bestätigungslink"
+  },
+  "view": "Ansicht",
+  "visibility": "Sichtbarkeit",
+  "x-forwarded-for": "x-forwarded-for",
+  "year": "Jahr",
+  "|": "|",
+  "✅ Rol in PostgreSQL aktualisiert:\\n\\nVorher: ${data": {
+    "before": {
+      "role}\\nJetzt: ${data": {
+        "after": {
+          "role}\\n\\nSQL ausgef\\u00FChrt:\\n${data": {
+            "sql}\\n\\nJetzt mit Stack Auth synchronisieren": "✅ Rol in PostgreSQL aktualisiert:\\n\\nVorher: ${data.before.role}\\nJetzt: ${data.after.role}\\n\\nSQL ausgef\\u00FChrt:\\n${data.sql}\\n\\nJetzt mit Stack Auth synchronisieren"
+          }
+        }
+      }
+    }
+  },
+  "✅ Rol synchronisiert:\\nDB Rolle: ${data": {
+    "data": {
+      "dbRole}\\nInterne Rolle: ${data": {
+        "data": {
+          "internalRole}\\n\\nNeu laden": {
+            "": {
+              "": {
+                "": "✅ Rol synchronisiert:\\nDB Rolle: ${data.data.dbRole}\\nInterne Rolle: ${data.data.internalRole}\\n\\nNeu laden..."
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "❌ Fehler: ${data": {
+    "error}": "❌ Fehler: ${data.error}",
+    "error}\\n${data": {
+      "details || ": "❌ Fehler: ${data.error}\\n${data.details || "
+    }
+  }
+}

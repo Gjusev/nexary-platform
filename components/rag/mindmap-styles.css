@@ -1,0 +1,24 @@
+/* Allow component-level styles to control edge appearance */
+.react-flow__edges path {
+    /* No global overrides - let CustomEdge control styles */
+    transition: opacity 0.3s ease, stroke 0.3s ease;
+}
+
+/* Ensure text labels are visible */
+.react-flow__edge-text {
+    fill: hsl(var(--foreground)) !important;
+    font-size: 12px !important;
+    font-weight: 600 !important;
+}
+
+/* Fix label background to be visible */
+.react-flow__edge-textbg,
+.react-flow__edges rect {
+    fill: hsl(var(--background)) !important;
+    fill-opacity: 0.95 !important;
+}
+
+/* Override any inline stroke="none" */
+.react-flow__edge-path[stroke="none"] {
+    stroke: hsl(var(--muted-foreground)) !important;
+}

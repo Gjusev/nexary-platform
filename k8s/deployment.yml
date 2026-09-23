@@ -1,0 +1,430 @@
+# Nexary Enterprise - Kubernetes Deployment
+# Optimized for European cloud providers (AWS EKS, Azure AKS, Google GKE)
+
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: nexary
+  labels:
+    name: nexary
+    compliance: gdpr
+    environment: production
+
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: nexary-config
+  namespace: nexary
+data:
+  NODE_ENV: "production"
+  PORT: "3000"
+  DEFAULT_DATA_REGION: "eu-west-1"
+  TZ: "Europe/Berlin"
+
+---
+apiVersion: v1
+kind: Secret
+metadata:
+  name: nexary-secrets
+  namespace: nexary
+type: Opaque
+stringData:
+  # Stack Auth
+  NEXT_PUBLIC_STACK_PROJECT_ID: "${NEXT_PUBLIC_STACK_PROJECT_ID}"
+  NEXT_PUBLIC_STACK_API_KEY: "${NEXT_PUBLIC_STACK_API_KEY}"
+
+  # Database
+  POSTGRES_USER: "${POSTGRES_USER:-nexary}"
+  POSTGRES_PASSWORD: "${POSTGRES_PASSWORD}"
+  DATABASE_URL: "postgresql://${POSTGRES_USER:-nexary}:${POSTGRES_PASSWORD}@nexary-postgres:5432/${POSTGRES_DB:-nexarydb}"
+
+  # Redis
+  REDIS_PASSWORD: "${REDIS_PASSWORD}"
+
+  # MinIO
+  MINIO_ACCESS_KEY: "${MINIO_ACCESS_KEY}"
+  MINIO_SECRET_KEY: "${MINIO_SECRET_KEY}"
+  MINIO_ROOT_USER: "${MINIO_ROOT_USER:-minioadmin}"
+  MINIO_ROOT_PASSWORD: "${MINIO_ROOT_PASSWORD}"
+
+  # App
+  NEXTAUTH_SECRET: "${NEXTAUTH_SECRET}"
+  NEXTAUTH_URL: "${NEXTAUTH_URL:-https://nexary.example.com}"
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nexary-app
+  namespace: nexary
+  labels:
+    app: nexary
+    component: app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nexary
+      component: app
+  template:
+    metadata:
+      labels:
+        app: nexary
+        component: app
+    spec:
+      containers:
+      - name: nexary
+        image: nexary:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 3000
+          name: http
+          protocol: TCP
+        env:
+        - name: NODE_ENV
+          valueFrom:
+            configMapKeyRef:
+              name: nexary-config
+              key: NODE_ENV
+        - name: PORT
+          valueFrom:
+            configMapKeyRef:
+              name: nexary-config
+              key: PORT
+        - name: DEFAULT_DATA_REGION
+          valueFrom:
+            configMapKeyRef:
+              name: nexary-config
+              key: DEFAULT_DATA_REGION
+        - name: TZ
+          valueFrom:
+            configMapKeyRef:
+              name: nexary-config
+              key: TZ
+        - name: NEXT_PUBLIC_STACK_PROJECT_ID
+          valueFrom:
+            secretKeyRef:
+              name: nexary-secrets
+              key: NEXT_PUBLIC_STACK_PROJECT_ID
+        - name: NEXT_PUBLIC_STACK_API_KEY
+          valueFrom:
+            secretKeyRef:
+              name: nexary-secrets
+              key: NEXT_PUBLIC_STACK_API_KEY
+        - name: DATABASE_URL
+          valueFrom:
+            secretKeyRef:
+              name: nexary-secrets
+              key: DATABASE_URL
+        - name: REDIS_URL
+          value: "redis://nexary-redis:6379"
+        - name: QDRANT_URL
+          value: "http://nexary-qdrant:6333"
+        - name: MINIO_ENDPOINT
+          value: "nexary-minio:9000"
+        - name: MINIO_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: nexary-secrets
+              key: MINIO_ACCESS_KEY
+        - name: MINIO_SECRET_KEY
+          valueFrom:
+            secretKeyRef:
+              name: nexary-secrets
+              key: MINIO_SECRET_KEY
+        - name: NEXTAUTH_SECRET
+          valueFrom:
+            secretKeyRef:
+              name: nexary-secrets
+              key: NEXTAUTH_SECRET
+        - name: NEXTAUTH_URL
+          valueFrom:
+            secretKeyRef:
+              name: nexary-secrets
+              key: NEXTAUTH_URL
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "2000m"
+        livenessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+          initialDelaySeconds: 30
+          periodSeconds: 10
+          timeoutSeconds: 5
+          failureThreshold: 3
+        readinessProbe:
+          httpGet:
+            path: /api/health
+            port: 3000
+          initialDelaySeconds: 10
+          periodSeconds: 5
+          timeoutSeconds: 3
+          failureThreshold: 3
+        volumeMounts:
+        - name: uploads
+          mountPath: /tmp/nexary-uploads
+      volumes:
+      - name: uploads
+        emptyDir: {}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nexary-app
+  namespace: nexary
+spec:
+  selector:
+    app: nexary
+    component: app
+  ports:
+  - protocol: TCP
+    port: 3000
+    targetPort: 3000
+  type: ClusterIP
+
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: postgres-pvc
+  namespace: nexary
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 20Gi
+  storageClassName: ${STORAGE_CLASS:-standard}
+
+---
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: nexary-postgres
+  namespace: nexary
+spec:
+  serviceName: nexary-postgres
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nexary
+      component: postgres
+  template:
+    metadata:
+      labels:
+        app: nexary
+        component: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:15-alpine
+        ports:
+        - containerPort: 5432
+          name: postgres
+        env:
+        - name: POSTGRES_USER
+          valueFrom:
+            secretKeyRef:
+              name: nexary-secrets
+              key: POSTGRES_USER
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: nexary-secrets
+              key: POSTGRES_PASSWORD
+        - name: POSTGRES_DB
+          value: "nexarydb"
+        - name: PGDATA
+          value: /var/lib/postgresql/data
+        volumeMounts:
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
+        resources:
+          requests:
+            memory: "1Gi"
+            cpu: "500m"
+          limits:
+            memory: "4Gi"
+            cpu: "2000m"
+        livenessProbe:
+          exec:
+            command:
+            - pg_isready
+            - -U
+            - nexary
+          initialDelaySeconds: 30
+          periodSeconds: 10
+        volumeMounts:
+        - name: postgres-data
+          mountPath: /var/lib/postgresql/data
+  volumeClaimTemplates:
+  - metadata:
+      name: postgres-data
+    spec:
+      accessModes: ["ReadWriteOnce"]
+      resources:
+        requests:
+          storage: 20Gi
+      storageClassName: ${STORAGE_CLASS:-standard}
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nexary-postgres
+  namespace: nexary
+spec:
+  selector:
+    app: nexary
+    component: postgres
+  ports:
+  - port: 5432
+    targetPort: 5432
+  type: ClusterIP
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nexary-redis
+  namespace: nexary
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nexary
+      component: redis
+  template:
+    metadata:
+      labels:
+        app: nexary
+        component: redis
+    spec:
+      containers:
+      - name: redis
+        image: redis:7-alpine
+        ports:
+        - containerPort: 6379
+        command:
+        - redis-server
+        - --appendonly yes
+        resources:
+          requests:
+            memory: "256Mi"
+            cpu: "250m"
+          limits:
+            memory: "1Gi"
+            cpu: "1000m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nexary-redis
+  namespace: nexary
+spec:
+  selector:
+    app: nexary
+    component: redis
+  ports:
+  - port: 6379
+    targetPort: 6379
+  type: ClusterIP
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nexary-qdrant
+  namespace: nexary
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: nexary
+      component: qdrant
+  template:
+    metadata:
+      labels:
+        app: nexary
+        component: qdrant
+    spec:
+      containers:
+      - name: qdrant
+        image: qdrant/qdrant:v1.8.0
+        ports:
+        - containerPort: 6333
+          name: http
+        - containerPort: 6334
+          name: grpc
+        env:
+        - name: QDRANT__SERVICE__GRPC_PORT
+          value: "6334"
+        resources:
+          requests:
+            memory: "512Mi"
+            cpu: "500m"
+          limits:
+            memory: "2Gi"
+            cpu: "2000m"
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: nexary-qdrant
+  namespace: nexary
+spec:
+  selector:
+    app: nexary
+    component: qdrant
+  ports:
+  - port: 6333
+    targetPort: 6333
+    name: http
+  - port: 6334
+    targetPort: 6334
+    name: grpc
+  type: ClusterIP
+
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: nexary-ingress
+  namespace: nexary
+  annotations:
+    # European Cloud Providers
+    # AWS
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+    # Azure
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    # GKE
+    networking.gke.io/managed-certificates: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  ingressClassName: nginx
+  tls:
+  - hosts:
+    - nexary.example.com
+    secretName: nexary-tls
+  rules:
+  - host: nexary.example.com
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: nexary-app
+            port:
+              number: 3000

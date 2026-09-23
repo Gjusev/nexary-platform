@@ -1,0 +1,1426 @@
+openapi: 3.1.0
+info:
+  title: Nexary API
+  description: |
+    Nexary is a full-stack AI platform featuring multi-provider AI chat, RAG (Retrieval-Augmented Generation),
+    team-based workspace management, and enterprise-grade compliance features.
+
+    ## Authentication
+    Most endpoints require authentication via Stack Auth. Include the session token in cookies.
+    Some endpoints also support API key authentication via the `Authorization` header.
+
+    ## Rate Limiting
+    API requests are rate-limited based on subscription plan.
+  version: 1.0.0
+  contact:
+    name: Nexary API Support
+    email: support@nexary.ai
+  license:
+    name: Proprietary
+
+servers:
+  - url: https://api.nexary.ai
+    description: Production server
+  - url: https://staging-api.nexary.ai
+    description: Staging server
+  - url: http://localhost:3000
+    description: Development server
+
+tags:
+  - name: Authentication
+    description: User authentication and session management
+  - name: Chat
+    description: Chat conversations and messaging
+  - name: RAG
+    description: Retrieval-Augmented Generation and document processing
+  - name: Teams
+    description: Team management and collaboration
+  - name: Documents
+    description: Centralized document management
+  - name: Admin
+    description: Administrative operations (requires admin role)
+  - name: Compliance
+    description: GDPR, HIPAA, and compliance-related operations
+  - name: Invitations
+    description: Team invitations and join requests
+
+paths:
+  /api/auth/callback/stack:
+    get:
+      tags: [Authentication]
+      summary: Stack Auth callback handler
+      description: Handles OAuth callback from Stack Auth
+      responses:
+        '302':
+          description: Redirect to application
+        '400':
+          description: Authentication error
+
+  /api/auth/register-team:
+    post:
+      tags: [Authentication]
+      summary: Register a new team
+      description: Creates a new team and authenticated user
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [teamName]
+              properties:
+                teamName:
+                  type: string
+                  minLength: 3
+                  maxLength: 50
+      responses:
+        '201':
+          description: Team created successfully
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '409':
+          description: Team already exists
+
+  # Chat Endpoints
+  /api/chat/conversations:
+    get:
+      tags: [Chat]
+      summary: List conversations
+      description: Get all conversations for the authenticated user
+      security:
+        - cookieAuth: []
+        - apiKeyAuth: []
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 20
+            maximum: 100
+        - name: offset
+          in: query
+          schema:
+            type: integer
+            default: 0
+      responses:
+        '200':
+          description: List of conversations
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  conversations:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Conversation'
+                  total:
+                    type: integer
+        '401':
+          $ref: '#/components/responses/Unauthorized'
+
+    post:
+      tags: [Chat]
+      summary: Create conversation
+      description: Create a new chat conversation
+      security:
+        - cookieAuth: []
+        - apiKeyAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [title]
+              properties:
+                title:
+                  type: string
+                  maxLength: 200
+                slug:
+                  type: string
+                  pattern: '^[a-z0-9-]+$'
+                modelId:
+                  type: string
+                  description: AI model to use
+                ragPackageIds:
+                  type: array
+                  items:
+                    type: string
+                  format: uuid
+                  description: RAG packages to include in context
+      responses:
+        '201':
+          description: Conversation created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /api/chat/conversations/{id}:
+    get:
+      tags: [Chat]
+      summary: Get conversation
+      description: Get a specific conversation by ID or slug
+      security:
+        - cookieAuth: []
+        - apiKeyAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ConversationId'
+      responses:
+        '200':
+          description: Conversation details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConversationWithMessages'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [Chat]
+      summary: Update conversation
+      description: Update conversation metadata
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ConversationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                title:
+                  type: string
+                  maxLength: 200
+                modelId:
+                  type: string
+                ragPackageIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+      responses:
+        '200':
+          description: Conversation updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Conversation'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    delete:
+      tags: [Chat]
+      summary: Delete conversation
+      description: Delete a conversation
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ConversationId'
+      responses:
+        '204':
+          description: Conversation deleted
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+  /api/chat/conversations/{id}/messages:
+    get:
+      tags: [Chat]
+      summary: List messages
+      description: Get all messages in a conversation
+      security:
+        - cookieAuth: []
+        - apiKeyAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ConversationId'
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+            maximum: 200
+      responses:
+        '200':
+          description: List of messages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Message'
+
+  /api/chat/conversations/{id}/stream:
+    post:
+      tags: [Chat]
+      summary: Stream chat response
+      description: |
+        Send a message and receive a streaming response.
+        Uses Server-Sent Events (SSE) for streaming.
+      security:
+        - cookieAuth: []
+        - apiKeyAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ConversationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [content]
+              properties:
+                content:
+                  type: string
+                  description: User message content
+                modelId:
+                  type: string
+                  description: Override default model
+                useRAG:
+                  type: boolean
+                  description: Enable RAG for this query
+      responses:
+        '200':
+          description: Streaming response
+          content:
+            text/event-stream:
+              schema:
+                type: string
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /api/chat/conversations/{id}/query:
+    post:
+      tags: [Chat]
+      summary: RAG-augmented query
+      description: |
+        Send a query with RAG context from specified packages.
+        Returns relevant document chunks along with AI response.
+      security:
+        - cookieAuth: []
+        - apiKeyAuth: []
+      parameters:
+        - $ref: '#/components/parameters/ConversationId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [query]
+              properties:
+                query:
+                  type: string
+                  description: Query text
+                ragPackageIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+                  description: RAG packages to search
+                chunkCount:
+                  type: integer
+                  default: 5
+                  maximum: 20
+      responses:
+        '200':
+          description: Query response with context
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  response:
+                    type: string
+                  chunks:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/RAGChunk'
+
+  # RAG Endpoints
+  /api/rag/packages:
+    get:
+      tags: [RAG]
+      summary: List RAG packages
+      description: Get all RAG packages accessible to the user
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: scope
+          in: query
+          schema:
+            type: string
+            enum: [team, global, all]
+            default: all
+        - name: teamId
+          in: query
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: List of RAG packages
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RAGPackage'
+
+    post:
+      tags: [RAG]
+      summary: Create RAG package
+      description: Create a new RAG knowledge base package
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name:
+                  type: string
+                  minLength: 3
+                  maxLength: 100
+                description:
+                  type: string
+                scope:
+                  type: string
+                  enum: [team, global]
+                teamId:
+                  type: string
+                  format: uuid
+      responses:
+        '201':
+          description: RAG package created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RAGPackage'
+        '400':
+          $ref: '#/components/responses/BadRequest'
+
+  /api/rag/packages/{id}:
+    get:
+      tags: [RAG]
+      summary: Get RAG package
+      description: Get details of a specific RAG package
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RAGPackageId'
+      responses:
+        '200':
+          description: RAG package details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RAGPackage'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [RAG]
+      summary: Update RAG package
+      description: Update RAG package metadata
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RAGPackageId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  maxLength: 100
+                description:
+                  type: string
+      responses:
+        '200':
+          description: RAG package updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RAGPackage'
+
+    delete:
+      tags: [RAG]
+      summary: Delete RAG package
+      description: Delete a RAG package and all its documents
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RAGPackageId'
+      responses:
+        '204':
+          description: RAG package deleted
+
+  /api/rag/packages/{id}/ingest:
+    post:
+      tags: [RAG]
+      summary: Ingest documents
+      description: |
+        Upload and process documents into a RAG package.
+        Supports PDF, DOCX, XLSX, PPTX up to 10MB.
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RAGPackageId'
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              type: object
+              required: [files]
+              properties:
+                files:
+                  type: array
+                  items:
+                    type: string
+                    format: binary
+      responses:
+        '202':
+          description: Documents accepted for processing
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  jobId:
+                    type: string
+                    format: uuid
+                  documentCount:
+                    type: integer
+        '400':
+          $ref: '#/components/responses/BadRequest'
+        '413':
+          description: File too large
+
+  /api/rag/packages/{id}/documents:
+    get:
+      tags: [RAG]
+      summary: List documents
+      description: Get all documents in a RAG package
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RAGPackageId'
+        - name: includeDeleted
+          in: query
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: List of documents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RAGDocument'
+
+  /api/rag/packages/{id}/documents/deleted:
+    get:
+      tags: [RAG]
+      summary: List deleted documents
+      description: Get soft-deleted documents in trash
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RAGPackageId'
+      responses:
+        '200':
+          description: List of deleted documents
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/RAGDocument'
+
+  /api/rag/packages/{id}/documents/bulk/delete:
+    post:
+      tags: [RAG]
+      summary: Bulk delete documents
+      description: Soft-delete multiple documents
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RAGPackageId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [documentIds]
+              properties:
+                documentIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+      responses:
+        '200':
+          description: Documents deleted
+
+  /api/rag/packages/{id}/documents/bulk/restore:
+    post:
+      tags: [RAG]
+      summary: Bulk restore documents
+      description: Restore multiple soft-deleted documents
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RAGPackageId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [documentIds]
+              properties:
+                documentIds:
+                  type: array
+                  items:
+                    type: string
+                    format: uuid
+      responses:
+        '200':
+          description: Documents restored
+
+  /api/rag/packages/{id}/documents/empty-trash:
+    post:
+      tags: [RAG]
+      summary: Empty trash
+      description: Permanently delete all soft-deleted documents
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RAGPackageId'
+      responses:
+        '204':
+          description: Trash emptied
+
+  /api/rag/packages/{id}/restore:
+    post:
+      tags: [RAG]
+      summary: Restore package
+      description: Restore a soft-deleted RAG package
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/RAGPackageId'
+      responses:
+        '200':
+          description: Package restored
+
+  /api/rag/graph/{packageId}:
+    get:
+      tags: [RAG]
+      summary: Get knowledge graph
+      description: Get knowledge graph visualization for a RAG package
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: packageId
+          in: path
+          required: true
+          schema:
+            type: string
+            format: uuid
+      responses:
+        '200':
+          description: Knowledge graph data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  nodes:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        id:
+                          type: string
+                        label:
+                          type: string
+                        type:
+                          type: string
+                  edges:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        source:
+                          type: string
+                        target:
+                          type: string
+                        weight:
+                          type: number
+
+  # Team Management
+  /api/team:
+    get:
+      tags: [Teams]
+      summary: List teams
+      description: Get all teams for the authenticated user
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: List of teams
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Team'
+
+    post:
+      tags: [Teams]
+      summary: Create team
+      description: Create a new team
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name:
+                  type: string
+                  minLength: 3
+                  maxLength: 50
+                description:
+                  type: string
+      responses:
+        '201':
+          description: Team created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+
+  /api/team/{id}:
+    get:
+      tags: [Teams]
+      summary: Get team
+      description: Get team details
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TeamId'
+      responses:
+        '200':
+          description: Team details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+        '404':
+          $ref: '#/components/responses/NotFound'
+
+    put:
+      tags: [Teams]
+      summary: Update team
+      description: Update team information
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TeamId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string
+                  maxLength: 50
+                description:
+                  type: string
+      responses:
+        '200':
+          description: Team updated
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Team'
+
+    delete:
+      tags: [Teams]
+      summary: Delete team
+      description: Delete a team
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TeamId'
+      responses:
+        '204':
+          description: Team deleted
+
+  /api/team/{id}/members:
+    get:
+      tags: [Teams]
+      summary: List team members
+      description: Get all members of a team
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TeamId'
+      responses:
+        '200':
+          description: List of team members
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/TeamMember'
+
+  /api/team/{id}/invitations:
+    get:
+      tags: [Teams, Invitations]
+      summary: List invitations
+      description: Get all pending invitations for a team
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TeamId'
+      responses:
+        '200':
+          description: List of invitations
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Invitation'
+
+    post:
+      tags: [Teams, Invitations]
+      summary: Create invitation
+      description: Create a new team invitation
+      security:
+        - cookieAuth: []
+      parameters:
+        - $ref: '#/components/parameters/TeamId'
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [email]
+              properties:
+                email:
+                  type: string
+                  format: email
+                role:
+                  type: string
+                  enum: [member, team-leader]
+                  default: member
+      responses:
+        '201':
+          description: Invitation created
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Invitation'
+
+  /api/invitations/accept:
+    post:
+      tags: [Invitations]
+      summary: Accept invitation
+      description: Accept a team invitation
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [token]
+              properties:
+                token:
+                  type: string
+                  description: Invitation token
+      responses:
+        '200':
+          description: Invitation accepted
+
+  # Compliance Endpoints
+  /api/gdpr/consent:
+    get:
+      tags: [Compliance]
+      summary: Get consent records
+      description: Get all GDPR consent records for a user
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: List of consent records
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/ConsentRecord'
+
+    post:
+      tags: [Compliance]
+      summary: Record consent
+      description: Record user consent for data processing
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [purpose, consent]
+              properties:
+                purpose:
+                  type: string
+                  description: Purpose of data processing
+                consent:
+                  type: boolean
+      responses:
+        '201':
+          description: Consent recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ConsentRecord'
+
+  /api/gdpr/data-access:
+    post:
+      tags: [Compliance]
+      summary: Request data access
+      description: Submit a GDPR data access request
+      security:
+        - cookieAuth: []
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                scope:
+                  type: string
+                  enum: [all, chat, rag, profile]
+                  default: all
+      responses:
+        '202':
+          description: Request accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    format: uuid
+
+  /api/gdpr/data-delete:
+    post:
+      tags: [Compliance]
+      summary: Request data deletion
+      description: Submit a GDPR data erasure request
+      security:
+        - cookieAuth: []
+      responses:
+        '202':
+          description: Request accepted
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  requestId:
+                    type: string
+                    format: uuid
+
+  /api/gdpr/data-export:
+    get:
+      tags: [Compliance]
+      summary: Export user data
+      description: Export all user data in machine-readable format
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: Data export file
+          content:
+            application/json:
+              schema:
+                type: object
+
+  /api/compliance/reports:
+    get:
+      tags: [Compliance]
+      summary: Get compliance reports
+      description: Get compliance framework reports
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: framework
+          in: query
+          schema:
+            type: string
+            enum: [GDPR, HIPAA, SOC2, STGB203]
+        - name: startDate
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          schema:
+            type: string
+            format: date-time
+      responses:
+        '200':
+          description: Compliance reports
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    framework:
+                      type: string
+                    reportDate:
+                      type: string
+                      format: date-time
+                    status:
+                      type: string
+                      enum: [compliant, non-compliant, partial]
+                    findings:
+                      type: array
+                      items:
+                        type: object
+
+  # Admin Endpoints
+  /api/admin/users:
+    get:
+      tags: [Admin]
+      summary: List all users
+      description: Admin endpoint to list all users (requires admin role)
+      security:
+        - cookieAuth: []
+      responses:
+        '200':
+          description: List of users
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '403':
+          $ref: '#/components/responses/Forbidden'
+
+  /api/admin/audit-logs:
+    get:
+      tags: [Admin]
+      summary: Get audit logs
+      description: Retrieve system audit logs
+      security:
+        - cookieAuth: []
+      parameters:
+        - name: startDate
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: endDate
+          in: query
+          schema:
+            type: string
+            format: date-time
+        - name: userId
+          in: query
+          schema:
+            type: string
+            format: uuid
+        - name: action
+          in: query
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Audit logs
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/AuditLog'
+
+components:
+  securitySchemes:
+    cookieAuth:
+      type: apiKey
+      in: cookie
+      name: next-auth.session-token
+      description: Stack Auth session cookie
+    apiKeyAuth:
+      type: apiKey
+      in: header
+      name: Authorization
+      description: API key in format `Bearer {api_key}`
+
+  parameters:
+    ConversationId:
+      name: id
+      in: path
+      required: true
+      description: Conversation ID or slug
+      schema:
+        oneOf:
+          - type: string
+            format: uuid
+          - type: string
+            pattern: '^[a-z0-9-]+$'
+
+    RAGPackageId:
+      name: id
+      in: path
+      required: true
+      description: RAG package ID
+      schema:
+        type: string
+        format: uuid
+
+    TeamId:
+      name: id
+      in: path
+      required: true
+      description: Team ID
+      schema:
+        type: string
+        format: uuid
+
+  schemas:
+    Conversation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        title:
+          type: string
+        slug:
+          type: string
+        modelId:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        ragPackageIds:
+          type: array
+          items:
+            type: string
+            format: uuid
+
+    ConversationWithMessages:
+      allOf:
+        - $ref: '#/components/schemas/Conversation'
+        - type: object
+          properties:
+            messages:
+              type: array
+              items:
+                $ref: '#/components/schemas/Message'
+
+    Message:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        conversationId:
+          type: string
+          format: uuid
+        role:
+          type: string
+          enum: [user, assistant, system]
+        content:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    RAGPackage:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        scope:
+          type: string
+          enum: [team, global]
+        teamId:
+          type: string
+          format: uuid
+          nullable: true
+        documentCount:
+          type: integer
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+
+    RAGDocument:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        packageId:
+          type: string
+          format: uuid
+        title:
+          type: string
+        fileName:
+          type: string
+        mimeType:
+          type: string
+        size:
+          type: integer
+        chunkCount:
+          type: integer
+        deletedAt:
+          type: string
+          format: date-time
+          nullable: true
+        createdAt:
+          type: string
+          format: date-time
+
+    RAGChunk:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        documentId:
+          type: string
+          format: uuid
+        content:
+          type: string
+        score:
+          type: number
+          format: float
+        metadata:
+          type: object
+
+    Team:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+        description:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+        memberCount:
+          type: integer
+
+    TeamMember:
+      type: object
+      properties:
+        userId:
+          type: string
+          format: uuid
+        teamId:
+          type: string
+          format: uuid
+        role:
+          type: string
+          enum: [team-owner, team-leader, member]
+        joinedAt:
+          type: string
+          format: date-time
+        user:
+          type: object
+          properties:
+            id:
+              type: string
+              format: uuid
+            email:
+              type: string
+            displayName:
+              type: string
+
+    Invitation:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        teamId:
+          type: string
+          format: uuid
+        email:
+          type: string
+        role:
+          type: string
+        token:
+          type: string
+        expiresAt:
+          type: string
+          format: date-time
+
+    ConsentRecord:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        purpose:
+          type: string
+        consent:
+          type: boolean
+        timestamp:
+          type: string
+          format: date-time
+        ipAddress:
+          type: string
+
+    User:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        email:
+          type: string
+        displayName:
+          type: string
+        createdAt:
+          type: string
+          format: date-time
+
+    AuditLog:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        userId:
+          type: string
+          format: uuid
+        action:
+          type: string
+        resource:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        metadata:
+          type: object
+
+    Error:
+      type: object
+      properties:
+        error:
+          type: string
+        message:
+          type: string
+        details:
+          type: object
+
+  responses:
+    BadRequest:
+      description: Bad request
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    Unauthorized:
+      description: Unauthorized
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    Forbidden:
+      description: Forbidden - insufficient permissions
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    NotFound:
+      description: Resource not found
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+
+    TooManyRequests:
+      description: Rate limit exceeded
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+      headers:
+        X-RateLimit-Limit:
+          schema:
+            type: integer
+          description: Request limit per time window
+        X-RateLimit-Remaining:
+          schema:
+            type: integer
+          description: Requests remaining in window
+        X-RateLimit-Reset:
+          schema:
+            type: integer
+          description: Unix timestamp when limit resets

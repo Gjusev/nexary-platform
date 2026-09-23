@@ -1,0 +1,891 @@
+"use client";
+
+import { useEffect, useState } from 'react';
+import type { ReactNode } from 'react';
+import Link from 'next/link';
+import { ThemeToggle } from '@/components/theme-toggle';
+import { FileText, Package, PlusCircle, Upload, Trash2, X, RotateCcw, Trash, CheckSquare, Square } from 'lucide-react';
+
+import { useTeam } from '@/hooks/use-team';
+import { useToast } from '@/hooks/use-toast';
+import { Badge } from '@/components/ui/badge';
+import { Button } from '@/components/ui/button';
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card';
+import { Checkbox } from '@/components/ui/checkbox';
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogFooter,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from '@/components/ui/dialog';
+import { Input } from '@/components/ui/input';
+import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
+import type { RagPackageSummary, RagDocument } from '@/lib/rag/types';
+
+function formatDate(value: string) {
+  return new Date(value).toLocaleString();
+}
+
+type CreatePackagePayload = {
+  name: string;
+  description?: string;
+};
+
+type PackagesResponse = {
+  success: boolean;
+  packages?: RagPackageSummary[];
+  error?: string;
+  details?: unknown;
+};
+
+type CreatePackageResponse = {
+  success: boolean;
+  package?: RagPackageSummary;
+  error?: string;
+  details?: unknown;
+};
+
+type UploadDocumentsResponse = {
+  success: boolean;
+  package?: RagPackageSummary;
+  processed?: Array<{ filename: string; chunkCount: number; pointIds: string[] }>;
+  failures?: Array<{ filename: string; error: string }>;
+  error?: string;
+  details?: unknown;
+};
+
+type DeleteDocumentResponse = {
+  success: boolean;
+  package?: RagPackageSummary;
+  error?: string;
+  message?: string;
+};
+
+type DeletedDocumentsResponse = {
+  success: boolean;
+  documents?: RagDocument[];
+  error?: string;
+  message?: string;
+};
+
+type RestoreDocumentResponse = {
+  success: boolean;
+  package?: RagPackageSummary;
+  error?: string;
+  message?: string;
+};
+
+export default function TeamRagDashboard() {
+  const { isOwner, teamSlug } = useTeam();
+  const { toast } = useToast();
+  const [packages, setPackages] = useState<RagPackageSummary[]>([]);
+  const [loading, setLoading] = useState(false);
+  const [removingDocumentIds, setRemovingDocumentIds] = useState<Record<string, boolean>>({});
+  const [showTrash, setShowTrash] = useState(false);
+  const [restoringDocumentIds, setRestoringDocumentIds] = useState<Record<string, boolean>>({});
+  const [docTrash, setDocTrash] = useState<Record<string, { open: boolean; loading: boolean; items: RagDocument[] }>>({});
+  const [docSelected, setDocSelected] = useState<Record<string, Record<string, boolean>>>({});
+
+  useEffect(() => {
+    if (!isOwner) {
+      setPackages([]);
+      return;
+    }
+
+    const fetchPackages = async () => {
+      setLoading(true);
+      try {
+        const res = await fetch(showTrash ? '/api/rag/packages?include=deleted' : '/api/rag/packages');
+        const data = (await res.json()) as PackagesResponse;
+        if (res.ok && data.success && Array.isArray(data.packages)) {
+          setPackages(data.packages);
+        } else {
+          toast({
+            title: 'Pakete konnten nicht geladen werden',
+            description: 'Bitte in wenigen Augenblicken erneut versuchen.',
+            variant: 'destructive',
+          });
+        }
+      } catch (error) {
+        console.error('Failed to fetch RAG packages', error);
+        toast({
+          title: 'Verbindungsfehler',
+          description: 'RAG-Daten konnten nicht geladen werden.',
+          variant: 'destructive',
+        });
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchPackages();
+  }, [isOwner, toast, showTrash]);
+
+  const handlePackageCreated = (pkg: RagPackageSummary) => {
+    setPackages((prev: RagPackageSummary[]) => [pkg, ...prev]);
+  };
+
+  const handlePackageUpdated = (pkg: RagPackageSummary) => {
+    setPackages((prev: RagPackageSummary[]) => prev.map((item: RagPackageSummary) => (item.id === pkg.id ? pkg : item)));
+  };
+
+  const handleRemoveStoredDocument = async (packageId: string, documentId: string) => {
+    setRemovingDocumentIds((prev: Record<string, boolean>) => ({ ...prev, [documentId]: true }));
+    try {
+      const res = await fetch(`/api/rag/packages/${packageId}/documents/${documentId}`, { method: 'DELETE' });
+      const data = (await res.json()) as DeleteDocumentResponse;
+      if (res.ok && data.success && data.package) {
+        setPackages((prev: RagPackageSummary[]) => prev.map((pkg: RagPackageSummary) => (pkg.id === packageId ? data.package! : pkg)));
+        toast({ title: 'Dokument entfernt', description: 'Das Dokument wurde aus dem Paket entfernt.' });
+      } else {
+        toast({
+          title: 'Dokument konnte nicht entfernt werden',
+          description: data.message || data.error || 'Bitte versuche es erneut.',
+          variant: 'destructive',
+        });
+      }
+    } catch (error) {
+      console.error('Failed to remove document', error);
+      toast({
+        title: 'Fehler beim Entfernen des Dokuments',
+        description: 'Server konnte nicht erreicht werden.',
+        variant: 'destructive',
+      });
+    } finally {
+      setRemovingDocumentIds((prev: Record<string, boolean>) => {
+        const next = { ...prev };
+        delete next[documentId];
+        return next;
+      });
+    }
+  };
+
+  if (!isOwner) {
+    return (
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+        <div className="max-w-4xl mx-auto px-4 sm:px-6 py-16">
+          <Card>
+            <CardHeader>
+              <CardTitle>Zugriff eingeschraenkt</CardTitle>
+              <CardDescription>
+                Nur Team-Administratoren koennen RAG-Pakete verwalten.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <p className="text-sm text-slate-500">
+                Bitte einen Administrator um Berechtigungen oder kehre zum{' '}
+                <Link href="/dashboard" className="underline">
+                  Hauptdashboard
+                </Link>
+                .
+              </p>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+      <header className="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900">
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+          <div>
+            <p className="text-sm text-slate-500 dark:text-slate-400">Team: {teamSlug}</p>
+            <h1 className="text-2xl font-semibold text-slate-900 dark:text-slate-100">RAG-Paketverwaltung</h1>
+            <p className="text-sm text-slate-500 dark:text-slate-400 mt-1">
+              Lade Dokumente hoch, erstelle Embeddings und halte sie fuer den Unternehmens-Chat bereit.
+            </p>
+          </div>
+          <div className="flex gap-2">
+            <Link href="/dashboard">
+              <Button variant="outline">Zurueck</Button>
+            </Link>
+            <CreatePackageDialog onCreated={handlePackageCreated} />
+            <ThemeToggle />
+            <Button variant={showTrash ? 'default' : 'outline'} onClick={() => setShowTrash((v) => !v)}>
+              {showTrash ? 'Ver Papelera' : 'Papelera'}
+            </Button>
+          </div>
+        </div>
+      </header>
+
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 py-10 space-y-6">
+        {loading ? (
+          <Card>
+            <CardContent className="py-10 text-center text-slate-500">RAG-Pakete werden geladen...</CardContent>
+          </Card>
+        ) : packages.length === 0 ? (
+          <Card>
+            <CardHeader>
+              <CardTitle>Keine Pakete konfiguriert</CardTitle>
+              <CardDescription>
+                Erstelle dein erstes RAG-Paket, um Team-Dokumente zu vektorisieren.
+              </CardDescription>
+            </CardHeader>
+            <CardContent>
+              <CreatePackageDialog
+                onCreated={handlePackageCreated}
+                trigger={
+                  <Button className="w-full">
+                    <PlusCircle className="h-4 w-4 mr-2" /> RAG-Paket erstellen
+                  </Button>
+                }
+              />
+            </CardContent>
+          </Card>
+        ) : (
+          <div className="grid gap-6 md:grid-cols-2">
+            {packages.map((pkg) => (
+              <Card key={pkg.id} className="flex flex-col">
+                <CardHeader className="space-y-2">
+                  <div className="flex items-center justify-between">
+                    <CardTitle className="flex items-center gap-2">
+                      <Package className="h-5 w-5" />
+                      {pkg.name}
+                    </CardTitle>
+                    <div className="flex items-center gap-2">
+                      <Badge variant="outline">{pkg.documentCount} Dokumente</Badge>
+                      {!showTrash ? (
+                        <Button variant="destructive" size="sm" onClick={async () => {
+                          if (!confirm(`¿Enviar a papelera "${pkg.name}"?`)) return;
+                          const res = await fetch(`/api/rag/packages/${pkg.id}`, { method: 'DELETE' });
+                          if (res.ok) {
+                            setPackages((prev: any[]) => prev.filter((p) => p.id !== pkg.id));
+                            toast({ title: 'Enviado a papelera', description: `${pkg.name}` });
+                          } else {
+                            toast({ title: 'Fehler', description: 'No se pudo mover a papelera', variant: 'destructive' });
+                          }
+                        }}>Papelera</Button>
+                      ) : (
+                        <>
+                          <Button variant="outline" size="sm" onClick={async () => {
+                            const res = await fetch(`/api/rag/packages/${pkg.id}/restore`, { method: 'POST' });
+                            if (res.ok) {
+                              setPackages((prev: any[]) => prev.filter((p) => p.id !== pkg.id));
+                              toast({ title: 'Restaurado', description: `${pkg.name}` });
+                            } else {
+                              toast({ title: 'Fehler', description: 'No se pudo restaurar', variant: 'destructive' });
+                            }
+                          }}>Restaurar</Button>
+                          <Button variant="destructive" size="sm" onClick={async () => {
+                            if (!confirm(`¿Eliminar definitivamente "${pkg.name}"?`)) return;
+                            const res = await fetch(`/api/rag/packages/${pkg.id}?hard=1`, { method: 'DELETE' });
+                            if (res.ok) {
+                              setPackages((prev: any[]) => prev.filter((p) => p.id !== pkg.id));
+                              toast({ title: 'Eliminado definitivamente', description: `${pkg.name}` });
+                            } else {
+                              toast({ title: 'Fehler', description: 'No se pudo eliminar', variant: 'destructive' });
+                            }
+                          }}>Eliminar</Button>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  {pkg.description ? (
+                    <CardDescription>{pkg.description}</CardDescription>
+                  ) : (
+                    <CardDescription>Paket ohne Beschreibung.</CardDescription>
+                  )}
+                </CardHeader>
+                <CardContent className="flex-1 space-y-4">
+                  <div className="rounded-lg border border-slate-200 dark:border-slate-800 p-3 text-sm text-slate-600 dark:text-slate-300">
+                    <p>Collection: {pkg.collectionName}</p>
+                    <p>Vektorisierte Chunks: {pkg.totalChunks}</p>
+                    <p>Letzte Aktualisierung: {formatDate(pkg.updatedAt)}</p>
+                  </div>
+
+                  <div>
+                    <h3 className="text-sm font-medium text-slate-700 dark:text-slate-200 mb-2 flex items-center gap-2">
+                      <FileText className="h-4 w-4" /> Hochgeladene Dokumente
+                    </h3>
+                    {pkg.documents.length === 0 ? (
+                      <p className="text-sm text-slate-500">Es wurden noch keine Dokumente hochgeladen.</p>
+                    ) : (
+                      <ul className="space-y-2 text-sm text-slate-600 dark:text-slate-300">
+                        {pkg.documents.map((doc: RagDocument) => (
+                          <li key={doc.id} className="flex items-center justify-between gap-2">
+                            <span className="truncate" title={doc.filename}>
+                              {doc.filename}
+                            </span>
+                            <div className="flex items-center gap-2">
+                              <Badge variant="secondary">{doc.chunkCount} chunks</Badge>
+                              <Button
+                                type="button"
+                                variant="ghost"
+                                size="icon"
+                                onClick={() => handleRemoveStoredDocument(pkg.id, doc.id)}
+                                disabled={Boolean(removingDocumentIds[doc.id])}
+                                title="Dokument entfernen"
+                              >
+                                <Trash2 className="h-4 w-4" />
+                              </Button>
+                            </div>
+                          </li>
+                        ))}
+                      </ul>
+                    )}
+                  </div>
+                  <div className="mt-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <h3 className="text-sm font-medium text-slate-700 dark:text-slate-200">Papelera de documentos</h3>
+                      <Button variant="outline" size="sm" onClick={() => toggleDocTrash(pkg.id)}>
+                        {docTrash[pkg.id]?.open ? 'Ocultar' : 'Ver'}
+                      </Button>
+                    </div>
+                    {docTrash[pkg.id]?.open && (
+                      <div className="rounded-lg border border-dashed border-slate-200 dark:border-slate-800 p-3 text-sm">
+                        {docTrash[pkg.id]?.loading ? (
+                          <p className="text-slate-500">Cargando documentos eliminados...</p>
+                        ) : (docTrash[pkg.id]?.items?.length ?? 0) === 0 ? (
+                          <p className="text-slate-500">No hay documentos en la papelera.</p>
+                        ) : (
+                          <ul className="space-y-2">
+                            {docTrash[pkg.id]!.items.map((d) => (
+                              <li key={d.id} className="flex items-center justify-between gap-2">
+                                <span className="truncate" title={d.filename}>{d.filename}</span>
+                                <div className="flex items-center gap-2">
+                                  <Badge variant="secondary">{d.chunkCount} chunks</Badge>
+                                  <Button
+                                    type="button"
+                                    size="sm"
+                                    onClick={() => handleRestoreDocument(pkg.id, d.id)}
+                                    disabled={Boolean(restoringDocumentIds[d.id])}
+                                  >
+                                    Restaurar
+                                  </Button>
+                                  <Button
+                                    type="button"
+                                    variant="destructive"
+                                    size="sm"
+                                    onClick={async () => {
+                                      if (!confirm(`¿Eliminar definitivamente "${d.filename}"?`)) return;
+                                      try {
+                                        const res = await fetch(`/api/rag/packages/${pkg.id}/documents/${d.id}?hard=1`, { method: 'DELETE' });
+                                        const data = await res.json();
+                                        if (res.ok && data?.success) {
+                                          setDocTrash((prev) => {
+                                            const state = prev[pkg.id] || { open: true, loading: false, items: [] };
+                                            return { ...prev, [pkg.id]: { ...state, items: state.items.filter((x) => x.id !== d.id) } };
+                                          });
+                                          if (data.package) {
+                                            setPackages((prev: RagPackageSummary[]) => prev.map((p) => (p.id === pkg.id ? data.package : p)));
+                                          }
+                                          toast({ title: 'Eliminado', description: `${d.filename}` });
+                                        } else {
+                                          toast({ title: 'No se pudo eliminar', variant: 'destructive' });
+                                        }
+                                      } catch (e) {
+                                        toast({ title: 'Error de red', description: 'No se pudo eliminar', variant: 'destructive' });
+                                      }
+                                    }}
+                                  >
+                                    Eliminar
+                                  </Button>
+                                </div>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                    )}
+                  </div>
+                </CardContent>
+                <div className="px-6 pb-6">
+                  <UploadDocumentDialog ragPackage={pkg} onPackageUpdated={handlePackageUpdated} />
+                </div>
+              </Card>
+            ))}
+          </div>
+        )}
+      </main>
+    </div>
+  );
+}
+
+type CreatePackageDialogProps = {
+  onCreated: (pkg: RagPackageSummary) => void;
+  trigger?: ReactNode;
+};
+
+function CreatePackageDialog({ onCreated, trigger }: CreatePackageDialogProps) {
+  const { toast } = useToast();
+  const [open, setOpen] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [form, setForm] = useState<CreatePackagePayload>({ name: '', description: '' });
+
+  const handleSubmit = async () => {
+    setSubmitting(true);
+    try {
+      const res = await fetch('/api/rag/packages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form),
+      });
+      const data = (await res.json()) as UploadDocumentsResponse;
+      if (res.ok && data.success && data.package) {
+        onCreated(data.package);
+        toast({ title: 'Paket erstellt', description: 'Du kannst jetzt Dokumente hochladen.' });
+        setForm({ name: '', description: '' });
+        setOpen(false);
+      } else {
+        toast({
+          title: 'Paket konnte nicht erstellt werden',
+          description: 'Bitte Daten pruefen und erneut versuchen.',
+          variant: 'destructive',
+        });
+      }
+    } catch (error) {
+      console.error('Failed to create package', error);
+      toast({
+        title: 'Netzwerkfehler',
+        description: 'Bitte in wenigen Augenblicken erneut versuchen.',
+        variant: 'destructive',
+      });
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  const triggerNode = trigger ?? (
+    <Button type="button">
+      <PlusCircle className="h-4 w-4 mr-2" /> Paket erstellen
+    </Button>
+  );
+
+  return (
+    <Dialog open={open} onOpenChange={setOpen}>
+      <DialogTrigger asChild>{triggerNode}</DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Neues RAG-Paket</DialogTitle>
+          <DialogDescription>
+            Gruppiere vektorisierte Dokumente nach Bereich, Domain oder Kunde.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="space-y-4 py-2">
+          <div className="space-y-2">
+            <Label htmlFor="rag-name">Name</Label>
+            <Input
+              id="rag-name"
+              value={form.name}
+              onChange={(event) => setForm((prev) => ({ ...prev, name: event.target.value }))}
+              placeholder="Support-Repository"
+            />
+          </div>
+          <div className="space-y-2">
+            <Label htmlFor="rag-description">Beschreibung</Label>
+            <Textarea
+              id="rag-description"
+              value={form.description}
+              onChange={(event) => setForm((prev) => ({ ...prev, description: event.target.value }))}
+              placeholder="Dokumentation und Leitfaeden des Support-Bereichs."
+            />
+          </div>
+        </div>
+        <DialogFooter>
+          <Button variant="outline" onClick={() => setOpen(false)} disabled={submitting}>
+            Abbrechen
+          </Button>
+          <Button onClick={handleSubmit} disabled={submitting || form.name.trim().length < 3}>
+            {submitting ? 'Wird erstellt...' : 'Paket erstellen'}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}
+
+type UploadDocumentDialogProps = {
+  ragPackage: RagPackageSummary;
+  onPackageUpdated: (pkg: RagPackageSummary) => void;
+};
+
+function UploadDocumentDialog({ ragPackage, onPackageUpdated }: UploadDocumentDialogProps) {
+  const { toast } = useToast();
+  const [open, setOpen] = useState(false);
+  const [files, setFiles] = useState<File[]>([]);
+  const [uploading, setUploading] = useState(false);
+  const [progress, setProgress] = useState(0); // 0-100
+
+  const removeFileFromSelection = (index: number) => {
+    setFiles((prev: File[]) => prev.filter((_, idx) => idx !== index));
+  };
+
+  const handleUpload = async () => {
+    if (files.length === 0) return;
+
+    setUploading(true);
+    setProgress(0);
+    try {
+      // Subir uno por uno para mostrar progreso
+      const totalBytes = files.reduce((s, f) => s + f.size, 0);
+      let uploadedBytes = 0;
+      let anyProcessed = false;
+      for (const file of files) {
+        await new Promise<void>((resolve, reject) => {
+          const xhr = new XMLHttpRequest();
+          xhr.open('POST', `/api/rag/packages/${ragPackage.id}/documents`);
+          xhr.upload.onprogress = (e) => {
+            if (e.lengthComputable) {
+              const current = uploadedBytes + e.loaded;
+              setProgress(Math.min(99, Math.round((current / totalBytes) * 100)));
+            }
+          };
+          xhr.onload = async () => {
+            uploadedBytes += file.size;
+            try {
+              const resp = JSON.parse(xhr.responseText || '{}') as UploadDocumentsResponse;
+              if (xhr.status >= 200 && xhr.status < 300) {
+                if (resp.package) {
+                  onPackageUpdated(resp.package);
+                  anyProcessed = true;
+                }
+                const fails = Array.isArray(resp.failures) ? resp.failures : [];
+                if (fails.length) {
+                  toast({ title: 'Error al procesar', description: fails.map(f => `${f.filename}: ${f.error}`).join(' | '), variant: 'destructive' });
+                }
+                resolve();
+              } else {
+                toast({ title: 'Error al subir', description: resp.error || xhr.statusText, variant: 'destructive' });
+                resolve();
+              }
+            } catch (e) {
+              resolve();
+            }
+          };
+          xhr.onerror = () => {
+            uploadedBytes += file.size;
+            toast({ title: 'Error de red', description: 'No se pudo subir el archivo', variant: 'destructive' });
+            resolve();
+          };
+          const fd = new FormData();
+          fd.append('files', file);
+          xhr.send(fd);
+        });
+      }
+      setProgress(100);
+      if (anyProcessed) {
+        toast({ title: 'Subida completada', description: `${files.length} archivo(s) procesado(s)` });
+      }
+      setFiles([]);
+      setOpen(false);
+    } catch (error) {
+      console.error('Failed to upload document', error);
+      toast({
+        title: files.length > 1 ? 'Fehler beim Hochladen der Dokumente' : 'Fehler beim Hochladen des Dokuments',
+        description: 'Server konnte nicht erreicht werden.',
+        variant: 'destructive',
+      });
+    } finally {
+      setUploading(false);
+      setProgress(0);
+    }
+  };
+
+  const toggleDocTrash = async (packageId: string) => {
+    setDocTrash((prev) => {
+      const current = prev[packageId] || { open: false, loading: false, items: [] };
+      const next = { ...prev, [packageId]: { ...current, open: !current.open } };
+      return next;
+    });
+    const state = docTrash[packageId];
+    const willOpen = !(state?.open);
+    if (willOpen && (!state || state.items.length === 0)) {
+      setDocTrash((prev) => ({ ...prev, [packageId]: { open: true, loading: true, items: [] } }));
+      try {
+        const res = await fetch(`/api/rag/packages/${packageId}/documents/deleted`);
+        const data = (await res.json()) as DeletedDocumentsResponse;
+        if (res.ok && data.success && Array.isArray(data.documents)) {
+          setDocTrash((prev) => ({ ...prev, [packageId]: { open: true, loading: false, items: data.documents! } }));
+          setDocSelected((prev) => ({ ...prev, [packageId]: {} }));
+        } else {
+          setDocTrash((prev) => ({ ...prev, [packageId]: { open: true, loading: false, items: [] } }));
+          toast({ title: 'No se pudo cargar la papelera de documentos', variant: 'destructive' });
+        }
+      } catch (e) {
+        setDocTrash((prev) => ({ ...prev, [packageId]: { open: true, loading: false, items: [] } }));
+        toast({ title: 'Error de red', description: 'No se pudo cargar la papelera', variant: 'destructive' });
+      }
+    }
+  };
+
+  const handleRestoreDocument = async (packageId: string, documentId: string) => {
+    setRestoringDocumentIds((prev) => ({ ...prev, [documentId]: true }));
+    try {
+      const res = await fetch(`/api/rag/packages/${packageId}/documents/${documentId}/restore`, { method: 'POST' });
+      const data = (await res.json()) as RestoreDocumentResponse;
+      if (res.ok && data.success && data.package) {
+        setPackages((prev: RagPackageSummary[]) => prev.map((pkg: RagPackageSummary) => (pkg.id === packageId ? data.package! : pkg)));
+        setDocTrash((prev) => {
+          const state = prev[packageId] || { open: true, loading: false, items: [] };
+          return { ...prev, [packageId]: { ...state, items: state.items.filter((d) => d.id !== documentId) } };
+        });
+        toast({ title: 'Documento restaurado', description: 'El documento fue restaurado correctamente.' });
+      } else {
+        toast({ title: 'No se pudo restaurar', description: data.message || data.error, variant: 'destructive' });
+      }
+    } catch (e) {
+      toast({ title: 'Error', description: 'No se pudo restaurar el documento', variant: 'destructive' });
+    } finally {
+      setRestoringDocumentIds((prev) => {
+        const next = { ...prev };
+        delete next[documentId];
+        return next;
+      });
+    }
+  };
+
+  const toggleSelectDoc = (packageId: string, documentId: string) => {
+    setDocSelected((prev) => {
+      const pkgSel = prev[packageId] || {};
+      const nextPkgSel = { ...pkgSel, [documentId]: !pkgSel[documentId] };
+      return { ...prev, [packageId]: nextPkgSel };
+    });
+  };
+
+  const selectedIdsFor = (packageId: string): string[] => {
+    const pkgSel = docSelected[packageId] || {};
+    return Object.keys(pkgSel).filter((id) => pkgSel[id]);
+  };
+
+  const selectAllDocs = (packageId: string) => {
+    const items = docTrash[packageId]?.items || [];
+    const all: Record<string, boolean> = {};
+    items.forEach((d) => (all[d.id] = true));
+    setDocSelected((prev) => ({ ...prev, [packageId]: all }));
+  };
+
+  const clearSelection = (packageId: string) => {
+    setDocSelected((prev) => ({ ...prev, [packageId]: {} }));
+  };
+
+  const handleBulkRestore = async (packageId: string) => {
+    const ids = selectedIdsFor(packageId);
+    if (ids.length === 0) return;
+    try {
+      const res = await fetch(`/api/rag/packages/${packageId}/documents/bulk/restore`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ids }),
+      });
+      const data = await res.json();
+      if (res.ok && data?.success && data?.package) {
+        setPackages((prev: RagPackageSummary[]) => prev.map((p) => (p.id === packageId ? data.package : p)));
+        setDocTrash((prev) => {
+          const state = prev[packageId] || { open: true, loading: false, items: [] };
+          return { ...prev, [packageId]: { ...state, items: state.items.filter((d) => !ids.includes(d.id)) } };
+        });
+        clearSelection(packageId);
+        toast({ title: 'Documentos restaurados', description: `${ids.length} elemento(s)` });
+      } else {
+        toast({ title: 'No se pudieron restaurar', variant: 'destructive' });
+      }
+    } catch (e) {
+      toast({ title: 'Error de red', description: 'No se pudo restaurar', variant: 'destructive' });
+    }
+  };
+
+  const handleBulkDelete = async (packageId: string) => {
+    const ids = selectedIdsFor(packageId);
+    if (ids.length === 0) return;
+    if (!confirm(`¿Eliminar definitivamente ${ids.length} documento(s)?`)) return;
+    try {
+      const res = await fetch(`/api/rag/packages/${packageId}/documents/bulk/delete`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ ids, hard: true }),
+      });
+      const data = await res.json();
+      if (res.ok && data?.success) {
+        setDocTrash((prev) => {
+          const state = prev[packageId] || { open: true, loading: false, items: [] };
+          return { ...prev, [packageId]: { ...state, items: state.items.filter((d) => !ids.includes(d.id)) } };
+        });
+        if (data.package) {
+          setPackages((prev: RagPackageSummary[]) => prev.map((p) => (p.id === packageId ? data.package : p)));
+        }
+        clearSelection(packageId);
+        toast({ title: 'Eliminados', description: `${ids.length} elemento(s)` });
+      } else {
+        toast({ title: 'No se pudo eliminar', variant: 'destructive' });
+      }
+    } catch (e) {
+      toast({ title: 'Error de red', description: 'No se pudo eliminar', variant: 'destructive' });
+    }
+  };
+
+  const handleEmptyTrash = async (packageId: string) => {
+    const trashItems = docTrash[packageId]?.items || [];
+    if (trashItems.length === 0) {
+      toast({ title: 'La papelera ya está vacía', variant: 'default' });
+      return;
+    }
+    
+    if (!confirm(`¿Vaciar toda la papelera? Se eliminarán permanentemente ${trashItems.length} documento(s).`)) return;
+    
+    try {
+      const res = await fetch(`/api/rag/packages/${packageId}/documents/empty-trash`, {
+        method: 'POST',
+      });
+      const data = await res.json();
+      if (res.ok && data?.success) {
+        setDocTrash((prev) => ({ ...prev, [packageId]: { open: true, loading: false, items: [] } }));
+        if (data.package) {
+          setPackages((prev: RagPackageSummary[]) => prev.map((p) => (p.id === packageId ? data.package : p)));
+        }
+        clearSelection(packageId);
+        toast({ title: 'Papelera vaciada', description: `${data.deletedCount || 0} documento(s) eliminados permanentemente` });
+      } else {
+        toast({ title: 'No se pudo vaciar la papelera', description: data.error || 'Error desconocido', variant: 'destructive' });
+      }
+    } catch (e) {
+      toast({ title: 'Error de red', description: 'No se pudo vaciar la papelera', variant: 'destructive' });
+    }
+  };
+
+  const toggleDocTrash = async (packageId: string) => {
+    setDocTrash((prev) => {
+      const current = prev[packageId] || { open: false, loading: false, items: [] };
+      const next = { ...prev, [packageId]: { ...current, open: !current.open } };
+      return next;
+    });
+    const state = docTrash[packageId];
+    const willOpen = !(state?.open);
+    if (willOpen && (!state || state.items.length === 0)) {
+      setDocTrash((prev) => ({ ...prev, [packageId]: { open: true, loading: true, items: [] } }));
+      try {
+        const res = await fetch(`/api/rag/packages/${packageId}/documents/deleted`);
+        const data = (await res.json()) as DeletedDocumentsResponse;
+        if (res.ok && data.success && Array.isArray(data.documents)) {
+          setDocTrash((prev) => ({ ...prev, [packageId]: { open: true, loading: false, items: data.documents! } }));
+          setDocSelected((prev) => ({ ...prev, [packageId]: {} }));
+        } else {
+          setDocTrash((prev) => ({ ...prev, [packageId]: { open: true, loading: false, items: [] } }));
+          toast({ title: 'No se pudo cargar la papelera de documentos', variant: 'destructive' });
+        }
+      } catch (e) {
+        setDocTrash((prev) => ({ ...prev, [packageId]: { open: true, loading: false, items: [] } }));
+        toast({ title: 'Error de red', description: 'No se pudo cargar la papelera', variant: 'destructive' });
+      }
+    }
+  };
+
+  const handleRestoreDocument = async (packageId: string, documentId: string) => {
+    setRestoringDocumentIds((prev) => ({ ...prev, [documentId]: true }));
+    try {
+      const res = await fetch(`/api/rag/packages/${packageId}/documents/${documentId}/restore`, { method: 'POST' });
+      const data = (await res.json()) as RestoreDocumentResponse;
+      if (res.ok && data.success && data.package) {
+        setPackages((prev: RagPackageSummary[]) => prev.map((pkg: RagPackageSummary) => (pkg.id === packageId ? data.package! : pkg)));
+        setDocTrash((prev) => {
+          const state = prev[packageId] || { open: true, loading: false, items: [] };
+          return { ...prev, [packageId]: { ...state, items: state.items.filter((d) => d.id !== documentId) } };
+        });
+        toast({ title: 'Documento restaurado', description: 'El documento fue restaurado correctamente.' });
+      } else {
+        toast({ title: 'No se pudo restaurar', description: data.message || data.error, variant: 'destructive' });
+      }
+    } catch (e) {
+      toast({ title: 'Error', description: 'No se pudo restaurar el documento', variant: 'destructive' });
+    } finally {
+      setRestoringDocumentIds((prev) => {
+        const next = { ...prev };
+        delete next[documentId];
+        return next;
+      });
+    }
+  };
+
+  return (
+    <Dialog open={open} onOpenChange={(value) => { setOpen(value); if (!value) { setFiles([]); } }}>
+      <DialogTrigger asChild>
+        <Button className="w-full" variant="secondary" onClick={() => setOpen(true)}>
+          <Upload className="h-4 w-4 mr-2" /> Dokumente hochladen
+        </Button>
+      </DialogTrigger>
+      <DialogContent>
+        <DialogHeader>
+          <DialogTitle>Dokumente hochladen</DialogTitle>
+          <DialogDescription>
+            Unterstuetzte Textdateien (.txt, .md, .json). Embeddings werden automatisch in Qdrant erstellt.
+          </DialogDescription>
+        </DialogHeader>
+        <div className="space-y-4 py-2">
+          <Input
+            type="file"
+            multiple
+            accept=".txt,.md,.json,.pdf,.doc,.docx,text/plain,text/markdown,application/json,application/pdf,application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+            onChange={(event) => {
+              const selected = Array.from(event.target.files ?? []);
+              const MAX_MB = 25;
+              const supported = (f: File) => {
+                const ct = (f.type || '').toLowerCase();
+                const name = f.name.toLowerCase();
+                return (
+                  ct.startsWith('text/') ||
+                  ct.includes('markdown') ||
+                  ct.includes('json') ||
+                  ct.includes('pdf') || /\.pdf$/.test(name) ||
+                  ct.includes('word') || /\.(docx?|odt)$/.test(name)
+                );
+              };
+              const valid: File[] = [];
+              const rejected: string[] = [];
+              selected.forEach((f) => {
+                if (f.size > MAX_MB * 1024 * 1024) {
+                  rejected.push(`${f.name}: supera ${MAX_MB}MB`);
+                } else if (!supported(f)) {
+                  rejected.push(`${f.name}: tipo no soportado`);
+                } else {
+                  valid.push(f);
+                }
+              });
+              setFiles(valid);
+              if (rejected.length) {
+                toast({ title: 'Algunos archivos no se seleccionaron', description: rejected.join(' | '), variant: 'destructive' });
+              }
+            }}
+          />
+          {files.length > 0 && (
+            <div className="space-y-1 text-sm text-slate-500">
+              {files.map((file: File, index: number) => (
+                <div key={`${file.name}-${file.size}`} className="flex items-center justify-between gap-2">
+                  <span>Datei: <strong>{file.name}</strong> - {(file.size / 1024).toFixed(1)} KB</span>
+                  <Button
+                    type="button"
+                    variant="ghost"
+                    size="icon"
+                    onClick={() => removeFileFromSelection(index)}
+                    title="Datei entfernen"
+                  >
+                    <X className="h-4 w-4" />
+                  </Button>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
+        <DialogFooter>
+          <div className="flex-1 mr-4">
+            {uploading && (
+              <div className="w-full h-2 bg-muted rounded overflow-hidden">
+                <div className="h-2 bg-primary transition-all" style={{ width: `${progress}%` }} />
+              </div>
+            )}
+          </div>
+          <Button variant="outline" onClick={() => setOpen(false)} disabled={uploading}>
+            Abbrechen
+          </Button>
+          <Button onClick={handleUpload} disabled={files.length === 0 || uploading}>
+            {uploading ? 'Subiendo/Indexando…' : `Procesar ${files.length > 1 ? 'documentos' : 'documento'}`}
+          </Button>
+        </DialogFooter>
+      </DialogContent>
+    </Dialog>
+  );
+}

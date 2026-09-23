@@ -1,0 +1,44 @@
+# Nixpacks Configuration for Nexary
+# This file configures how Nixpacks builds your Next.js application
+# Used by Railway, CodeSandbox, Replit, and other platforms
+
+[phases.build]
+# Build command - Nixpacks detects bun.lock and uses Bun automatically
+cmds = ["bun run build"]
+
+[phases.start]
+# Start command - Use Node.js for production stability
+# The Dockerfile already builds a standalone Next.js app
+cmd = "node .next/standalone/projectNexus/server.js"
+
+# Environment variables during build
+[variables]
+NODE_ENV = "production"
+PORT = "3000"
+NEXT_TELEMETRY_DISABLED = "1"
+
+# Nixpacks automatically detects bun.lock and uses Bun
+# No additional configuration needed for Bun support
+# If you want to explicitly specify Bun:
+# [provider]
+# name = "bun"
+
+# Health check configuration
+[healthcheck]
+path = "/api/health"
+timeout = 300
+interval = 60
+restart_limit = 10
+
+# Deployment configuration
+[deploy]
+# Number of seconds to wait before health check fails
+healthcheckTimeout = 300
+# Number of seconds to wait before starting health checks
+healthcheckInterval = 60
+
+# Static site configuration (if needed)
+[static]
+# Files and directories to include in the static output
+# This is optional and only needed if you're deploying as a static site
+# assets = ["public", ".next/static"]

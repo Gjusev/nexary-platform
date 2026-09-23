@@ -1,0 +1,41 @@
+node_modules
+.next
+.turbo
+.git
+.gitignore
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+bun-debug.log*
+coverage
+dist
+build
+out
+tmp
+.DS_Store
+# Environment files (use .env.example for reference)
+.env
+.env*.local
+# Development files
+*.log
+.vscode
+.idea
+*.swp
+*.swo
+# Test files
+**/*.test.ts
+**/*.test.tsx
+**/*.spec.ts
+**/*.spec.tsx
+__tests__
+coverage
+# Documentation (already in docs/ folder)
+*.md
+!CLAUDE.md
+# Cache directories
+.cache
+.parcel-cache
+.npm
+.bun
+.eslintcache
