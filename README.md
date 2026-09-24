@@ -1,80 +1,88 @@
-# Nexary — Enterprise AI Platform (on-premise)
+<h1 align="center">Nexary</h1>
+<p align="center"><strong>Hybrid RAG and auditable AI collaboration for customer-controlled networks.</strong></p>
+<p align="center">
+  <a href="LICENSE"><img alt="MIT license" src="https://img.shields.io/badge/license-MIT-0d9488?style=flat-square"></a>
+  <img alt="Next.js 15" src="https://img.shields.io/badge/Next.js-15-20252b?style=flat-square">
+  <img alt="Qdrant + BM25" src="https://img.shields.io/badge/RAG-Qdrant%20%2B%20BM25-20252b?style=flat-square">
+</p>
+<p align="center"><a href="#quickstart">Quickstart</a> · <a href="#architecture">Architecture</a> · <a href="#screenshots">Screenshots</a> · <a href="docs/README.md">Documentation</a></p>
 
-**Multi-provider LLM platform with hybrid RAG that runs entirely inside a customer network: no external SaaS dependencies, every audit trail exportable via SYSLOG.** The deployment constraint — an air-gapped enterprise LAN with regulated data (German professional secrecy, STGB §203) — made every decision harder and every decision better.
+![Nexary landing page](docs/screenshots/nexus-landing.png)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-![Next.js 15](https://img.shields.io/badge/Next.js%2015-App%20Router-black)
-![TypeScript](https://img.shields.io/badge/TypeScript-strict-blue)
-![Qdrant](https://img.shields.io/badge/Qdrant-hybrid%20search-red)
-![Docker](https://img.shields.io/badge/Docker-private%20cloud-2496ED)
+An on-premise AI platform export for multi-provider chat, document retrieval and auditable operations. Provider egress is optional configuration; the deployment keeps application data in customer-controlled infrastructure.
 
 ## Why this exists
 
-Enterprise customers in regulated industries (legal, healthcare, finance) could not use any cloud AI assistant: data may not leave the network, and every action must be auditable. Nexary is the answer to "what does an AI collaboration platform look like when *nothing* can call out" — multi-provider inference behind one abstraction, retrieval that has to work without external APIs, and compliance (audit, SYSLOG export, SSO/SAML) as architecture, not as an afterthought.
+Regulated teams need to inspect where data goes, retrieve exact identifiers as well as concepts, and export activity to existing operations tooling.
 
-> The constraint made every decision harder and every decision better.
+| Control | Retrieve | Operate |
+| :--- | :--- | :--- |
+| Customer-network deployment and SSO | Dense retrieval + BM25 + reranking | Audit events and SYSLOG export |
+| Docker Compose, PostgreSQL and MinIO | Qdrant and PostgreSQL full text | Health endpoints and runbooks |
 
-## What's inside
+**Status:** public portfolio export. The production Linux deployment was previously verified; this export has not been re-verified as a fresh end-to-end private-cloud install. The OCR service is separate, and no customer data or credentials are included.
 
-- **Multi-provider chat** — OpenAI, Anthropic, Mistral, Google Gemini, Aleph Alpha behind one provider abstraction; per-conversation model choice; token + cost tracking per user and team.
-- **Hybrid RAG** — smart semantic chunking, dense retrieval (Qdrant) fused with BM25, cross-encoder reranking; multi-format ingestion: PDF, OCR microservice for scans, images, office formats.
-- **Enterprise identity** — Stack Auth with SAML 2.0, OIDC (Authentik/Keycloak), role-based permissions, organization scoping.
-- **Compliance as architecture** — complete audit trails with SYSLOG export (SIEM-ready), STGB §203 compliance documentation, data residency entirely on-premise.
-- **Multilingual** — UI and document handling in 6+ languages with automatic detection.
-- **Operations** — Sentry, structured logging, health endpoints, docker-compose private-cloud topology, k8s manifests, backup sidecar.
+## Quickstart
+
+The private-cloud stack requires Docker and the services in the [installation guide](docs/guides/INSTALLATION-GUIDE.md).
+
+```bash
+cp .env.example .env
+docker compose -f docker-compose.private-cloud.yml up -d --build
+```
+
+On PowerShell, use `Copy-Item .env.example .env`. Configure values in `.env`; do not commit them.
+
+| Variable group | Purpose |
+| :--- | :--- |
+| Provider, PostgreSQL, Qdrant, MinIO and Redis settings | Private-cloud service connections |
+| Auth settings | Application identity configuration |
+
+This is a deployment wiring guide, not a verified one-command laptop stack. UI-only work uses `bun install && bun run dev` with reachable PostgreSQL.
 
 ## Architecture
 
 ```mermaid
-flowchart TB
-    U[Users · browser] --> NGINX[nginx · TLS termination]
-
-    subgraph APP[Nexary app · Next.js 15]
-        CHAT[chat + provider abstraction<br/>OpenAI · Anthropic · Mistral · Gemini · Aleph Alpha]
-        RAG[RAG pipeline<br/>semantic chunking → dense + BM25 fusion<br/>→ cross-encoder rerank]
-        ING[document ingestion<br/>PDF · office · images]
-        AUTH[identity · Stack Auth<br/>SAML 2.0 · OIDC · RBAC]
-        AUD[audit trail → SYSLOG<br/>SIEM export]
-    end
-
-    NGINX --> APP
-    ING --> OCR[OCR microservice<br/>scans → text]
-    RAG --> QD[(Qdrant<br/>dense vectors)]
-    RAG --> PGSQL[(PostgreSQL<br/>docs · chunks metadata · BM25)]
-    AUTH --> PGSQL
-    CHAT --> LLM[LLM APIs · only if the<br/>customer network allows egress]
-    APP --> REDIS[(Redis · cache/queues)]
-    ING --> MINIO[(MinIO · object storage)]
-    APP --> SENTRY[Sentry · observability]
-    BKP[backup sidecar] --> PGSQL
+flowchart LR
+    USER[Browser] --> EDGE[nginx TLS edge]
+    EDGE --> APP[Next.js application]
+    APP --> AUTH[Stack Auth and SSO]
+    APP --> RAG[Ingestion and hybrid RAG]
+    RAG --> PG[(PostgreSQL BM25)]
+    RAG --> QD[(Qdrant vectors)]
+    RAG --> OBJ[MinIO originals]
+    APP --> AUDIT[Audit and SYSLOG]
+    APP -.->|optional egress| LLM[Configured AI provider]
 ```
 
-Full decisions and trade-offs: [`docs/architecture.md`](docs/architecture.md). Deployment topology: [`docker-compose.private-cloud.yml`](docker-compose.private-cloud.yml), [`k8s/`](k8s/). Compliance: [`docs/compliance/stgb203-compliance.md`](docs/compliance/stgb203-compliance.md).
+Retrieval fuses lexical and vector candidates before reranking; originals, metadata and vectors stay in separate stores. [Architecture and boundaries ->](docs/architecture.md)
 
-## Demo video
+## Screenshots
 
-[`docs/demo.md`](docs/demo.md) is the 60-second recorded walkthrough (hosted deployment, real documents): multi-provider chat → hybrid RAG answer with citations → audit trail → SYSLOG export. <!-- TODO-VIDEO: record with OBS per docs/demo.md, embed here -->
+| Landing surface | Registration flow |
+| :---: | :---: |
+| ![Nexary landing page showing the product entry point](docs/screenshots/nexus-landing.png) | ![Nexary registration screen](docs/screenshots/nexus-register.png) |
 
-## Run locally (partial — see note)
+These captures show the exported UI, not a fresh deployment verification.
 
-The full private-cloud stack:
+## Engineering decisions
 
-```bash
-cp .env.example .env        # fill provider keys + POSTGRES/QDRANT/MINIO/REDIS + AUTH
-docker compose -f docker-compose.private-cloud.yml up -d --build
-# app + postgres 15 + qdrant + redis + minio + nginx + backup sidecar
-```
-
-> **Honest status:** build and deployment verified on the production Linux host; this repository export has not been re-verified end-to-end locally (the OCR microservice is a separate deployment). UI-only development: `bun install && bun run dev` with a reachable Postgres.
+| Decision | Benefit | Tradeoff |
+| :--- | :--- | :--- |
+| Qdrant + PostgreSQL BM25 | Exact identifiers and semantic matches both contribute | Two retrieval paths must be operated and evaluated |
+| Provider abstraction | Deployments can choose allowed providers | Egress and provider behavior need per-deployment controls |
+| Private-cloud topology | Customer controls data stores and network boundaries | More services than a hosted SaaS |
+| SYSLOG audit export | Fits existing SIEM operations | Not an independent compliance audit |
 
 ## What I'd do differently
 
-1. **Hybrid search from day one.** The first retrieval iteration was dense-only and failed on exact identifiers (contract numbers, statute references); BM25 + fusion fixed classes of queries that embeddings fundamentally miss. I'd never ship RAG without the lexical arm again.
-2. **Secrets discipline earlier.** Early Docker build iterations hardcoded environment values — purged and rotated later, but the cost of getting this wrong in a regulated context is high enough that env-only should be enforced by CI from commit one.
-3. **Fewer root-level process documents.** Roadmaps and implementation summaries accreted at the repo root; they belong in `docs/` (fixed in this export) or out of the repo entirely.
+- **Build an evaluation set before retrieval features.** Exact-identifier failures established that dense-only retrieval was insufficient.
+- **Enforce secret handling from the first build.** Configuration must remain environment-only and reviewable.
+- **Separate demonstration material sooner.** Session summaries obscured operator documentation until this public export was reorganized.
 
-## Author
+[Documentation index](docs/README.md) · [Demo script](docs/demo.md) · [Compliance guides](docs/compliance/) · [Runbooks](docs/runbooks/)
 
-**Youssef Ouhaghi Ahmian** — [mokka-agentur.de](https://mokka-agentur.de) · [GitHub](https://github.com/Gjusev)
+---
 
-MIT License — see [LICENSE](LICENSE). Contributing: [CONTRIBUTING.md](CONTRIBUTING.md).
+Built by **Youssef Ouhaghi Ahmian** · [Mokka](https://mokka-agentur.de) · [GitHub](https://github.com/Gjusev)
+Released under the [MIT license](LICENSE).
