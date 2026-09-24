@@ -117,8 +117,8 @@ TEXT_EXTRACTOR_URL=http://localhost:8080/extract
 
 ## 📚 Documentación Completa
 
-- **Análisis de problemas**: `docs/rag-issues-and-fixes.md`
-- **Resumen de cambios**: `docs/rag-fixes-summary.md`
+- **Análisis de problemas**: `docs/rag/issues-and-fixes.md`
+- **Resumen de cambios**: `docs/rag/fixes-summary.md`
 - **Variables de entorno**: `.env.example`
 
 ## 🆘 Soporte
@@ -126,7 +126,7 @@ TEXT_EXTRACTOR_URL=http://localhost:8080/extract
 Si encuentras problemas:
 
 1. Verifica la configuración con los logs de inicio
-2. Revisa `docs/rag-issues-and-fixes.md`
+2. Revisa `docs/rag/issues-and-fixes.md`
 3. Busca en los logs del servidor mensajes de error detallados
 4. Los warnings en la UI indican problemas no críticos
 

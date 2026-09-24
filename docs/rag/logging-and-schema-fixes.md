@@ -299,8 +299,8 @@ diagnosis: 'PDF probablemente es escaneado (solo imágenes) o está protegido. N
 **Conclusión:** `document_taxo_lyon.pdf` es un PDF escaneado (solo imágenes). No tiene capa de texto seleccionable. El sistema funciona correctamente rechazando archivos sin contenido indexable.
 
 � **Documentación Creada:**
-- `docs/rag-logging-and-schema-fixes.md` - Este documento
-- `docs/rag-scanned-pdfs.md` - Guía completa sobre PDFs escaneados y soluciones OCR
+- `docs/rag/logging-and-schema-fixes.md` - Este documento
+- `docs/rag/scanned-pdfs.md` - Guía completa sobre PDFs escaneados y soluciones OCR
 
 🔧 **Solución para el Usuario:**
-Ver `docs/rag-scanned-pdfs.md` para instrucciones sobre cómo aplicar OCR al PDF antes de subirlo.
+Ver `docs/rag/scanned-pdfs.md` para instrucciones sobre cómo aplicar OCR al PDF antes de subirlo.

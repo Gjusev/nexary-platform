@@ -424,5 +424,5 @@ app.get('/metrics', async (req, res) => {
 - [Sentry Documentation](https://docs.sentry.io/)
 - [Pino Documentation](https://getpino.io/)
 - [Datadog Monitoring](https://docs.datadoghq.com/)
-- [Alerting Guide](./ALERTING.md)
-- [Runbooks](./runbooks/)
+- [Alerting Guide](alerting.md)
+- [Runbooks](../runbooks/)

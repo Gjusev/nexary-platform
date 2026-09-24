@@ -504,6 +504,6 @@ Antes de desplegar:
 **Última actualización**: Enero 8, 2026
 
 **Documentación relacionada**:
-- `docs/BUN_VS_NPM_GUIDE.md` - Comparación npm vs Bun
-- `docs/BUN_OPTIMIZATION.md` - Optimización con Bun
+- `docs/tooling/bun-vs-npm.md` - Comparación npm vs Bun
+- `docs/tooling/bun-optimization.md` - Optimización con Bun
 - `Dockerfile` - Docker optimizado con Bun

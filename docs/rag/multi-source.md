@@ -877,7 +877,7 @@ migrations/
 ## Soporte
 
 Para más información, consulta:
-- [Base Connector Interface](../lib/connectors/base-connector.ts)
-- [Connector Factory](../lib/connectors/connector-factory.ts)
-- [Sync Scheduler](../lib/sync/scheduler.ts)
-- [API Endpoints](../app/api/data-sources/)
+- [Base Connector Interface](../../lib/connectors/base-connector.ts)
+- [Connector Factory](../../lib/connectors/connector-factory.ts)
+- [Sync Scheduler](../../lib/sync/scheduler.ts)
+- [API Endpoints](../../app/api/data-sources/)

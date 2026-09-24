@@ -210,7 +210,7 @@ MINIO_BUCKET="projectnexus"
 ---
 
 ### 8. **Documentación de Problemas**
-**Archivo**: `docs/rag-issues-and-fixes.md` ✨ NUEVO
+**Archivo**: `docs/rag/issues-and-fixes.md` ✨ NUEVO
 
 **Contenido**:
 - Análisis detallado de todos los problemas identificados
