@@ -9,7 +9,7 @@
 
 ![Nexary landing page](docs/screenshots/nexus-landing.png)
 
-[▶ 17s demo video](docs/screenshots/brag.mp4) — the app in motion.
+[![17s demo video — click to play](docs/screenshots/brag-poster.png)](docs/screenshots/brag.mp4)
 
 An on-premise AI platform export for multi-provider chat, document retrieval and auditable operations. Provider egress is optional configuration; the deployment keeps application data in customer-controlled infrastructure.
 
