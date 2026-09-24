@@ -1,0 +1,215 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --font-sans: var(--font-geist-sans);
+    --font-mono: var(--font-geist-mono);
+    
+    /* Nexary Brand - Light Mode */
+    --background: 0 0% 100%;
+    --foreground: 210 20% 10%;
+    
+    --card: 0 0% 100%;
+    --card-foreground: 210 20% 10%;
+    
+    --popover: 0 0% 100%;
+    --popover-foreground: 210 20% 10%;
+    
+    /* Teal primary for brand */
+    --primary: 168 76% 36%;
+    --primary-foreground: 0 0% 100%;
+    --primary-light: 168 76% 50%;
+    --primary-dark: 168 76% 25%;
+    
+    /* Neutral secondary */
+    --secondary: 210 15% 96%;
+    --secondary-foreground: 210 20% 10%;
+    
+    --muted: 210 15% 96%;
+    --muted-foreground: 210 10% 45%;
+    
+    --accent: 168 60% 95%;
+    --accent-foreground: 168 76% 25%;
+    
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+    
+    --border: 210 15% 90%;
+    --input: 210 15% 90%;
+    --ring: 168 76% 36%;
+    
+    --radius: 0.625rem;
+    
+    /* Chart colors */
+    --chart-1: 168 76% 36%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+  }
+
+  .dark {
+    /* Nexary Brand - Dark Mode */
+    --background: 220 20% 6%;
+    --foreground: 0 0% 98%;
+    
+    --card: 220 18% 10%;
+    --card-foreground: 0 0% 98%;
+    
+    --popover: 220 18% 10%;
+    --popover-foreground: 0 0% 98%;
+    
+    /* Teal primary for brand (brighter in dark mode) */
+    --primary: 168 70% 45%;
+    --primary-foreground: 220 20% 6%;
+    --primary-light: 168 70% 55%;
+    --primary-dark: 168 70% 35%;
+    
+    /* Neutral secondary */
+    --secondary: 220 15% 15%;
+    --secondary-foreground: 0 0% 98%;
+    
+    --muted: 220 15% 15%;
+    --muted-foreground: 210 10% 60%;
+    
+    --accent: 168 40% 15%;
+    --accent-foreground: 168 70% 60%;
+    
+    --destructive: 0 62% 30%;
+    --destructive-foreground: 0 0% 98%;
+    
+    --border: 220 15% 18%;
+    --input: 220 15% 18%;
+    --ring: 168 70% 45%;
+    
+    /* Chart colors */
+    --chart-1: 168 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+
+  /* Focus-visible styles for better keyboard navigation */
+  *:focus-visible {
+    outline: 2px solid hsl(var(--ring));
+    outline-offset: 2px;
+  }
+
+  /* Remove default outline for mouse users */
+  *:focus:not(:focus-visible) {
+    outline: none;
+  }
+
+  /* Skip link styles */
+  .skip-to-main {
+    position: absolute;
+    left: -9999px;
+    z-index: 999;
+    padding: 1rem 2rem;
+    background-color: hsl(var(--background));
+    color: hsl(var(--foreground));
+    text-decoration: none;
+    border-radius: 0.5rem;
+    transition: left 0.3s;
+  }
+
+  .skip-to-main:focus {
+    left: 1rem;
+    top: 1rem;
+  }
+}
+
+/* Custom scrollbar for dark mode */
+@layer utilities {
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(var(--muted-foreground) / 0.3) transparent;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    background-color: hsl(var(--muted-foreground) / 0.3);
+    border-radius: 3px;
+  }
+  
+  .scrollbar-thin::-webkit-scrollbar-thumb:hover {
+    background-color: hsl(var(--muted-foreground) / 0.5);
+  }
+}
+
+/* Premium gradient utilities */
+@layer utilities {
+  .gradient-text {
+    @apply bg-clip-text text-transparent;
+    background-image: linear-gradient(
+      to right,
+      hsl(var(--primary)),
+      hsl(var(--primary-light))
+    );
+  }
+  
+  .gradient-border {
+    position: relative;
+  }
+  
+  .gradient-border::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(
+      135deg,
+      hsl(var(--primary) / 0.5),
+      hsl(var(--primary-light) / 0.2)
+    );
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+}
+
+/* Glass card effect */
+@layer utilities {
+  .glass-card {
+    @apply bg-card/80 backdrop-blur-xl border border-border/50;
+  }
+  
+  .dark .glass-card {
+    @apply bg-card/60 backdrop-blur-xl border-white/10;
+  }
+}

@@ -80,6 +80,21 @@ These captures show the exported UI, not a fresh deployment verification.
 - **Enforce secret handling from the first build.** Configuration must remain environment-only and reviewable.
 - **Separate demonstration material sooner.** Session summaries obscured operator documentation until this public export was reorganized.
 
+## Marketing site
+
+The trilingual marketing frontend (German, English, Spanish — Next.js 15,
+`next-intl`, light/dark themes, WCAG-conscious) lives in
+[`marketing/`](marketing/). It is a separate Next.js application:
+
+```bash
+cd marketing
+npm ci
+npm run dev        # localhost:3000/de · /en · /es
+```
+
+See [`marketing/README.md`](marketing/README.md) and
+[`marketing/docs/`](marketing/docs/) for its architecture and decisions.
+
 [Documentation index](docs/README.md) · [Demo script](docs/demo.md) · [Compliance guides](docs/compliance/) · [Runbooks](docs/runbooks/)
 
 ---

@@ -1,0 +1,1373 @@
+{
+  "meta": {
+    "title": "Nexary – The Secure AI Platform for Enterprises",
+    "description": "Nexary enables enterprises to use AI securely – GDPR-compliant, multi-model, and with your own data.",
+    "keywords": "AI Platform, GDPR compliant AI, Enterprise AI, RAG, Generative AI, AI for Business"
+  },
+  "accessibility": {
+    "skipToMain": "Skip to main content"
+  },
+  "nav": {
+    "platform": "Platform",
+    "useCases": "Use Cases",
+    "about": "About",
+    "contact": "Contact",
+    "pricing": "Pricing",
+    "login": "Login",
+    "register": "Register"
+  },
+  "hero": {
+    "headline": "AI Power for Your Enterprise – 100% GDPR Compliant",
+    "subheadline": "Unleash the possibilities of artificial intelligence without giving up data protection or control. Nexary combines the power of cutting-edge AI models with the security of a German platform.",
+    "ctaPrimary": "Get Started",
+    "ctaSecondary": "Contact Sales",
+    "valueProp1Title": "Multi-Model AI",
+    "valueProp1Desc": "GPT-4, Claude, Gemini & more",
+    "valueProp2Title": "100% GDPR Compliant",
+    "valueProp2Desc": "German hosting, no data training",
+    "valueProp3Title": "Ready in 24 Hours",
+    "valueProp3Desc": "Quick setup, instant results"
+  },
+  "socialProof": {
+    "trustedBy": "Trusted by leading companies",
+    "badge1": "ISO 27001 Certified",
+    "badge2": "GDPR Compliant",
+    "badge3": "Made in Germany"
+  },
+  "problem": {
+    "headline": "The Central AI Question for Mid-Size Companies",
+    "subheadline": "How do we use AI internally – without privacy issues, without losing control?",
+    "point1": "ChatGPT is not being used in a privacy-compliant manner",
+    "point2": "Employees cannot work safely with sensitive data",
+    "point3": "Management wants efficiency – with top language models and assistants"
+  },
+  "solution": {
+    "headline": "Your Company Knowledge and Data on One AI Platform in Your Own Cloud",
+    "subheadline": "Nexary is the fully controllable and policy-compliant platform for generative AI in the enterprise.",
+    "benefit1": "One License for All",
+    "benefit2": "Full Data Control",
+    "benefit3": "Fully Integratable",
+    "ctaPrimary": "Get Started"
+  },
+  "features": {
+    "headline": "Why Nexary?",
+    "gdpr": {
+      "title": "GDPR-Compliant AI",
+      "description": "Your data stays protected. Nexary processes information exclusively in your cloud environment or German data centers – 100% compliant with European data protection standards."
+    },
+    "multiModel": {
+      "title": "Multiple AI Models, No Restrictions",
+      "description": "Use the world's best AI models simultaneously – whether GPT-4, Claude, or others. Nexary is vendor-independent and avoids vendor lock-in."
+    },
+    "rag": {
+      "title": "Knowledge + AI = Accurate Answers",
+      "description": "Nexary connects AI with your company knowledge (RAG). Whether manuals, databases, or PDFs – Nexary finds the most relevant facts and delivers well-founded, quotable answers."
+    },
+    "automation": {
+      "title": "Automate Decisions",
+      "description": "From customer inquiries to reporting – automate routine decisions with AI support. Nexary integrates into your workflows and can trigger actions."
+    },
+    "transparency": {
+      "title": "Transparent & Explainable",
+      "description": "Every AI response can be backed by sources. You keep track of which data the AI used. Nexary is not a black box, but your transparent AI assistant."
+    },
+    "integration": {
+      "title": "Easy to Integrate",
+      "description": "Integrate Nexary seamlessly into your existing IT landscape via API and pre-built connectors (e.g., for MS Teams, SharePoint, Salesforce)."
+    }
+  },
+  "modelSelection": {
+    "headline": "Intelligent Model Selection",
+    "subheadline": "Nexary automatically selects the best AI model for your requirements",
+    "bestFor": "Best for",
+    "models": {
+      "gpt4": {
+        "title": "GPT-4",
+        "description": "The most powerful model for complex tasks and deep understanding",
+        "useCases": "Strategy development, complex analyses, creative content"
+      },
+      "gpt35": {
+        "title": "GPT-3.5",
+        "description": "Fast and cost-effective for routine tasks",
+        "useCases": "Customer support, text generation, simple analyses"
+      },
+      "local": {
+        "title": "Local Models",
+        "description": "Maximum data security with models hosted in Germany",
+        "useCases": "Sensitive data, compliance-critical tasks, financial analyses"
+      }
+    },
+    "howItWorks": {
+      "title": "How Automatic Selection Works",
+      "step1": {
+        "title": "Request Analysis",
+        "description": "Nexary analyzes the type and complexity of your request in real-time"
+      },
+      "step2": {
+        "title": "Model Selection",
+        "description": "Based on your request, Nexary automatically selects the optimal model"
+      },
+      "step3": {
+        "title": "Intelligent Optimization",
+        "description": "You receive the best answer – fast, accurate, and secure"
+      }
+    },
+    "cta": "Test Model Selection"
+  },
+  "security": {
+    "headline": "Enterprise Security for the Highest Standards",
+    "subheadline": "Company secrets and personal data protected in your environment just as GDPR-compliant as in Excel and SharePoint.",
+    "gdpr": "GDPR Compliant",
+    "gdprDesc": "European security standards",
+    "madeInGermany": "Made in Germany",
+    "madeInGermanyDesc": "German quality standards",
+    "iso": "ISO 27001 Certified",
+    "isoDesc": "High information security"
+  },
+  "integrations": {
+    "headline": "Seamless Integration into Your Systems",
+    "subheadline": "Over 280+ connectors to your favorite tools",
+    "badge": "100+ Integrations",
+    "customIntegration": "Need a custom integration?",
+    "contactUs": "Contact us"
+  },
+  "howItWorks": {
+    "headline": "How Does Nexary Work?",
+    "subheadline": "3 steps to AI-powered workflows",
+    "step1": {
+      "title": "1. Integrate Data",
+      "description": "Connect your data sources (SharePoint, SQL, APIs) with Nexary"
+    },
+    "step2": {
+      "title": "2. Configure AI",
+      "description": "Select the right models and create workflows"
+    },
+    "step3": {
+      "title": "3. Enable Teams",
+      "description": "Let your employees use AI safely and productively"
+    }
+  },
+  "useCases": {
+    "headline": "Use Cases for Every Department",
+    "subheadline": "Discover how Nexary supports your business",
+    "viewAll": "View All Use Cases",
+    "pageSubheadline": "From email creation to contract analysis: Discover concrete use cases for your enterprise.",
+    "sidebarTitle": "Use Cases for All",
+    "useCasesCount": "{count} use cases",
+    "ctaHeadline": "Ready to implement these use cases?",
+    "ctaDescription": "Start with Nexary today and transform your workflows with AI.",
+    "ctaButton": "Get Started",
+    "finance": "Finance",
+    "healthcare": "Healthcare",
+    "legal": "Legal",
+    "retail": "Retail & E-Commerce",
+    "industry": "Industry & Manufacturing",
+    "public": "Public Sector",
+    "detail": {
+      "context": "Context",
+      "objective": "Objective",
+      "workflow": "Workflow",
+      "benefits": "Benefits",
+      "risks": "Risks & Mitigations",
+      "inputs": "Inputs",
+      "outputs": "Outputs",
+      "ctaHeadline": "Interested in this Use Case?",
+      "ctaDescription": "Contact our team to learn more about how Nexary can support your specific requirements.",
+      "ctaButton": "Contact Team"
+    }
+  },
+  "useCasesPage": {
+    "badge": "30+ Use Cases",
+    "categories": {
+      "allgemein": {
+        "title": "General",
+        "items": {
+          "emails": "Write Emails",
+          "emailsDesc": "Draft professional emails for any situation in seconds",
+          "correct": "Correct Text",
+          "correctDesc": "Automatically improve spelling, grammar, and style",
+          "tables": "Create Tables",
+          "tablesDesc": "Extract structured data from unstructured text",
+          "meetings": "Meeting Minutes",
+          "meetingsDesc": "Summarize discussions and extract action items",
+          "research": "Web Research",
+          "researchDesc": "Gather current information from the internet",
+          "translations": "Translations",
+          "translationsDesc": "Translate texts into all major languages"
+        }
+      },
+      "marketing": {
+        "title": "Marketing & Sales",
+        "items": {
+          "content": "Generate Content",
+          "contentDesc": "Create blog posts, social media posts, and marketing copy",
+          "seo": "Optimize SEO",
+          "seoDesc": "Optimize content for search engines with keywords",
+          "campaigns": "Campaign Ideas",
+          "campaignsDesc": "Develop creative concepts and slogans for marketing campaigns",
+          "outreach": "Cold Outreach",
+          "outreachDesc": "Draft personalized emails for initial contact",
+          "ads": "Ad Scripts",
+          "adsDesc": "Create ad copy for Google, LinkedIn, and Meta",
+          "leads": "Lead Qualification",
+          "leadsDesc": "Automatically analyze, score, and prioritize leads"
+        }
+      },
+      "hr": {
+        "title": "HR & Recruiting",
+        "items": {
+          "jobAds": "Create Job Listings",
+          "jobAdsDesc": "Generate compelling job ads for social recruiting",
+          "resumes": "Evaluate Resumes",
+          "resumesDesc": "Automatically pre-filter and summarize applications",
+          "interviews": "Interview Preparation",
+          "interviewsDesc": "Create tailored interview guides for each position",
+          "references": "Write References",
+          "referencesDesc": "Draft legally sound references with correct tone",
+          "onboarding": "Onboarding Plans",
+          "onboardingDesc": "Create personalized onboarding plans for new employees"
+        }
+      },
+      "finanzen": {
+        "title": "Finance",
+        "items": {
+          "reporting": "Financial Reports",
+          "reportingDesc": "Automatically create monthly, quarterly, annual reports",
+          "summary": "Summarize Reports",
+          "summaryDesc": "Condense long financial reports to key points",
+          "budget": "Budget Planning",
+          "budgetDesc": "Prepare scenarios, forecasts, and commentaries",
+          "bigdata": "Big Data Analysis",
+          "bigdataDesc": "Structure, analyze, and visualize CSV/Excel files",
+          "excel": "Excel Spreadsheets",
+          "excelDesc": "Generate complex calculations from simple inputs"
+        }
+      },
+      "operations": {
+        "title": "Operations",
+        "items": {
+          "intranet": "Intranet Assistants",
+          "intranetDesc": "Smart assistants for process navigation and IT policies",
+          "support": "Support Assistant",
+          "supportDesc": "Automatically answer recurring customer inquiries",
+          "helpdesk": "IT Helpdesk",
+          "helpdeskDesc": "Central assistant for common IT questions and troubleshooting",
+          "accounting": "Accounting Assistant",
+          "accountingDesc": "Answer questions about bookings and invoices"
+        }
+      },
+      "software": {
+        "title": "Software Development",
+        "items": {
+          "code": "Write Code",
+          "codeDesc": "Code generation in Python, JavaScript, SQL, and more",
+          "bugs": "Bug Identification",
+          "bugsDesc": "Automatically detect code errors and suggest fixes",
+          "review": "Code Review",
+          "reviewDesc": "Check code quality and suggest improvements",
+          "docs": "Create Documentation",
+          "docsDesc": "Automatically generate technical documentation from code"
+        }
+      },
+      "management": {
+        "title": "Management",
+        "items": {
+          "strategy": "Strategic Decisions",
+          "strategyDesc": "Data-driven analyses for informed management decisions",
+          "competition": "Competitive Analysis",
+          "competitionDesc": "Market and competitive analysis from public sources",
+          "vision": "Sharpen Vision",
+          "visionDesc": "Articulate corporate visions and strategies"
+        }
+      },
+      "legal": {
+        "title": "Legal & Compliance",
+        "items": {
+          "contracts": "Contract Analysis",
+          "contractsDesc": "Review contracts and identify critical clauses",
+          "clauses": "Compare Clauses",
+          "clausesDesc": "Match standard clauses against contract passages",
+          "compliance": "Compliance Checks",
+          "complianceDesc": "Verify documents for regulatory compliance",
+          "diligence": "Due Diligence",
+          "diligenceDesc": "Systematically analyze company documents"
+        }
+      }
+    }
+  },
+  "common": {
+    "gdprCompliant": "GDPR Compliant",
+    "iso27001": "ISO 27001",
+    "euHosting": "EU Hosting",
+    "allFeaturesButton": "Discover All Features",
+    "compareFeatures": "Compare All Features",
+    "hideComparison": "Hide Comparison",
+    "enterprise": "Enterprise",
+    "smartSelectAi": "Smart Select AI",
+    "complexAnalysis": "Complex Analysis",
+    "creativeContent": "Creative Content",
+    "quickTasks": "Quick Tasks",
+    "feature": "Feature"
+  },
+  "cta": {
+    "headline": "Ready for the Next Step?",
+    "subheadline": "Experience Nexary in Action!",
+    "description": "Start using Nexary today and transform your business with secure AI.",
+    "button": "Get Started Now",
+    "values": {
+      "trust": "Trustworthy",
+      "trustDesc": "We believe in trustworthy AI as the basis of all digitalization.",
+      "innovation": "innovation",
+      "innovationDesc": "We drive innovation and use the latest technologies.",
+      "security": "Security",
+      "securityDesc": "Data security is our top priority.",
+      "headline": "Ready for the next step?"
+    },
+    "tagline": "Ready for the future?",
+    "mission": "Our Mission",
+    "missionDesc": "We make powerful AI secure and usable for every enterprise."
+  },
+  "faq": {
+    "headline": "Frequently Asked Questions",
+    "subheadline": "Answers to the most common questions about Nexary",
+    "moreQuestions": "Still have questions?",
+    "contactUs": "Contact us",
+    "question1": "What AI models are available in Nexary?",
+    "answer1": "Nexary offers a variety of leading AI models such as GPT-4, Claude, Gemini, and Mistral. Our goal is to always provide the latest and best AI models now and in the future.",
+    "question2": "Why Nexary instead of ChatGPT?",
+    "answer2": "With Nexary, you can do everything ChatGPT can – and much more. Plus, you use the language models with Nexary on European servers, GDPR-compliant and secure. Your data is not processed further and not used for training language models.",
+    "question3": "What can I use Nexary for?",
+    "answer3": "Nexary combines all the capabilities of leading AI models in one solution. With Nexary, you write texts, conduct research, create documents, automate workflows, and seamlessly integrate AI into your existing systems.",
+    "question4": "Is Nexary GDPR-compliant?",
+    "answer4": "Yes, Nexary is GDPR-compliant and developed according to European security standards. Nexary hosts these AI models in Germany, enabling the use of all leading AI models according to GDPR guidelines – now and in the future."
+  },
+  "contact": {
+    "tagline": "Contact",
+    "headline": "Contact Us",
+    "subheadline": "We're here for you!",
+    "form": {
+      "name": "Name",
+      "company": "Company Name",
+      "email": "Business Email",
+      "message": "Message",
+      "submit": "Send Message",
+      "success": "Thank you! Your message has been received.",
+      "successDesc": "We will get back to you shortly.",
+      "successToastTitle": "Success",
+      "sending": "Sending...",
+      "newMessage": "Send new message",
+      "error": "Oops! There was an error submitting the form.",
+      "privacyLabel": "I have read the",
+      "privacyLink": "Privacy Policy",
+      "privacyAnd": "and",
+      "agbLink": "Terms & Conditions",
+      "privacyError": "Please confirm that you have read the Privacy Policy and Terms & Conditions.",
+      "privacyErrorTitle": "Error"
+    },
+    "details": {
+      "headline": "Contact Details",
+      "email": "Email",
+      "phone": "Phone",
+      "address": "Address"
+    },
+    "cta": {
+      "headline": "Ready for the next step?",
+      "description": "Experience Nexary in action!",
+      "button": "Get Started"
+    }
+  },
+  "videoShowcase": {
+    "headline": "Experience Nexary in Action",
+    "subheadline": "See how our AI platform transforms your workflow.",
+    "watchDemo": "Watch Demo",
+    "cta": "Get Started Now",
+    "feature1": {
+      "title": "Intuitive Interface",
+      "description": "Easy to use for everyone."
+    },
+    "feature2": {
+      "title": "Real-time Analysis",
+      "description": "Get insights instantly."
+    },
+    "feature3": {
+      "title": "Secure & Compliant",
+      "description": "Data stays in your control."
+    }
+  },
+  "footer": {
+    "slogan": "AI without compromise – secure, compliant, powerful.",
+    "product": "Product",
+    "platform": "Platform",
+    "features": "Features",
+    "integrations": "Integrations",
+    "security": "Security",
+    "company": "Company",
+    "aboutUs": "About Us",
+    "contact": "Contact",
+    "useCases": "Use Cases",
+    "resources": "Resources",
+    "newsletter": "Subscribe to Newsletter",
+    "copyright": "© {year} Nexary. All rights reserved.",
+    "privacy": "Privacy",
+    "agb": "Terms & Conditions",
+    "impressum": "Imprint"
+  },
+  "about": {
+    "tagline": "About Nexary",
+    "headline": "About Nexary",
+    "mission": "Our Mission",
+    "missionDesc": "Nexary was developed to give companies access to AI – without privacy concerns and without complicated technology. The Nexary team brings together experienced software developers, data scientists, and data protection experts. Together, we built Nexary so you can use the benefits of AI safely and easily.",
+    "values": {
+      "headline": "Our Values",
+      "trust": "Trustworthy",
+      "trustDesc": "We believe in trustworthy AI as the foundation of every digitalization.",
+      "innovation": "Innovation",
+      "innovationDesc": "We drive innovation and use cutting-edge technologies.",
+      "security": "Security",
+      "securityDesc": "Data security is our highest priority."
+    },
+    "team": {
+      "headline": "Our Team",
+      "desc": "The Nexary team brings together experienced software developers, data scientists, and data protection experts."
+    }
+  },
+  "platform": {
+    "tag": "Enterprise Platform",
+    "headline": "The AI Platform for Your Enterprise",
+    "subheadline": "Secure, scalable, and GDPR-compliant. Nexary integrates seamlessly into your existing infrastructure.",
+    "modules": {
+      "multiProvider": {
+        "title": "Multi-Provider AI",
+        "desc": "Use models from OpenAI, Anthropic, or local LLMs via a unified API."
+      },
+      "rag": {
+        "title": "RAG Pipeline",
+        "desc": "Connect your data sources (SharePoint, Confluence) for contextual answers."
+      },
+      "automation": {
+        "title": "Automation",
+        "desc": "Create workflows and agents to automate repetitive tasks."
+      },
+      "api": {
+        "title": "API-First",
+        "desc": "Integrate AI functions directly into your own applications."
+      }
+    },
+    "architecture": {
+      "title": "Flexible Architecture",
+      "desc": "Built for maximum security and adaptability."
+    },
+    "comparison": {
+      "title": "Why Nexary?",
+      "desc": "The difference is in the details.",
+      "points": {
+        "gdpr": "GDPR-compliant data processing",
+        "multi": "Multi-Provider Support",
+        "rag": "Company-owned RAG Pipeline",
+        "workflow": "Workflow Automation",
+        "audit": "Audit Logging",
+        "cloud": "Private Cloud/On-Premise"
+      }
+    },
+    "cta": {
+      "headline": "Ready to Start?",
+      "description": "Experience Nexary in action and discover how your organization can benefit from AI.",
+      "button": "Start Now"
+    }
+  },
+  "legal": {
+    "headline": "Legal Information",
+    "impressum": {
+      "headline": "Imprint",
+      "address": "Sample Street 1, 60000 Frankfurt am Main, Germany",
+      "email": "hello@nexary.de",
+      "phone": "+49 (0)123 456789",
+      "company": "Nexary GmbH",
+      "director": "Managing Director",
+      "vat": "VAT ID: DE123456789",
+      "court": "District Court Frankfurt am Main, HRB 12345",
+      "disclaimer": "We are not willing or obliged to take part in dispute resolution proceedings before a consumer arbitration board.",
+      "liability_content": "As a service provider, we are responsible for our own content on these pages in accordance with general laws. \nHowever, as a service provider, we are not obliged to monitor transmitted or stored third-party information or to investigate circumstances that indicate illegal activity. \nObligations to remove or block the use of information in accordance with general law remain unaffected. \nHowever, liability in this regard is only possible from the time of knowledge of a specific legal violation. \nIf we become aware of any corresponding legal violations, we will immediately remove this content.",
+      "links": {
+        "agb": "Terms and Conditions",
+        "privacy": "Privacy Policy"
+      },
+      "register_info": "Commercial Register, Frankfurt am Main District Court, HRB 123456",
+      "representatives": "Dr. \nAlexander Schmidt, Dr. \nSarah Müller"
+    },
+    "privacy": {
+      "headline": "Privacy Policy",
+      "intro": "We take the protection of your personal data very seriously. This privacy policy explains how we handle your data.",
+      "placeholder": "Detailed privacy policy will be added...",
+      "authority": "Responsible supervisory authority:",
+      "authority_address": "Kavalleriestraße 2-4, 40213 Düsseldorf",
+      "authority_email": "Email: poststelle@ldi.nrw.de",
+      "authority_fax": "Fax: 49 211 3842499",
+      "authority_name": "State Commissioner for Data Protection and Freedom of Information for North Rhine-Westphalia",
+      "authority_phone": "Telephone: 49 211 384240",
+      "basis_consent": "Consent (Art. 6 Para. 1 lit. a) GDPR)",
+      "basis_contract": "Fulfillment of the contract and pre-contractual inquiries (Art. 6 para. 1 lit. b) GDPR)",
+      "basis_interest": "Legitimate interests (Art. 6 Para. 1 lit. f) GDPR)",
+      "basis_legal": "Legal obligation (Art. 6 Para. 1 lit. c) GDPR)",
+      "changes": "Changes and updates to the data protection declaration",
+      "changes_desc": "We ask you to regularly inform yourself about the content of this data protection declaration. \nWe will adapt the data protection declaration as soon as changes to the data processing we carry out make this necessary. \nWe will inform you as soon as the changes require your cooperation (e.g. consent) or other individual notification.",
+      "contact_form": "Contact us via website contact form",
+      "contact_form_data": "If you send us inquiries using the contact form, your inquiries, including the contact details you provided there, will be stored by us for the purpose of processing and answering the inquiry and in the event of follow-up questions and will be further processed accordingly. \nThis also applies to your IP address and the date and time you sent your message to us. \nWe do not pass on this data to third parties unless this is necessary in the context of processing and answering your contact request or you have given us your corresponding consent (Art. 6 Para. 1 lit. a) GDPR).",
+      "contact_form_legal_basis": "Fulfillment of the contract and pre-contractual inquiries (Art. 6 Para. 1 lit. b) GDPR) as well as safeguarding our legitimate interests (Art. 6 Para. 1 lit. f) GDPR)",
+      "contact_form_retention": "Storage period: The relevant data is based on Section 5 of this data protection declaration.",
+      "contract_data_retention": "Contract data: Until the end of the contractual relationship. \nServer log files: 30 days. \nIP addresses: 7 days. \nNewsletter addresses: 3 years.",
+      "controller": "Responsible person",
+      "controller_address": "Tech Boulevard 123, 60386 Frankfurt am Main, Germany",
+      "controller_company": "Nexary GmbH",
+      "controller_contact": "Email: hello@nexary.de",
+      "controller_representatives": "Dr. \nAlexander Schmidt, Dr. \nSarah Müller",
+      "cookies": "Use of cookies and similar tracking technologies",
+      "cookies_desc": "We sometimes use so-called cookies and similar tracking technologies on our website, such as tracking pixels or fingerprinting technologies. \nThe tracking serves to make our offers more user-friendly, effective and secure and to personalize content and advertising.",
+      "cookies_functional": "Functional tracking: In these cases, the legal basis for accessing your device, collecting the information and further processing any personal data is Section 25 Paragraph 2 No. 2 TDDDG and Article 6 Paragraph 1 Letter f) or Letter b) GDPR. \nThe absolutely necessary tracking helps us to make a website technically usable and secure.",
+      "cookies_marketing": "Tracking for marketing, personalization or analytics purposes: Your voluntary consent is required for all other purposes mentioned. \nThe legal basis is then Section 25 Paragraph 1 TDDDG and Article 6 Paragraph 1 Letter a) GDPR. \nYou can grant collective consent for all purposes by selecting \"Accept all\".",
+      "cookies_optout": "Option to object (opt-out): You can revoke the consent you have given at any time. \nTo do this, click on “Cookie Settings” at the bottom of the website and either select “Reject all” or deactivate individual categories.",
+      "cookies_storage": "Storage period: Once consent has been given, these cookies can be stored for a period of up to 24 months.",
+      "data_categories": "Categories of data subjects",
+      "data_categories_desc": "Interested parties, communication partners, business and contractual partners",
+      "data_provision": "Obligation to provide data: In principle, you are not obliged to provide us with your personal data.",
+      "data_retention": "Duration of data processing and deletion",
+      "data_retention_desc": "We initially process your personal data for the period necessary for the respective processing purpose.",
+      "data_transfers": "Transfer of personal data to third countries",
+      "data_transfers_dpf": "EU-US Data Privacy Framework (DPF): Some of our service providers are certified under the EU-US Data Privacy Framework (as of July 2023). \nThe list of certified companies and additional information about the DPF can be found on the US Department of Commerce website.",
+      "data_transfers_scc": "To the extent necessary for our purposes, we transmit your data to recipients in third countries (outside the European Union). \nWe only transfer data to recipients in third countries in compliance with the provisions in Chapter V of the GDPR, i.e. if it is established that the EU Commission has established an adequate level of data protection within the meaning of Article 45 Paragraph 1 GDPR or that appropriate guarantees within the meaning of Article 46 Paragraph 2 and Paragraph 3 GDPR have been implemented or an exception pursuant to Article 49 Paragraph 1 GDPR exists.",
+      "data_types": "Types of data processed",
+      "data_types_desc": "Inventory data, contact data, content data, contract data, usage data, meta, communication and procedural data",
+      "dpo": "Data Protection Officer",
+      "dpo_contact": "datenschutz@nexary.de",
+      "ip_retention": "7 days",
+      "kai_anthropic": "Anthropic Models (Amazon Bedrock): Hosting: AWS Europe. \nGuarantees: No return of prompts or outputs for training; \nDPA firmado; \nData Privacy Framework.",
+      "kai_disclaimer": "Advice on the calidad of the IA: The contents are generated by the applications of the IA and contain errors and inexactitudes. \nNo information is verified or certified, but the contents are created automatically and are not updated. \nNexary no asume responsabilidad por los daños que podrían derivarse del uso de dichos contenidos.",
+      "kai_google": "Google Models (Gemini): Hosting: Google Cloud Europe. \nGuarantees: DPF; \nNo use of customer data for training; \nProcessing Agreement.",
+      "kai_local": "Local models (Mistral, Llama): Hosting: Own infrastructure in Germany. \nGuarantees: Maximum data sovereignty; \nNo training with customer data.",
+      "kai_models": "AI models and hosting",
+      "kai_openai": "OpenAI Models (Azure): Hosting: Azure (Europe). \nGuarantees: No storage of prompts, outputs and training data; \nEU-US Data Privacy Framework (DPF) recognized; \nProcessing Agreement firmado.",
+      "legal_bases": "Relevant legal bases according to the GDPR",
+      "log_retention": "30 days",
+      "newsletter": "Newsletters and electronic notifications",
+      "newsletter_consent": "Consent: The newsletter will only be sent with your express consent (Art. 6 Para. 1 lit. a) GDPR).",
+      "newsletter_content": "Content: Information about us, our services, promotions and offers.",
+      "newsletter_double_opt": "We use the so-called double opt-in procedure: After you register, you will receive an email asking you to confirm your newsletter subscription. \nWithout this confirmation, your registration will not be completed.",
+      "newsletter_optout": "Unsubscribe: You can unsubscribe from the newsletter at any time - regardless of whether you receive it based on consent or legitimate interests. \nTo do this, use the unsubscribe link at the end of each newsletter.",
+      "newsletter_storage": "Storage period: The email address is stored for up to 3 years before we delete it in order to be able to prove that consent was previously given.",
+      "newsletter_storage_period": "3 years",
+      "platform": "Use of our platform and AI applications",
+      "platform_avp": "Order processing agreement (AVV): We have concluded a corresponding order processing agreement (AVV) with the customer in accordance with Art. 28 Para. 3 GDPR.",
+      "platform_desc": "If you use third-party AI applications via our platform as an authorized user, this customer is the person responsible within the meaning of Art. 4 No. 7 GDPR for the processing of your personal data as part of the use.",
+      "platform_processing": "Processed data: name, email address of the user, company data for business customers, chats and inputs, AI models used, tokens consumed, usage statistics.",
+      "platform_purpose": "Purposes: Provision of contractual services and fulfillment of our contractual obligations.",
+      "purposes": "Purposes of processing",
+      "purposes_desc": "Provision of contractual services and customer service, contact inquiries and communication, security measures, reach measurement, provision of the online offering and user-friendliness",
+      "register_court": "Registration court: Frankfurt am Main District Court, HRB 123456",
+      "retention_website": "Storage period and deletion: Your IP address will be stored for a maximum of 7 days for IT security purposes. \nServer log files are stored for a maximum of 30 days and then deleted.",
+      "right_complaint": "Right to complain to a supervisory authority: Without prejudice to any other administrative or judicial remedy, you have the right to complain to a supervisory authority, in particular in the Member State of your habitual residence, your place of work or the place of the alleged infringement, if you believe that the processing of personal data concerning you violates the GDPR.",
+      "right_consent": "Right to revoke consent: You have the right to revoke your consent at any time.",
+      "right_correct": "Right to rectification: In accordance with legal requirements, you have the right to request that incorrect data concerning you be completed or that incorrect data concerning you be corrected.",
+      "right_delete": "Right to deletion: You have the right to request that the data concerning you be deleted immediately, or alternatively to request that the processing of the data be restricted in accordance with legal requirements.",
+      "right_info": "Right to information: You have the right to request confirmation as to whether the data in question is being processed and to receive information about this data as well as further information and copies of the data in accordance with legal requirements.",
+      "right_oppose": "Right to object: Under the conditions set out in Article 21 Paragraph 1 GDPR, you have the right, for reasons arising from your particular situation, to object at any time to the processing of personal data concerning you, which is carried out on the basis of Article 6 Paragraph 1 lit. e or f) GDPR; \nThis also applies to profiling based on these provisions.",
+      "right_portability": "Right to data portability: You have the right to receive the data concerning you that you have provided to us in a structured, common and machine-readable format in accordance with the legal requirements or to request that it be transmitted to another person responsible.",
+      "rights": "Rights of data subjects",
+      "security": "Security measures",
+      "security_desc": "We take appropriate technical and organizational measures to ensure an appropriate level of protection: TLS encryption of all connections; \nRestricting access through authentication; \nfirewalls and intrusion detection; \nRegular penetration testing; \nData backup in data centers in Germany; \nEmployee training on data protection; \nOrder processing contracts with all service providers.",
+      "vat_number": "VAT ID number: DE123456789",
+      "website": "Visit our website",
+      "website_data": "Each time our website is accessed, the following data is automatically collected: browser type and browser version, operating system used, IP address of the requesting device, website from which access is made (origin or referrer URL), date and time of access, sub-pages visited and time spent there",
+      "website_legal_basis": "The processing of access data is technically necessary to provide a functional website and for system security. \nIn addition to the above purposes, we use server log files exclusively to tailor and optimize our website on a purely statistical basis and without drawing any conclusions about you personally. \nThis data will not be merged with other data sources.",
+      "website_purpose": "Technical provision and system security (contract fulfillment and pre-contractual inquiries Art. 6 Para. 1 lit. b) GDPR)"
+    },
+    "agb": {
+      "headline": "General Terms and Conditions",
+      "updated": "Last updated: January 2026",
+      "praembel": "Preamble",
+      "praembel_content": "These General Terms and Conditions (GTC) apply to all business relationships between Nexary GmbH (hereinafter 'Provider') and its customers (hereinafter 'Customer'). The version valid at the time the contract is concluded shall apply.",
+      "definitionen": "Definitions",
+      "definitionen_content": "Platform refers to the AI Software-as-a-Service solution provided by the Provider. Customer refers to entrepreneurs within the meaning of the law.",
+      "allgemeine_regelungen": "General Regulations",
+      "allgemeine_regelungen_content": "The Provider makes the platform available to the Customer for use via the Internet. The scope of functions results from the service description.",
+      "preismodell": "Pricing Model",
+      "preismodell_content": "Remuneration is based on the current price list or individual offer. All prices are exclusive of statutory VAT.",
+      "plattform_zugriff": "Platform and Access",
+      "plattform_zugriff_content": "The Customer receives a simple, non-transferable right to use the platform for the term of the contract. Access is password-protected.",
+      "gewaehrleistung": "Warranty",
+      "gewaehrleistung_content": "Statutory warranty rights apply. Platform availability is 99.5% on an annual average.",
+      "laufzeit_kuendigung": "Term and Termination",
+      "laufzeit_kuendigung_content": "Unless otherwise agreed, the minimum contract term is 12 months. The contract is automatically extended if not terminated in due time.",
+      "haftungsbeschraenkung": "Limitation of Liability",
+      "haftungsbeschraenkung_content": "The Provider is liable without limitation for intent and gross negligence. For slight negligence, the Provider is only liable for breach of essential contractual obligations.",
+      "schlussbestimmungen": "Final Provisions",
+      "schlussbestimmungen_content": "The law of the Federal Republic of Germany applies. Place of jurisdiction is Frankfurt am Main.",
+      "allgemeine_regelungen": "General regulations"
+    }
+  },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The requested page does not exist or has been moved.",
+    "backHome": "Back to Home"
+  },
+  "models": {
+    "benefit1": "One license for everyone",
+    "benefit2": "Full data control",
+    "benefit3": "Fully integrable",
+    "headline": "Why Nexary?",
+    "subheadline": "The AI ​​platform for your company"
+  },
+  "featureTabs": {
+    "headline": "A Platform That Adapts to Your Requirements",
+    "subheadline": "Explore the versatile capabilities of Nexary for your enterprise AI needs",
+    "tabs": {
+      "chat": "Chat",
+      "knowledge": "Internal Knowledge",
+      "assistants": "Assistants & Workflows",
+      "multimodal": "Multimodal",
+      "platform": "Platform & Tools"
+    }
+  },
+  "departmentUseCases": {
+    "headline": "AI for Every Department",
+    "subheadline": "Generative AI for your entire organization: Nexary supports all your teams",
+    "badge": "50+ Use Cases",
+    "departments": {
+      "hr": {
+        "title": "Human Resources",
+        "description": "Strengthen employees, develop talent – securely with AI",
+        "metrics": {
+          "0": {
+            "value": "75%",
+            "label": "faster onboarding"
+          },
+          "1": {
+            "value": "3h",
+            "label": "saved per week"
+          }
+        },
+        "useCases": {
+          "0": {
+            "title": "Automate Onboarding",
+            "desc": "Create personalized onboarding plans and welcome emails"
+          },
+          "1": {
+            "title": "Create Job Ads",
+            "desc": "Generate compelling job ads for social recruiting"
+          },
+          "2": {
+            "title": "Analyze CVs",
+            "desc": "Pre-screen, rate and summarize applications automatically"
+          },
+          "3": {
+            "title": "Interview Prep",
+            "desc": "Create individual interview guides per position"
+          },
+          "4": {
+            "title": "Write References",
+            "desc": "Formulate legally compliant references with correct tone"
+          },
+          "5": {
+            "title": "HR-Wiki Bot",
+            "desc": "Answer employee questions about parental leave, benefits etc."
+          }
+        }
+      },
+      "it": {
+        "title": "IT",
+        "description": "Enterprise-Ready: Controlled AI that integrates seamlessly",
+        "metrics": {
+          "0": {
+            "value": "60%",
+            "label": "fewer tickets"
+          },
+          "1": {
+            "value": "5min",
+            "label": "response time"
+          }
+        },
+        "useCases": {
+          "0": {
+            "title": "IT Helpdesk",
+            "desc": "Central assistant for common IT questions and troubleshooting"
+          },
+          "1": {
+            "title": "SAP Support",
+            "desc": "Explain error codes and find solutions from documentation"
+          },
+          "2": {
+            "title": "Write Code",
+            "desc": "Code generation and review with integrated Code Interpreter"
+          },
+          "3": {
+            "title": "Bug ID",
+            "desc": "Automatically detect code errors and suggest fixes"
+          },
+          "4": {
+            "title": "Create Docs",
+            "desc": "Generate technical documentation from code and comments"
+          },
+          "5": {
+            "title": "Intranet Assistant",
+            "desc": "Smart assistants for process navigation and IT policies"
+          }
+        }
+      },
+      "service": {
+        "title": "Service",
+        "description": "Help faster, understand better – with AI in service",
+        "metrics": {
+          "0": {
+            "value": "40%",
+            "label": "faster resolution"
+          },
+          "1": {
+            "value": "24/7",
+            "label": "availability"
+          }
+        },
+        "useCases": {
+          "0": {
+            "title": "Support Assistant",
+            "desc": "Answer recurring customer inquiries automatically"
+          },
+          "1": {
+            "title": "Manual Search",
+            "desc": "Extract error code explanations from technical docs"
+          },
+          "2": {
+            "title": "Ticket Analysis",
+            "desc": "Find similar tickets and suggest proven solutions"
+          },
+          "3": {
+            "title": "Maintenance Guides",
+            "desc": "Retrieve relevant passages from maintenance manuals"
+          },
+          "4": {
+            "title": "Feedback Analysis",
+            "desc": "Sentiment analysis and trend identification from feedback"
+          },
+          "5": {
+            "title": "Knowledge Base",
+            "desc": "Automatically update FAQ and help articles"
+          }
+        }
+      },
+      "sales": {
+        "title": "Sales",
+        "description": "Efficient support from lead qualification to closing",
+        "metrics": {
+          "0": {
+            "value": "25%",
+            "label": "more closings"
+          },
+          "1": {
+            "value": "2x",
+            "label": "lead conversion"
+          }
+        },
+        "useCases": {
+          "0": {
+            "title": "Lead Qualification",
+            "desc": "Analyze, rate and prioritize leads automatically"
+          },
+          "1": {
+            "title": "CRM Analysis",
+            "desc": "Identify sales potential from Salesforce/HubSpot data"
+          },
+          "2": {
+            "title": "Meeting Prep",
+            "desc": "Create company profiles and argumentation lines"
+          },
+          "3": {
+            "title": "Proposal Gen",
+            "desc": "Generate personalized proposals and presentations"
+          },
+          "4": {
+            "title": "Cold Outreach",
+            "desc": "Formulate personalized emails for initial contact"
+          },
+          "5": {
+            "title": "Competitor Analysis",
+            "desc": "Market and competitor analysis from public sources"
+          }
+        }
+      },
+      "marketing": {
+        "title": "Marketing",
+        "description": "Content that works – faster from idea to campaign",
+        "metrics": {
+          "0": {
+            "value": "80%",
+            "label": "faster production"
+          },
+          "1": {
+            "value": "10x",
+            "label": "content output"
+          }
+        },
+        "useCases": {
+          "0": {
+            "title": "Content Gen",
+            "desc": "Create text, images, videos for social media in seconds"
+          },
+          "1": {
+            "title": "Campaign Ideas",
+            "desc": "Develop creative concepts, claims and strategies"
+          },
+          "2": {
+            "title": "SEO Optimization",
+            "desc": "Optimize content for search engines with keywords"
+          },
+          "3": {
+            "title": "Ad Scripts",
+            "desc": "Create ad copy for Google, LinkedIn, Meta"
+          },
+          "4": {
+            "title": "Translations",
+            "desc": "Localize and adapt content for new markets"
+          },
+          "5": {
+            "title": "Newsletters",
+            "desc": "Generate personalized email campaigns"
+          }
+        }
+      },
+      "finance": {
+        "title": "Finance",
+        "description": "Informed decisions and better negotiation positions",
+        "metrics": {
+          "0": {
+            "value": "90%",
+            "label": "time savings"
+          },
+          "1": {
+            "value": "0",
+            "label": "report errors"
+          }
+        },
+        "useCases": {
+          "0": {
+            "title": "Financial Reporting",
+            "desc": "Create monthly, quarterly, annual reports automatically"
+          },
+          "1": {
+            "title": "Budget Planning",
+            "desc": "Prepare scenarios, forecasts and comments"
+          },
+          "2": {
+            "title": "Big Data Analysis",
+            "desc": "Structure, evaluate and visualize CSV/Excel files"
+          },
+          "3": {
+            "title": "Excel Tables",
+            "desc": "Generate complex calculations from simple inputs"
+          },
+          "4": {
+            "title": "Accounting Assistant",
+            "desc": "Answer questions about bookings and invoices"
+          },
+          "5": {
+            "title": "Risk Analysis",
+            "desc": "Identify and evaluate financial risks"
+          }
+        }
+      },
+      "legal": {
+        "title": "Legal",
+        "description": "Check contracts, minimize risks.",
+        "metrics": {
+          "0": {
+            "value": "50%",
+            "label": "faster review"
+          },
+          "1": {
+            "value": "€€€",
+            "label": "cost savings"
+          }
+        },
+        "useCases": {
+          "0": {
+            "title": "Contract Analysis",
+            "desc": "Review contracts and identify critical clauses"
+          },
+          "1": {
+            "title": "Clause Compare",
+            "desc": "Compare standard clauses with contract passages"
+          },
+          "2": {
+            "title": "Compliance Checks",
+            "desc": "Check documents for rule compliance"
+          },
+          "3": {
+            "title": "Legal Search",
+            "desc": "Find relevant judgments and laws"
+          },
+          "4": {
+            "title": "Due Diligence",
+            "desc": "Systematically analyze company documents"
+          },
+          "5": {
+            "title": "NDA Gen",
+            "desc": "Create and adapt standard contracts"
+          }
+        }
+      },
+      "purchasing": {
+        "title": "Purchasing",
+        "description": "Informed decisions and better negotiation positions",
+        "metrics": {
+          "0": {
+            "value": "15%",
+            "label": "cost reduction"
+          },
+          "1": {
+            "value": "4h",
+            "label": "saved/week"
+          }
+        },
+        "useCases": {
+          "0": {
+            "title": "Negotiation Prep",
+            "desc": "Create market analyses and supplier comparisons"
+          },
+          "1": {
+            "title": "Supplier Rating",
+            "desc": "Systematically analyze and rate suppliers"
+          },
+          "2": {
+            "title": "Price Optimization",
+            "desc": "Conduct price negotiations with data-based insights"
+          },
+          "3": {
+            "title": "Contract Review",
+            "desc": "Analyze supply contracts for risks"
+          },
+          "4": {
+            "title": "Procurement Plan",
+            "desc": "Forecast needs and optimize procurement"
+          },
+          "5": {
+            "title": "Claims Mgmt",
+            "desc": "Automate complaint processes"
+          }
+        }
+      },
+      "rd": {
+        "title": "R&D",
+        "description": "Innovation engine AI: Connect knowledge, accelerate insights",
+        "metrics": {
+          "0": {
+            "value": "2x",
+            "label": "faster research"
+          },
+          "1": {
+            "value": "30%",
+            "label": "more innovation"
+          }
+        },
+        "useCases": {
+          "0": {
+            "title": "Patent Search",
+            "desc": "Analyze relevant patents and state of the art"
+          },
+          "1": {
+            "title": "Link Knowledge",
+            "desc": "Search and connect research results"
+          },
+          "2": {
+            "title": "Lit Analysis",
+            "desc": "Summarize scientific papers"
+          },
+          "3": {
+            "title": "Innovation Track",
+            "desc": "Monitor technology trends and competitors"
+          },
+          "4": {
+            "title": "Tech Docs",
+            "desc": "Document product specifications"
+          },
+          "5": {
+            "title": "Lab Notes",
+            "desc": "Create and analyze test protocols"
+          }
+        }
+      }
+    },
+    "ctaButton": "Start now",
+    "ctaDescription": "Get started with Nexary today and transform your workflows with AI.",
+    "ctaHeadline": "Ready to implement these use cases?",
+    "pageSubheadline": "From email creation to contract analysis: discover concrete use cases for your company.",
+    "sidebarTitle": "Use cases for everyone",
+    "useCasesCount": "{count} use cases",
+    "viewAll": "View all use cases"
+  },
+  "pricing": {
+    "headline": "Transparent Pricing for Every Company Size",
+    "subheadline": "Choose the plan that best fits your needs. All plans include GDPR compliance and German hosting.",
+    "monthly": "Monthly",
+    "annual": "Annual",
+    "savePercent": "Save 20%",
+    "perMonth": "month",
+    "billedAnnually": "Billed annually",
+    "custom": "Custom",
+    "mostPopular": "Most Popular",
+    "getStarted": "Get Started",
+    "contactSales": "Contact Sales",
+    "needHelp": "Not sure which plan is right for you?",
+    "talkToUs": "Talk to our team",
+    "tiers": {
+      "starter": {
+        "name": "Starter",
+        "description": "Perfect for small teams getting started with AI",
+        "priceMonthly": "€49",
+        "priceAnnual": "€39"
+      },
+      "professional": {
+        "name": "Professional",
+        "description": "For growing teams that need more power",
+        "priceMonthly": "€149",
+        "priceAnnual": "€119"
+      },
+      "business": {
+        "name": "Business",
+        "description": "For organizations with advanced requirements",
+        "priceMonthly": "€399",
+        "priceAnnual": "€319"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "description": "Tailored solutions for large organizations"
+      }
+    },
+    "features": {
+      "accessToGpt4": "Access to GPT-4 and Claude",
+      "basicRag": "Basic RAG integration",
+      "upTo5Users": "Up to 5 users",
+      "emailSupport": "Email support",
+      "gdprCompliant": "GDPR compliant",
+      "allStarterFeatures": "All Starter features",
+      "multiModelAccess": "Multi-model access",
+      "advancedRag": "Advanced RAG with SharePoint, Confluence",
+      "upTo25Users": "Up to 25 users",
+      "prioritySupport": "Priority support",
+      "customWorkflows": "Custom AI workflows",
+      "allProfessionalFeatures": "All Professional features",
+      "upTo100Users": "Up to 100 users",
+      "ssoIntegration": "SSO integration (SAML, OIDC)",
+      "advancedAnalytics": "Advanced analytics dashboard",
+      "dedicatedManager": "Dedicated success manager",
+      "customIntegrations": "Custom integrations",
+      "allBusinessFeatures": "All Business features",
+      "unlimitedUsers": "Unlimited users",
+      "onPremiseDeployment": "On-premise deployment",
+      "customSla": "Custom SLA",
+      "whiteLabeling": "White-labeling options",
+      "priorityDevelopment": "Priority feature development"
+    },
+    "comparison": {
+      "featureColumn": "Feature",
+      "unlimited": "Unlimited",
+      "allModels": "All Models",
+      "allPlusCustom": "All + Custom",
+      "basic": "Basic",
+      "advanced": "Advanced",
+      "dedicated": "Dedicated",
+      "labels": {
+        "users": "Users",
+        "models": "AI Models",
+        "rag": "RAG / Knowledge Integration",
+        "workflows": "Custom Workflows",
+        "sso": "SSO Integration",
+        "analytics": "Analytics & Reporting",
+        "support": "Support",
+        "onpremise": "On-Premise Deployment",
+        "api": "API Access",
+        "audit": "Audit Logs"
+      }
+    }
+  },
+  "testimonials": {
+    "headline": "What Our Customers Say",
+    "subheadline": "Discover how enterprises are transforming their workflows with Nexary",
+    "testimonial1": {
+      "quote": "Nexary has revolutionized how our team works with AI. The GDPR compliance gives us peace of mind, and the multi-model approach means we always have the best tool for the job.",
+      "author": "Dr. Michael Weber",
+      "role": "CTO"
+    },
+    "testimonial2": {
+      "quote": "The integration with our existing systems was seamless. Our analysts now save hours every day thanks to the RAG capabilities that connect directly to our knowledge base.",
+      "author": "Sandra Hoffmann",
+      "role": "Head of Innovation"
+    },
+    "testimonial3": {
+      "quote": "Finally an AI platform that our legal team approved without hesitation. The transparency and German hosting were key factors in our decision.",
+      "author": "Dr. Thomas Müller",
+      "role": "Chief Compliance Officer"
+    },
+    "stats": {
+      "customers": {
+        "value": "150+",
+        "label": "Enterprise Customers"
+      },
+      "users": {
+        "value": "10,000+",
+        "label": "Active Users"
+      },
+      "rating": {
+        "value": "4.9/5",
+        "label": "Customer Satisfaction"
+      },
+      "uptime": {
+        "value": "99.9%",
+        "label": "Platform Uptime"
+      }
+    }
+  },
+  "videoShowcase": {
+    "headline": "See Nexary in Action",
+    "subheadline": "Watch how enterprises are using AI to transform their workflows",
+    "watchDemo": "Watch 2-minute demo",
+    "feature1": {
+      "title": "Quick Setup",
+      "description": "Get started in minutes, not months"
+    },
+    "feature2": {
+      "title": "Intuitive Interface",
+      "description": "No AI expertise required"
+    },
+    "feature3": {
+      "title": "Instant ROI",
+      "description": "See results from day one"
+    },
+    "cta": "Start now"
+  },
+  "ragFlow": {
+    "sharePoint": "SharePoint",
+    "sharePointDesc": "Documents",
+    "confluence": "Confluence",
+    "confluenceDesc": "Wiki & Docs",
+    "erpCrm": "ERP / CRM",
+    "erpCrmDesc": "Business Data",
+    "processing": "Processing",
+    "processingDesc": "Secure RAG",
+    "vectorDb": "Vector DB",
+    "vectorDbDesc": "Embeddings",
+    "llm": "LLM",
+    "llmDesc": "GPT, Claude, Gemini",
+    "response": "Response",
+    "responseDesc": "Contextualized",
+    "output": "Generation",
+    "outputDesc": "Context Response"
+  },
+  "featureShowcase": {
+    "headline": "Everything you need for Enterprise AI",
+    "subheadline": "One platform, endless possibilities. Secure, compliant, and powerful.",
+    "features": {
+      "chat": {
+        "title": "Secure Chat",
+        "description": "Chat securely with leading language models like GPT-4, Claude 3, and more. Your data stays private.",
+        "point1": "Top LLMs (OpenAI, Anthropic, Google)",
+        "point2": "Hosted exclusively in the EU",
+        "point3": "No training on your data",
+        "visualLabel": "Chat Interface"
+      },
+      "knowledge": {
+        "title": "Internal Knowledge",
+        "description": "Connect your documents and data sources. Nexary finds the answers in your company knowledge.",
+        "point1": "Integrations for SharePoint, Confluence, etc.",
+        "point2": "Always up-to-date answers (Live Index)",
+        "point3": "Sources and citations",
+        "visualLabel": "Knowledge Base"
+      },
+      "assistants": {
+        "title": "Assistants & Workflows",
+        "description": "Automate routine tasks with specialized AI assistants for every team.",
+        "point1": "Pre-built templates for HR, Marketing, etc.",
+        "point2": "Create custom workflows without code",
+        "point3": "Seamless integration into processes"
+      },
+      "multimodal": {
+        "title": "Multimodal",
+        "description": "Work with more than just text. Nexary understands images, documents, and audio.",
+        "point1": "Image analysis and generation",
+        "point2": "Document Chat (PDF, Docx)",
+        "point3": "Audio Transcription"
+      },
+      "platform": {
+        "title": "Platform for Tools",
+        "description": "The central command center for your AI initiative. Management, security, and compliance in one place.",
+        "point1": "SSO & Role Management",
+        "point2": "Detailed usage analytics",
+        "point3": "Enterprise-Grade Security"
+      }
+    }
+  },
+  "deploymentOptions": {
+    "headline": "Flexible Deployment",
+    "subheadline": "Choose the operating model that fits your security strategy.",
+    "recommended": "Recommended",
+    "cta": "Contact Sales",
+    "options": {
+      "saas": {
+        "title": "SaaS (Public Cloud)",
+        "description": "The fastest way to get started.",
+        "feature1": "Hosted in Frankfurt (DE)",
+        "feature2": "Automatic Updates",
+        "feature3": "99.9% Uptime",
+        "feature4": "Pay-as-you-go"
+      },
+      "privateCloud": {
+        "title": "Private Cloud",
+        "description": "Your own dedicated tenant.",
+        "feature1": "Dedicated Infrastructure",
+        "feature2": "Own Azure/AWS Environment",
+        "feature3": "VPN / Private Link",
+        "feature4": "Custom SLAs"
+      },
+      "onPremise": {
+        "title": "On-Premise",
+        "description": "Full control in your data center.",
+        "feature1": "Air-Gapped capable",
+        "feature2": "Docker / Kubernetes Deployment",
+        "feature3": "Local LLM Inference",
+        "feature4": "Maximum Data Sovereignty"
+      }
+    }
+  },
+  "ragBenefits": {
+    "headline": "Maximize Your AI Potential with RAG",
+    "subheadline": "Only by connecting your enterprise data does generative AI reach its full potential. Nexary uses Retrieval-Augmented Generation for precise, context-aware answers.",
+    "benefits": {
+      "currentData": {
+        "title": "Up-to-Date Data",
+        "description": "With continuous data synchronization, you always get precise and current answers – no more outdated training data."
+      },
+      "precision": {
+        "title": "Precision and Reliability",
+        "description": "Integrating company knowledge maximizes the accuracy and reliability of generated content."
+      },
+      "expertise": {
+        "title": "Domain-Specific Expertise",
+        "description": "Highly specialized, context-relevant results through the combination of enterprise data and powerful LLMs."
+      },
+      "efficiency": {
+        "title": "Efficient Data Usage",
+        "description": "Real-time access to company information from various data sources, centralized in your AI solution."
+      },
+      "acceptance": {
+        "title": "User Acceptance",
+        "description": "Increased user acceptance through precise results – strengthening trust in your enterprise AI."
+      },
+      "flexibility": {
+        "title": "Flexibility",
+        "description": "Flexible RAG architecture that dynamically adapts to changing business conditions."
+      }
+    }
+  },
+  "training": {
+    "headline": "Your Partner for Successful AI Adoption",
+    "subheadline": "With our modular AI Adoption Program, getting started is as easy as scaling. Our experienced AI consultants help you embed AI sustainably.",
+    "badge": "AI Adoption Program",
+    "cta": "Request Training Program",
+    "modules": {
+      "basics": {
+        "title": "AI Basics with Nexary",
+        "description": "Enablement for using AI tools in general and the Nexary platform specifically."
+      },
+      "prompting": {
+        "title": "Advanced Prompting",
+        "description": "Advanced prompting skills and deep prompt engineering techniques."
+      },
+      "assistants": {
+        "title": "Create Assistants",
+        "description": "Learn how to create, optimize, and deploy assistants in your daily business."
+      },
+      "workshop": {
+        "title": "Assistant Workshop",
+        "description": "Hands-on format for developing your own AI assistants – practical and applicable."
+      },
+      "useCases": {
+        "title": "Use Case Workshop",
+        "description": "Identify the most relevant AI use cases for your organization."
+      }
+    }
+  },
+  "enterpriseOnboarding": {
+    "headline": "From First Steps to Scaling",
+    "subheadline": "We guide your AI journey – from strategy to full integration into your organization.",
+    "phases": {
+      "foundation": {
+        "title": "Foundation",
+        "duration": "Week 1-2",
+        "description": "Technological and strategic foundations for your new central AI platform.",
+        "items": {
+          "1": "Analyze your company's AI potential",
+          "2": "Develop a tailored strategy",
+          "3": "Set up GDPR-compliant infrastructure"
+        }
+      },
+      "integration": {
+        "title": "Integration",
+        "duration": "Week 3-6",
+        "description": "Develop initial use cases and integrate them into your processes.",
+        "items": {
+          "1": "Implement pilot use cases",
+          "2": "Conduct employee training",
+          "3": "Establish change management"
+        }
+      },
+      "scaling": {
+        "title": "Scaling",
+        "duration": "From Week 7",
+        "description": "Implement specialized AI systems for your specific requirements.",
+        "items": {
+          "1": "Roll out to all departments",
+          "2": "Create tailored assistants",
+          "3": "Achieve maximum value creation"
+        }
+      }
+    }
+  },
+  "extendedFeatures": {
+    "headline": "Versatile AI Tools for Every Use Case",
+    "subheadline": "From multi-model selection to image generation to code development – Nexary offers all the tools your enterprise needs.",
+    "features": {
+      "multiModel": {
+        "title": "Multi-Model Selection",
+        "description": "All leading AI models on one platform – OpenAI, Anthropic, Google and Open Source. Smart Select AI automatically chooses the best model."
+      },
+      "rag": {
+        "title": "RAG Pipeline",
+        "description": "Direct access to SharePoint, Confluence and more with automatic synchronization of your enterprise data."
+      },
+      "assistants": {
+        "title": "Assistant Library",
+        "description": "Configure custom assistants with your own files, documents and extensions for your specific needs."
+      },
+      "webSearch": {
+        "title": "Web Search",
+        "description": "Research current information via Google or Perplexity with automatic source citations."
+      },
+      "imageGen": {
+        "title": "Image Generation",
+        "description": "Create high-quality digital images from natural language using GPT Image 1 or Gemini."
+      },
+      "codeInterpreter": {
+        "title": "Code Interpreter",
+        "description": "Write, understand and debug code – directly in the platform with interactive execution."
+      },
+      "deepResearch": {
+        "title": "Deep Research",
+        "description": "Conduct in-depth analyses, evaluate sources and create well-founded reports."
+      },
+      "documentChat": {
+        "title": "Document Chat",
+        "description": "Analyze PDFs, Word documents and presentations and ask questions directly about the content."
+      },
+      "analytics": {
+        "title": "Analytics Dashboard",
+        "description": "Detailed usage analytics, cost overview and model distribution at a glance."
+      }
+    }
+  }
+}

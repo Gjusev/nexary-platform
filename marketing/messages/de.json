@@ -1,0 +1,1371 @@
+{
+  "meta": {
+    "title": "Nexary – Die sichere KI-Plattform für Unternehmen",
+    "description": "Nexary ermöglicht Unternehmen die sichere Nutzung von KI – DSGVO-konform, multi-model und mit Ihren eigenen Daten.",
+    "keywords": "KI Plattform, DSGVO konforme KI, Enterprise AI, RAG, Generative KI, KI für Unternehmen"
+  },
+  "accessibility": {
+    "skipToMain": "Zum Hauptinhalt springen"
+  },
+  "nav": {
+    "platform": "Plattform",
+    "useCases": "Anwendungsfälle",
+    "about": "Über uns",
+    "contact": "Kontakt",
+    "pricing": "Preise",
+    "login": "Anmelden",
+    "register": "Registrieren"
+  },
+  "hero": {
+    "headline": "KI-Power für Ihr Unternehmen – 100 % DSGVO-konform",
+    "subheadline": "Entfesseln Sie die Möglichkeiten von Künstlicher Intelligenz, ohne Datenschutz oder Kontrolle aus der Hand zu geben. Nexary verbindet die Stärke modernster KI-Modelle mit der Sicherheit einer deutschen Plattform.",
+    "ctaPrimary": "Jetzt starten",
+    "ctaSecondary": "Vertrieb kontaktieren",
+    "valueProp1Title": "Multi-Modell KI",
+    "valueProp1Desc": "GPT-4, Claude, Gemini & mehr",
+    "valueProp2Title": "100% DSGVO-konform",
+    "valueProp2Desc": "Deutsches Hosting, keine Datentraining",
+    "valueProp3Title": "In 24 Stunden startklar",
+    "valueProp3Desc": "Schnelles Setup, sofortige Ergebnisse"
+  },
+  "socialProof": {
+    "trustedBy": "Vertraut von führenden Unternehmen",
+    "badge1": "ISO 27001-zertifiziert",
+    "badge2": "DSGVO konform",
+    "badge3": "Made in Germany"
+  },
+  "problem": {
+    "headline": "Die zentrale KI-Frage für mittelständische Unternehmen",
+    "subheadline": "Wie nutzen wir KI intern – ohne Datenschutzprobleme, ohne Kontrollverlust?",
+    "point1": "ChatGPT wird nicht datenschutzkonform verwendet",
+    "point2": "Mitarbeitende können nicht sicher mit sensiblen Daten arbeiten",
+    "point3": "Geschäftsführung will Effizienz – mit Top-Sprachmodellen und Assistenten"
+  },
+  "solution": {
+    "headline": "Ihr Unternehmenswissen und Ihre Daten auf einer KI-Plattform in Ihrer eigenen Cloud",
+    "subheadline": "Nexary ist die vollständig kontrollierbare und richtlinienkonforme Plattform für generative KI im Unternehmen.",
+    "benefit1": "Eine Lizenz für alle",
+    "benefit2": "Volle Datenkontrolle",
+    "benefit3": "Vollintegrierbar",
+    "ctaPrimary": "Jetzt starten"
+  },
+  "features": {
+    "headline": "Warum Nexary?",
+    "gdpr": {
+      "title": "DSGVO-konforme KI",
+      "description": "Ihre Daten bleiben geschützt. Nexary verarbeitet Informationen ausschließlich in Ihrer Cloud-Umgebung oder deutschen Rechenzentren – 100 % konform mit europäischen Datenschutzstandards."
+    },
+    "multiModel": {
+      "title": "Mehrere KI-Modelle, keine Einschränkungen",
+      "description": "Nutzen Sie gleichzeitig die besten KI-Modelle der Welt – ob GPT-4, Claude oder andere. Nexary ist herstellerunabhängig und vermeidet Vendor-Lock-in."
+    },
+    "rag": {
+      "title": "Wissen + KI = präzise Antworten",
+      "description": "Nexary verbindet KI mit Ihrem Unternehmenswissen (RAG). Ob Handbücher, Datenbanken oder PDFs – Nexary findet die relevantesten Fakten und liefert fundierte, zitierfähige Antworten."
+    },
+    "automation": {
+      "title": "Entscheidungen automatisieren",
+      "description": "Von der Kundenanfrage bis zum Berichtswesen – automatisieren Sie Routineentscheidungen mit KI-Unterstützung. Nexary integriert sich in Ihre Workflows und kann Aktionen anstoßen."
+    },
+    "transparency": {
+      "title": "Nachvollziehbar & erklärbar",
+      "description": "Jede KI-Antwort kann mit Quellen belegt werden. Sie behalten den Überblick, welche Daten die KI genutzt hat. Nexary ist keine Black-Box, sondern Ihre transparente KI-Assistentin."
+    },
+    "integration": {
+      "title": "Einfach integrierbar",
+      "description": "Integrieren Sie Nexary nahtlos in Ihre bestehende IT-Landschaft via API und vorgefertigte Konnektoren (z.B. für MS Teams, SharePoint, Salesforce)."
+    }
+  },
+  "modelSelection": {
+    "headline": "Intelligente Modell-Auswahl",
+    "subheadline": "Nexary wählt automatisch das beste KI-Modell für Ihre Anforderungen",
+    "bestFor": "Am besten für",
+    "models": {
+      "gpt4": {
+        "title": "GPT-4",
+        "description": "Das leistungsstärkste Modell für komplexe Aufgaben und tiefes Verständnis",
+        "useCases": "Strategie-Entwicklung, komplexe Analysen, Kreative Inhalte"
+      },
+      "gpt35": {
+        "title": "GPT-3.5",
+        "description": "Schnell und kosteneffizient für Routine-Aufgaben",
+        "useCases": "Kunden-Support, Text-Generierung, Einfache Analysen"
+      },
+      "local": {
+        "title": "Lokale Modelle",
+        "description": "Maximale Datensicherheit mit in Deutschland gehosteten Modellen",
+        "useCases": "Sensible Daten, Compliance-kritische Aufgaben, Finanz-Analysen"
+      }
+    },
+    "howItWorks": {
+      "title": "Wie die automatische Auswahl funktioniert",
+      "step1": {
+        "title": "Analyse der Anfrage",
+        "description": "Nexary analysiert die Art und Komplexität Ihrer Anfrage in Echtzeit"
+      },
+      "step2": {
+        "title": "Modell-Selektion",
+        "description": "Basierend auf Ihrer Anfrage wählt Nexary automatisch das optimale Modell aus"
+      },
+      "step3": {
+        "title": "Intelligente Optimierung",
+        "description": "Sie erhalten die beste Antwort – schnell, präzise und sicher"
+      }
+    },
+    "cta": "Modell-Auswahl testen"
+  },
+  "security": {
+    "headline": "Enterprise-Sicherheit für höchste Ansprüche",
+    "subheadline": "Unternehmensgeheimnisse und personenbezogene Daten in Ihrer Umgebung genauso DSGVO-konform geschützt wie in Excel und SharePoint.",
+    "gdpr": "DSGVO konform",
+    "gdprDesc": "Europäische Sicherheitsstandards",
+    "madeInGermany": "Made in Germany",
+    "madeInGermanyDesc": "Deutsche Qualitätsstandards",
+    "iso": "ISO 27001-zertifiziert",
+    "isoDesc": "Hohe Informationssicherheit"
+  },
+  "integrations": {
+    "headline": "Nahtlose Integration in Ihre Systeme",
+    "subheadline": "Über 280+ Schnittstellen zu Ihren Lieblingstools",
+    "badge": "100+ Integrationen",
+    "customIntegration": "Benötigen Sie eine spezielle Integration?",
+    "contactUs": "Kontaktieren Sie uns"
+  },
+  "howItWorks": {
+    "headline": "Wie funktioniert Nexary?",
+    "subheadline": "In 3 Schritten zur KI-gestützten Arbeitsweise",
+    "step1": {
+      "title": "1. Daten integrieren",
+      "description": "Verbinden Sie Ihre Datenquellen (SharePoint, SQL, APIs) mit Nexary"
+    },
+    "step2": {
+      "title": "2. KI konfigurieren",
+      "description": "Wählen Sie die passenden Modelle und erstellen Sie Workflows"
+    },
+    "step3": {
+      "title": "3. Teams starten",
+      "description": "Lassen Sie Ihre Mitarbeitenden KI sicher und produktiv nutzen"
+    }
+  },
+  "useCases": {
+    "headline": "Anwendungsfälle für jede Abteilung",
+    "subheadline": "Entdecken Sie, wie Nexary Ihr Unternehmen unterstützt",
+    "viewAll": "Alle Anwendungsfälle ansehen",
+    "pageSubheadline": "Von E-Mail-Erstellung bis Vertragsanalyse: Entdecken Sie konkrete Anwendungsfälle für Ihr Unternehmen.",
+    "sidebarTitle": "Use Cases für Alle",
+    "useCasesCount": "{count} Anwendungsfälle",
+    "ctaHeadline": "Bereit, diese Use Cases umzusetzen?",
+    "ctaDescription": "Starten Sie noch heute mit Nexary und transformieren Sie Ihre Arbeitsabläufe mit KI.",
+    "ctaButton": "Jetzt starten",
+    "finance": "Finanzwesen",
+    "healthcare": "Gesundheitswesen",
+    "legal": "Rechtswesen",
+    "retail": "Handel & E-Commerce",
+    "industry": "Industrie & Produktion",
+    "public": "Öffentlicher Sektor",
+    "detail": {
+      "context": "Kontext",
+      "objective": "Ziel",
+      "workflow": "Workflow",
+      "benefits": "Vorteile",
+      "risks": "Risiken & Mitigationen",
+      "inputs": "Inputs",
+      "outputs": "Outputs",
+      "ctaHeadline": "Interessiert an diesem Use Case?",
+      "ctaDescription": "Kontaktieren Sie unser Team, um mehr darüber zu erfahren, wie Nexary Ihre spezifischen Anforderungen unterstützen kann.",
+      "ctaButton": "Team kontaktieren"
+    }
+  },
+  "common": {
+    "gdprCompliant": "DSGVO-konform",
+    "iso27001": "ISO 27001",
+    "euHosting": "EU-Hosting",
+    "allFeaturesButton": "Alle Features entdecken",
+    "compareFeatures": "Alle Features vergleichen",
+    "hideComparison": "Vergleich ausblenden",
+    "enterprise": "Enterprise",
+    "smartSelectAi": "Smart Select AI",
+    "complexAnalysis": "Komplexe Analyse",
+    "creativeContent": "Kreative Inhalte",
+    "quickTasks": "Schnelle Aufgaben",
+    "feature": "Feature"
+  },
+  "cta": {
+    "headline": "Bereit für den nächsten Schritt?",
+    "subheadline": "Erleben Sie Nexary in Aktion!",
+    "description": "Starten Sie noch heute mit Nexary und transformieren Sie Ihr Unternehmen mit sicherer KI.",
+    "button": "Jetzt starten",
+    "values": {
+      "trust": "Vertrauenswürdig",
+      "trustDesc": "Wir glauben an vertrauenswürdige KI als Grundlage jeder Digitalisierung.",
+      "headline": "Bereit für den nächsten Schritt?",
+      "innovation": "Innovation",
+      "innovationDesc": "Wir treiben Innovation voran und nutzen modernste Technologien.",
+      "security": "Sicherheit",
+      "securityDesc": "Datensicherheit ist unsere höchste Priorität."
+    },
+    "mission": "Unsere Mission",
+    "missionDesc": "Wir machen leistungsstarke KI sicher und für jedes Unternehmen nutzbar.",
+    "tagline": "Bereit für die Zukunft?"
+  },
+  "faq": {
+    "headline": "Häufig gestellte Fragen",
+    "subheadline": "Antworten auf die häufigsten Fragen zu Nexary",
+    "moreQuestions": "Noch Fragen?",
+    "contactUs": "Kontaktieren Sie uns",
+    "question1": "Welche KI-Modelle gibt es bei Nexary?",
+    "answer1": "Nexary bietet eine Vielzahl der führenden KI-Modelle wie GPT-4, Claude, Gemini und Mistral. Unser Anspruch ist es, jetzt und in Zukunft immer die aktuellsten und besten KI-Modelle bereitzustellen.",
+    "question2": "Warum Nexary statt ChatGPT?",
+    "answer2": "Mit Nexary können Sie alles, was ChatGPT kann – und noch viel mehr. Außerdem nutzen Sie die Sprachmodelle mit Nexary auf europäischen Servern DSGVO-konform und sicher. Ihre Daten werden nicht weiterverarbeitet und nicht zum Trainieren von Sprachmodellen verwendet.",
+    "question3": "Wofür kann ich Nexary einsetzen?",
+    "answer3": "Nexary vereint alle Möglichkeiten führender KI-Modelle in nur einer Lösung. Mit Nexary schreiben Sie Texte, führen Recherchen durch, erstellen Dokumente, automatisieren Workflows und integrieren die KI nahtlos in Ihre bestehenden Systeme.",
+    "question4": "Ist Nexary DSGVO-konform?",
+    "answer4": "Ja, Nexary ist DSGVO-konform und nach Europäischen Sicherheitsstandards entwickelt. Nexary hostet diese KI-Modelle in Deutschland und ermöglicht somit eine Nutzung aller führenden KI-Modelle nach Richtlinien der DSGVO – jetzt und in Zukunft."
+  },
+  "contact": {
+    "tagline": "Kontakt",
+    "headline": "Kontaktieren Sie uns",
+    "subheadline": "Wir sind für Sie da!",
+    "form": {
+      "name": "Name",
+      "company": "Unternehmensname",
+      "email": "Geschäftliche E-Mail",
+      "message": "Nachricht",
+      "submit": "Nachricht senden",
+      "success": "Vielen Dank! Ihre Nachricht wurde empfangen.",
+      "successDesc": "Wir werden uns bald bei Ihnen melden.",
+      "successToastTitle": "Erfolg",
+      "sending": "Wird gesendet...",
+      "newMessage": "Neue Nachricht",
+      "error": "Ups! Beim Senden des Formulars ist ein Fehler aufgetreten.",
+      "privacyLabel": "Ich habe die",
+      "privacyLink": "Datenschutzerklärung",
+      "privacyAnd": "und",
+      "agbLink": "AGB",
+      "privacyError": "Bitte bestätigen Sie, dass Sie die Datenschutzerklärung und AGB gelesen haben.",
+      "privacyErrorTitle": "Fehler"
+    },
+    "details": {
+      "headline": "Kontaktdaten",
+      "email": "E-Mail",
+      "phone": "Telefon",
+      "address": "Adresse"
+    },
+    "cta": {
+      "headline": "Bereit für den nächsten Schritt?",
+      "description": "Erleben Sie Nexary in Aktion!",
+      "button": "Jetzt starten"
+    }
+  },
+  "videoShowcase": {
+    "headline": "Sehen Sie Nexary in Aktion",
+    "subheadline": "Erleben Sie, wie Unternehmen mit KI ihre Arbeitsabläufe transformieren",
+    "watchDemo": "2-Minuten-Demo ansehen",
+    "feature1": {
+      "title": "Schnelles Setup",
+      "description": "In Minuten starten, nicht Monaten"
+    },
+    "feature2": {
+      "title": "Intuitive Oberfläche",
+      "description": "Keine KI-Expertise erforderlich"
+    },
+    "feature3": {
+      "title": "Sofortiger ROI",
+      "description": "Ergebnisse ab dem ersten Tag"
+    }
+  },
+  "ragFlow": {
+    "sharePoint": "SharePoint",
+    "sharePointDesc": "Dokumente",
+    "confluence": "Confluence",
+    "confluenceDesc": "Wiki & Docs",
+    "erpCrm": "ERP / CRM",
+    "erpCrmDesc": "Unternehmensdaten",
+    "processing": "Verarbeitung",
+    "processingDesc": "Secure RAG",
+    "output": "Generierung",
+    "outputDesc": "Kontext-Antwort",
+    "llm": "LLM",
+    "llmDesc": "Sprachmodell",
+    "response": "Antwort",
+    "responseDesc": "Generierter Text",
+    "vectorDb": "Vektor-DB",
+    "vectorDbDesc": "Wissensspeicher"
+  },
+  "footer": {
+    "slogan": "KI ohne Kompromisse – sicher, compliant, leistungsstark.",
+    "product": "Produkt",
+    "platform": "Plattform",
+    "features": "Funktionen",
+    "integrations": "Integrationen",
+    "security": "Sicherheit",
+    "company": "Unternehmen",
+    "aboutUs": "Über uns",
+    "contact": "Kontakt",
+    "useCases": "Anwendungsfälle",
+    "resources": "Ressourcen",
+    "newsletter": "Zum Newsletter anmelden",
+    "copyright": "© {year} Nexary. Alle Rechte vorbehalten.",
+    "privacy": "Datenschutz",
+    "agb": "AGB",
+    "impressum": "Impressum"
+  },
+  "about": {
+    "tagline": "Über Nexary",
+    "headline": "Über Nexary",
+    "mission": "Unsere Mission",
+    "missionDesc": "Nexary wurde entwickelt, um Unternehmen den Zugang zu KI zu ermöglichen – ohne Datenschutzängste und ohne komplizierte Technik. Das Nexary-Team vereint erfahrene Softwareentwickler, Datenwissenschaftler und Datenschutzexperten. Gemeinsam haben wir Nexary so gebaut, dass Sie die Vorteile von KI sicher und einfach nutzen können.",
+    "values": {
+      "headline": "Unsere Werte",
+      "trust": "Vertrauenswürdig",
+      "trustDesc": "Wir glauben an vertrauenswürdige KI als Grundlage jeder Digitalisierung.",
+      "innovation": "Innovation",
+      "innovationDesc": "Wir treiben Innovation voran und nutzen modernste Technologien.",
+      "security": "Sicherheit",
+      "securityDesc": "Datensicherheit ist unsere höchste Priorität."
+    },
+    "team": {
+      "headline": "Unser Team",
+      "desc": "Das Nexary-Team vereint erfahrene Softwareentwickler, Datenwissenschaftler und Datenschutzexperten."
+    }
+  },
+  "platform": {
+    "tag": "Enterprise Plattform",
+    "headline": "Die KI-Plattform für Ihr Unternehmen",
+    "subheadline": "Sicher, skalierbar und DSGVO-konform. Nexary integriert sich nahtlos in Ihre bestehende Infrastruktur.",
+    "modules": {
+      "multiProvider": {
+        "title": "Multi-Provider KI",
+        "desc": "Nutzen Sie Modelle von OpenAI, Anthropic oder lokale LLMs über eine einheitliche API."
+      },
+      "rag": {
+        "title": "RAG Pipeline",
+        "desc": "Verbinden Sie Ihre Datenquellen (SharePoint, Confluence) für kontextbezogene Antworten."
+      },
+      "automation": {
+        "title": "Automatisierung",
+        "desc": "Erstellen Sie Workflows und Agenten, um wiederkehrende Aufgaben zu automatisieren."
+      },
+      "api": {
+        "title": "API-First",
+        "desc": "Integrieren Sie KI-Funktionen direkt in Ihre eigenen Anwendungen."
+      }
+    },
+    "architecture": {
+      "title": "Flexible Architektur",
+      "desc": "Gebaut für maximale Sicherheit und Anpassungsfähigkeit."
+    },
+    "comparison": {
+      "title": "Warum Nexary?",
+      "desc": "Der Unterschied liegt im Detail.",
+      "points": {
+        "gdpr": "DSGVO-konforme Datenverarbeitung",
+        "multi": "Multi-Provider Unterstützung",
+        "rag": "Unternehmenseigene RAG-Pipeline",
+        "workflow": "Workflow-Automatisierung",
+        "audit": "Audit-Protokollierung",
+        "cloud": "Eigene Cloud/On-Premise"
+      }
+    },
+    "cta": {
+      "headline": "Bereit zum Starten?",
+      "description": "Erleben Sie Nexary in Aktion und entdecken Sie, wie Ihre Organisation von KI profitieren kann.",
+      "button": "Jetzt starten"
+    }
+  },
+  "deploymentOptions": {
+    "headline": "Flexible Bereitstellung",
+    "subheadline": "Wählen Sie das Betriebsmodell, das zu Ihrer Sicherheitsstrategie passt.",
+    "recommended": "Empfohlen",
+    "cta": "Kontakt aufnehmen",
+    "options": {
+      "saas": {
+        "title": "SaaS (Public Cloud)",
+        "description": "Der schnellste Weg zum Start.",
+        "feature1": "Hosting in Frankfurt (DE)",
+        "feature2": "Automatische Updates",
+        "feature3": "99.9% Verfügbarkeit",
+        "feature4": "Pay-as-you-go"
+      },
+      "privateCloud": {
+        "title": "Private Cloud",
+        "description": "Ihr eigener dedizierter Tenant.",
+        "feature1": "Dedizierte Infrastruktur",
+        "feature2": "Eigene Azure/AWS Umgebung",
+        "feature3": "VPN / Private Link",
+        "feature4": "Individuelle SLAs"
+      },
+      "onPremise": {
+        "title": "On-Premise",
+        "description": "Volle Kontrolle in Ihrem Rechenzentrum.",
+        "feature1": "Air-Gapped fähig",
+        "feature2": "Docker / Kubernetes Deployment",
+        "feature3": "Lokale LLM Inferenz",
+        "feature4": "Maximale Datensouveränität"
+      }
+    }
+  },
+  "legal": {
+    "headline": "Rechtliche Informationen",
+    "impressum": {
+      "headline": "Impressum",
+      "address": "Tech Boulevard 123, 60386 Frankfurt am Main",
+      "email": "hello@nexary.de",
+      "phone": "+49 (0)69 12345678",
+      "company": "Nexary GmbH",
+      "director": "Geschäftsführer",
+      "vat": "USt-IdNr.: DE123456789",
+      "court": "Amtsgericht Frankfurt am Main, HRB 123456",
+      "representatives": "Dr. Alexander Schmidt, Dr. Sarah Müller",
+      "register_info": "Handelsregister, Amtsgericht Frankfurt am Main, HRB 123456",
+      "disclaimer": "Wir sind nicht bereit oder verpflichtet, an Streitbeilegungsverfahren vor einer Verbraucherschlichtungsstelle teilzunehmen.",
+      "liability_content": "Als Diensteanbieter sind wir für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich. Wir sind als Diensteanbieter jedoch nicht verpflichtet, übermittelte oder gespeicherte fremde Informationen zu überwachen oder nach Umständen zu forschen, die auf eine rechtswidrige Tätigkeit hinweisen. Verpflichtungen zur Entfernung oder Sperrung der Nutzung von Informationen nach den allgemeinen Gesetzen bleiben hiervon unberührt. Eine diesbezügliche Haftung ist jedoch erst ab dem Zeitpunkt der Kenntnis einer konkreten Rechtsverletzung möglich. Bei Bekanntwerden von entsprechenden Rechtsverletzungen werden wir diese Inhalte umgehend entfernen.",
+      "links": {
+        "privacy": "Datenschutzerklärung",
+        "agb": "AGB"
+      }
+    },
+    "privacy": {
+      "headline": "Datenschutzerklärung",
+      "intro": "Wir nehmen den Schutz Ihrer persönlichen Daten sehr ernst. Diese Datenschutzerklärung informiert Sie gemäß Art. 12 bis Art. 14 DSGVO darüber, wie wir Ihre personenbezogenen Daten verarbeiten.",
+      "controller": "Verantwortlicher",
+      "controller_company": "Nexary GmbH",
+      "controller_address": "Tech Boulevard 123, 60386 Frankfurt am Main, Deutschland",
+      "controller_contact": "E-Mail: hello@nexary.de",
+      "controller_representatives": "Dr. Alexander Schmidt, Dr. Sarah Müller",
+      "dpo": "Datenschutzbeauftragter",
+      "dpo_contact": "datenschutz@nexary.de",
+      "register_court": "Registergericht: Amtsgericht Frankfurt am Main, HRB 123456",
+      "vat_number": "USt-IdNr.: DE123456789",
+      "legal_bases": "Maßgebliche Rechtsgrundlagen nach der DSGVO",
+      "basis_consent": "Einwilligung (Art. 6 Abs. 1 lit. a) DSGVO)",
+      "basis_contract": "Vertragserfüllung und vorvertragliche Anfragen (Art. 6 Abs. 1 lit. b) DSGVO)",
+      "basis_legal": "Rechtliche Verpflichtung (Art. 6 Abs. 1 lit. c) DSGVO)",
+      "basis_interest": "Berechtigte Interessen (Art. 6 Abs. 1 lit. f) DSGVO)",
+      "data_types": "Arten der verarbeiteten Daten",
+      "data_types_desc": "Bestandsdaten, Kontaktdaten, Inhaltsdaten, Vertragsdaten, Nutzungsdaten, Meta-, Kommunikations- und Verfahrensdaten",
+      "data_categories": "Kategorien betroffener Personen",
+      "data_categories_desc": "Interessenten, Kommunikationspartner, Geschäfts- und Vertragspartner",
+      "purposes": "Zwecke der Verarbeitung",
+      "purposes_desc": "Erbringung vertraglicher Leistungen und Kundenservice, Kontaktanfragen und Kommunikation, Sicherheitsmaßnahmen, Reichweitenmessung, Bereitstellung des Onlineangebots und Nutzerfreundlichkeit",
+      "website": "Besuch unserer Website",
+      "website_data": "Bei jedem Abruf unserer Website werden folgende Daten automatisch erfasst: Browsertyp und Browserversion, verwendetes Betriebssystem, IP-Adresse des anfragenden Endgeräts, Website, von der aus der Zugriff erfolgt (Ursprungs- oder Referrer-URL), Datum und Uhrzeit des Abrufs, besuchte Unterseiten und dort verbrachte Zeit",
+      "website_legal_basis": "Die Verarbeitung der Zugriffsdaten ist zur Bereitstellung einer funktionsfähigen Website und zur Systemsicherheit technisch notwendig. Über die vorstehenden Zwecke hinaus verwenden wir Server-Logdateien ausschließlich zur bedarfsgerechten Gestaltung und Optimierung unseres Internetangebots rein statistisch und ohne Rückschluss auf Ihre Person. Eine Zusammenführung dieser Daten mit anderen Datenquellen wird nicht vorgenommen.",
+      "website_purpose": "Technische Bereitstellung und Systemsicherheit (Vertragserfüllung und vorvertragliche Anfragen Art. 6 Abs. 1 lit. b) DSGVO)",
+      "retention_website": "Speicherdauer und Löschung: Ihre IP-Adresse wird zu Zwecken der IT-Sicherheit für maximal 7 Tage gespeichert. Server-Logdateien werden für die Dauer von maximal 30 Tagen gespeichert und danach gelöscht.",
+      "cookies": "Verwendung von Cookies und ähnlichen Trackingtechnologien",
+      "cookies_desc": "Wir setzen auf unserer Website teilweise sogenannte Cookies und ähnliche Trackingtechnologien ein, wie z.B. Tracking-Pixel oder Fingerprinting-Technologien. Das Tracking dient dazu, unsere Angebote nutzerfreundlicher, effektiver und sicherer zu gestalten sowie Inhalte und Werbung zu personalisieren.",
+      "cookies_functional": "Funktionales Tracking: Rechtsgrundlage für den Zugriff auf Ihr Endgerät, die Erhebung der Informationen und die weitere Verarbeitung etwaiger personenbezogener Daten ist in diesen Fällen § 25 Abs. 2 Nr. 2 TDDDG und Art. 6 Abs. 1 lit. f) oder lit. b) DSGVO. Das unbedingt notwendige Tracking hilft uns dabei, eine Website technisch nutzbar und sicher zu gestalten.",
+      "cookies_marketing": "Tracking zu Zwecken des Marketings, der Personalisierung oder Analytik: Für alle weiteren genannten Zwecke ist Ihre freiwillige Einwilligung erforderlich. Rechtsgrundlage ist dann § 25 Abs. 1 TDDDG und Art. 6 Abs. 1 lit. a) DSGVO. Sie können die Einwilligung für alle Zwecke gebündelt erteilen, indem Sie „Alle akzeptieren\" wählen.",
+      "cookies_storage": "Speicherdauer: Nach erteilter Einwilligung können diese Cookies für einen Zeitraum von bis zu 24 Monaten gespeichert werden.",
+      "cookies_optout": "Widerspruchsmöglichkeit (Opt-Out): Sie können die von Ihnen erteilten Einwilligungen jederzeit widerrufen. Klicken Sie dazu auf „Cookie-Einstellungen\" am unteren Rand der Website und wählen Sie entweder „Alle ablehnen\" oder deaktivieren Sie einzelne Kategorien.",
+      "contact_form": "Kontaktaufnahme über Website-Kontaktformular",
+      "contact_form_data": "Wenn Sie uns per Kontaktformular Anfragen zukommen lassen, werden Ihre Anfragen inklusive der von Ihnen dort angegebenen Kontaktdaten zwecks Bearbeitung und Beantwortung der Anfrage sowie für den Fall von Anschlussfragen bei uns gespeichert und entsprechend weiterverarbeitet. Dies gilt auch für Ihre IP-Adresse sowie Datum und Uhrzeit des Absendens Ihrer Nachricht an uns. Diese Daten geben wir nicht an Dritte weiter, es sei denn, dies ist im Rahmen der Bearbeitung und Beantwortung Ihrer Kontaktanfrage erforderlich oder Sie haben uns Ihre entsprechende Einwilligung (Art. 6 Abs. 1 lit. a) DSGVO) erteilt.",
+      "contact_form_legal_basis": "Vertragserfüllung und vorvertragliche Anfragen (Art. 6 Abs. 1 lit. b) DSGVO) sowie Wahrung unserer berechtigten Interessen (Art. 6 Abs. 1 lit. f) DSGVO)",
+      "contact_form_retention": "Speicherdauer: Die entsprechenden Daten richten sich nach Ziffer 5 dieser Datenschutzerklärung.",
+      "newsletter": "Newsletter und elektronische Benachrichtigungen",
+      "newsletter_consent": "Einwilligung: Der Newsletter wird nur mit Ihrer ausdrücklichen Einwilligung (Art. 6 Abs. 1 lit. a) DSGVO) versendet.",
+      "newsletter_content": "Inhalte: Informationen zu uns, unseren Leistungen, Aktionen und Angeboten.",
+      "newsletter_double_opt": "Wir nutzen das sogenannte Double-Opt-In-Verfahren: Nach Ihrer Anmeldung erhalten Sie eine E-Mail, in der Sie um die Bestätigung Ihres Newsletterabonnements gebeten werden. Ohne diese Bestätigung wird Ihre Anmeldung nicht abgeschlossen.",
+      "newsletter_storage": "Speicherdauer: Die E-Mail-Adresse wird bis zu 3 Jahren gespeichert, bevor wir sie löschen, um eine ehemals gegebene Einwilligung nachweisen zu können.",
+      "newsletter_optout": "Abmeldung: Sie können den Newsletter jederzeit abbestellen – unabhängig davon, ob Sie ihn aufgrund einer Einwilligung oder berechtigter Interessen erhalten. Nutzen Sie dazu den Abmelde-Link am Ende jedes Newsletters.",
+      "platform": "Nutzung unserer Plattform und KI-Anwendungen",
+      "platform_desc": "Wenn Sie über unsere Plattform KI-Anwendungen von Drittanbietern als autorisierter Nutzer verwenden, ist dieser Kunde als Verantwortlicher im Sinne von Art. 4 Nr. 7 DSGVO für die Verarbeitung Ihrer personenbezogenen Daten im Rahmen der Nutzung.",
+      "platform_avp": "Auftragsverarbeitungsvertrag (AVV): Wir haben mit dem Kunden eine entsprechende Vereinbarung zur Auftragsverarbeitung (AVV) gemäß Art. 28 Abs. 3 DSGVO geschlossen.",
+      "platform_processing": "Verarbeitete Daten: Name, E-Mail-Adresse des Nutzers, Unternehmensdaten bei Geschäftskunden, Chats und Eingaben, verwendete KI-Modelle, Tokens verbraucht, Nutzungsstatistiken.",
+      "platform_purpose": "Zwecke: Erbringung vertraglicher Leistungen und Erfüllung unserer vertraglichen Pflichten.",
+      "kai_models": "KI-Modelle und Hosting",
+      "kai_openai": "OpenAI Models (Azure): Hosting: Azure (Europa). Garantien: Keine Speicherung von Prompts, Outputs und Trainingsdaten; EU-US Data Privacy Framework (DPF) anerkannt; Processing Agreement firmado.",
+      "kai_anthropic": "Anthropic Models (Amazon Bedrock): Hosting: AWS Europa. Garantien: Keine Rückgabe von Prompts oder Outputs für Training; DPA firmado; Data Privacy Framework.",
+      "kai_google": "Google Models (Gemini): Hosting: Google Cloud Europa. Garantien: DPF; Keine Nutzung von Kundendaten zum Training; Processing Agreement.",
+      "kai_local": "Lokale Modelle (Mistral, Llama): Hosting: Eigene Infrastruktur in Deutschland. Garantien: Maximale Datensouveränität; Kein Training mit Kundendaten.",
+      "kai_disclaimer": "Advertencia zur calidad de la IA: Los contenidos generados por las aplicaciones de IA pueden contener errores e inexactitudes. No se trata de información verificada o certificada, sino de contenidos creados automáticamente que pueden ser falsos o no estar actualizados. Nexary no asume responsabilidad por los daños que podrían derivarse del uso de dichos contenidos.",
+      "newsletter_storage_period": "3 Jahren",
+      "log_retention": "30 Tagen",
+      "ip_retention": "7 Tagen",
+      "rights": "Rechte der betroffenen Personen",
+      "right_oppose": "Widerspruchsrecht: Sie haben unter den in Art. 21 Abs. 1 DSGVO genannten Voraussetzungen das Recht, aus Gründen, die sich aus Ihrer besonderen Situation ergeben, jederzeit gegen die Verarbeitung der Sie betreffenden personenbezogenen Daten, die aufgrund von Art. 6 Abs. 1 lit. e oder f) DSGVO erfolgt, Widerspruch einzulegen; dies gilt auch für ein auf diese Bestimmungen gestütztes Profiling.",
+      "right_consent": "Widerrufsrecht bei Einwilligungen: Sie haben das Recht, erteilte Einwilligungen jederzeit zu widerrufen.",
+      "right_info": "Auskunftsrecht: Sie haben das Recht, eine Bestätigung darüber zu verlangen, ob betreffende Daten verarbeitet werden und auf Auskunft über diese Daten sowie auf weitere Informationen und Kopien der Daten entsprechend den gesetzlichen Vorgaben zu erhalten.",
+      "right_correct": "Recht auf Berichtigung: Sie haben entsprechend den gesetzlichen Vorgaben das Recht, die Vervollständigung der Sie betreffenden unrichtigen Daten oder die Berichtigung der Sie betreffenden unrichtigen Daten zu verlangen.",
+      "right_delete": "Recht auf Löschung: Sie haben das Recht, zu verlangen, dass die Sie betreffenden Daten unverzüglich gelöscht werden, bzw. alternativ nach Maßgabe der gesetzlichen Vorgaben eine Einschränkung der Verarbeitung der Daten zu verlangen.",
+      "right_portability": "Recht auf Datenübertragbarkeit: Sie haben das Recht, die Sie betreffenden Daten, die Sie uns bereitgestellt haben, nach Maßgabe der gesetzlichen Vorgaben in einem strukturierten, gängigen und maschinenlesbaren Format zu erhalten oder deren Übermittlung an einen anderen Verantwortlichen zu fordern.",
+      "right_complaint": "Beschwerderecht bei einer Aufsichtsbehörde: Sie haben unbeschadet eines anderweitigen verwaltungsrechtlichen oder gerichtlichen Rechtsbehelfs das Recht auf Beschwerde bei einer Aufsichtsbehörde, insbesondere im Mitgliedstaat Ihres gewöhnlichen Aufenthaltsorts, Ihres Arbeitsplatzes oder des Ortes des mutmaßlichen Verstoßes, wenn Sie der Ansicht sind, dass die Verarbeitung der Sie betreffenden personenbezogenen Daten gegen die DSGVO verstößt.",
+      "authority": "Zuständige Aufsichtsbehörde:",
+      "authority_name": "Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen",
+      "authority_address": "Kavalleriestraße 2-4, 40213 Düsseldorf",
+      "authority_phone": "Telefon: +49 211 384240",
+      "authority_fax": "Fax: +49 211 3842499",
+      "authority_email": "E-Mail: poststelle@ldi.nrw.de",
+      "security": "Sicherheitsmaßnahmen",
+      "security_desc": "Wir treffen angemessene technische und organisatorische Maßnahmen, um ein angemessenes Schutzniveau zu gewährleisten: TLS-Verschlüsselung aller Verbindungen; Zugangsbeschränkung durch Authentifizierung; Firewalls und Intrusion Detection; Regelmäßige Penetrationstests; Datensicherung in Rechenzentren in Deutschland; Mitarbeiter-Schulungen zum Datenschutz; Auftragsverarbeitungsverträge mit allen Dienstleistern.",
+      "data_transfers": "Übermittlung personenbezogener Daten in Drittstaaten",
+      "data_transfers_scc": "Soweit für unsere Zwecke erforderlich, übermitteln wir Ihre Daten an Empfänger in Drittstaaten (außerhalb der Europäischen Union). Wir übermitteln Daten an Empfänger in Drittstaaten nur unter Beachtung der Bestimmungen in Kapitel V der DSGVO, d.h. wenn festgestellt ist, dass die EU-Kommission ein angemessenes Datenschutzniveau im Sinne von Art. 45 Abs. 1 DSGVO festgestellt hat oder angemessene Garantien im Sinne von Art. 46 Abs. 2 und Abs. 3 DSGVO umgesetzt wurden oder eine Ausnahme nach Art. 49 Abs. 1 DSGVO vorliegt.",
+      "data_transfers_dpf": "EU-US Data Privacy Framework (DPF): Einige unserer Dienstleister sind unter dem EU-US Data Privacy Framework zertifiziert (Stand Juli 2023). Die Liste der zertifizierten Unternehmen sowie weitere Informationen zum DPF können Sie der Website des US-Handelsministeriums entnehmen.",
+      "data_retention": "Dauer der Datenverarbeitung und Löschung",
+      "data_retention_desc": "Wir verarbeiten Ihre personenbezogenen Daten zunächst für die Dauer, die für den jeweiligen Verarbeitungszweck erforderlich ist.",
+      "contract_data_retention": "Vertragsdaten: Bis zum Ende der vertraglichen Beziehung. Server-Logdateien: 30 Tagen. IP-Adressen: 7 Tagen. Newsletter-Adressen: 3 Jahren.",
+      "data_provision": "Pflicht zur Bereitstellung von Daten: Grundsätzlich sind Sie nicht verpflichtet, uns Ihre personenbezogenen Daten mitzuteilen.",
+      "changes": "Änderung und Aktualisierung der Datenschutzerklärung",
+      "changes_desc": "Wir bitten Sie, sich regelmäßig über den Inhalt dieser Datenschutzerklärung zu informieren. Wir passen die Datenschutzerklärung an, sobald die Änderungen der von uns durchgeführten Datenverarbeitungen dies erforderlich machen. Wir informieren Sie, sobald durch die Änderungen eine Mitwirkungshandlung Ihrerseits (z.B. Einwilligung) oder eine sonstige individuelle Benachrichtigung erforderlich wird.",
+      "placeholder": "Eine detaillierte Datenschutzerklärung wird hinzugefügt..."
+    },
+    "agb": {
+      "headline": "Allgemeine Geschäftsbedingungen",
+      "updated": "Stand: Januar 2026",
+      "praembel": "Präambel",
+      "praembel_content": "Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für alle Geschäftsbeziehungen zwischen der Nexary GmbH (im Folgenden 'Anbieter') und ihren Kunden (im Folgenden 'Kunde'). Maßgeblich ist die zum Zeitpunkt des Vertragsschlusses gültige Fassung.",
+      "definitionen": "Definitionen",
+      "definitionen_content": "Plattform bezeichnet die vom Anbieter bereitgestellte KI-Software-as-a-Service Lösung. Kunde bezeichnet Unternehmer im Sinne des § 14 BGB.",
+      "allgemeine_regelungen": "Allgemeine Regelungen",
+      "allgemeine_regelungen_content": "Der Anbieter stellt dem Kunden die Plattform zur Nutzung über das Internet zur Verfügung. Der Funktionsumfang ergibt sich aus der Leistungsbeschreibung.",
+      "preismodell": "Preismodell",
+      "preismodell_content": "Die Vergütung richtet sich nach der aktuellen Preisliste oder dem individuellen Angebot. Alle Preise verstehen sich zuzüglich der gesetzlichen Umsatzsteuer.",
+      "plattform_zugriff": "Plattform und Zugang",
+      "plattform_zugriff_content": "Der Kunde erhält für die Laufzeit des Vertrages ein einfaches, nicht übertragbares Recht zur Nutzung der Plattform. Der Zugriff erfolgt passwortgeschützt.",
+      "gewaehrleistung": "Gewährleistung",
+      "gewaehrleistung_content": "Es gelten die gesetzlichen Gewährleistungsrechte. Die Verfügbarkeit der Plattform beträgt 99,5% im Jahresmittel.",
+      "laufzeit_kuendigung": "Laufzeit und Kündigung",
+      "laufzeit_kuendigung_content": "Soweit nicht anders vereinbart, beträgt die Mindestvertragslaufzeit 12 Monate. Der Vertrag verlängert sich automatisch, wenn er nicht fristgerecht gekündigt wird.",
+      "haftungsbeschraenkung": "Haftungsbeschränkung",
+      "haftungsbeschraenkung_content": "Der Anbieter haftet unbeschränkt für Vorsatz und grobe Fahrlässigkeit. Für leichte Fahrlässigkeit haftet der Anbieter nur bei Verletzung wesentlicher Vertragspflichten.",
+      "schlussbestimmungen": "Schlussbestimmungen",
+      "schlussbestimmungen_content": "Es gilt das Recht der Bundesrepublik Deutschland. Gerichtsstand ist Frankfurt am Main."
+    }
+  },
+  "notFound": {
+    "title": "Seite nicht gefunden",
+    "description": "Die angeforderte Seite existiert nicht oder wurde verschoben.",
+    "backHome": "Zurück zur Startseite"
+  },
+  "models": {
+    "benefit1": "Eine Lizenz für alle",
+    "benefit2": "Volle Datenkontrolle",
+    "benefit3": "Vollintegrierbar",
+    "headline": "Warum Nexary?",
+    "subheadline": "Die KI-Plattform für Ihr Unternehmen"
+  },
+  "featureTabs": {
+    "headline": "Eine Plattform, die sich Ihren Anforderungen anpasst",
+    "subheadline": "Entdecken Sie die vielseitigen Möglichkeiten von Nexary für Ihre Enterprise-KI",
+    "tabs": {
+      "chat": "Chat",
+      "knowledge": "Internes Wissen",
+      "assistants": "Assistenten & Workflows",
+      "multimodal": "Multimodal",
+      "platform": "Plattform & Tools"
+    }
+  },
+  "useCasesPage": {
+    "badge": "30+ Anwendungsfälle",
+    "categories": {
+      "allgemein": {
+        "title": "Allgemein",
+        "items": {
+          "emails": "E-Mails schreiben",
+          "emailsDesc": "Professionelle E-Mails für jede Situation in Sekunden formulieren",
+          "correct": "Texte korrigieren",
+          "correctDesc": "Rechtschreibung, Grammatik und Stil automatisch verbessern",
+          "tables": "Tabellen erstellen",
+          "tablesDesc": "Strukturierte Daten aus unstrukturiertem Text extrahieren",
+          "meetings": "Meeting-Protokolle",
+          "meetingsDesc": "Besprechungsinhalte zusammenfassen und Action Items extrahieren",
+          "research": "Web-Recherche",
+          "researchDesc": "Aktuelle Informationen aus dem Internet zusammentragen",
+          "translations": "Übersetzungen",
+          "translationsDesc": "Texte in alle wichtigen Sprachen übersetzen"
+        }
+      },
+      "marketing": {
+        "title": "Marketing & Sales",
+        "items": {
+          "content": "Content generieren",
+          "contentDesc": "Blogposts, Social Media Posts und Marketing-Texte erstellen",
+          "seo": "SEO optimieren",
+          "seoDesc": "Inhalte für Suchmaschinen mit Keywords optimieren",
+          "campaigns": "Kampagnen-Ideen",
+          "campaignsDesc": "Kreative Konzepte und Claims für Marketing-Kampagnen entwickeln",
+          "outreach": "Cold Outreach",
+          "outreachDesc": "Personalisierte E-Mails für Erstansprache formulieren",
+          "ads": "Ad-Skripte",
+          "adsDesc": "Werbetexte für Google, LinkedIn und Meta erstellen",
+          "leads": "Lead-Qualifizierung",
+          "leadsDesc": "Leads automatisch analysieren, bewerten und priorisieren"
+        }
+      },
+      "hr": {
+        "title": "HR & Recruiting",
+        "items": {
+          "jobAds": "Stellenanzeigen erstellen",
+          "jobAdsDesc": "Überzeugende Jobanzeigen für Social Recruiting generieren",
+          "resumes": "Lebensläufe auswerten",
+          "resumesDesc": "Bewerbungen automatisch vorfiltern und zusammenfassen",
+          "interviews": "Interview-Vorbereitung",
+          "interviewsDesc": "Individuelle Interviewleitfäden pro Position erstellen",
+          "references": "Arbeitszeugnisse schreiben",
+          "referencesDesc": "Rechtssichere Zeugnisse mit korrekter Tonalität formulieren",
+          "onboarding": "Onboarding-Pläne",
+          "onboardingDesc": "Personalisierte Einarbeitungspläne für neue Mitarbeiter erstellen"
+        }
+      },
+      "finanzen": {
+        "title": "Finanzen",
+        "items": {
+          "reporting": "Finanz-Reportings",
+          "reportingDesc": "Monats-, Quartals-, Jahresberichte automatisch erstellen",
+          "summary": "Berichte zusammenfassen",
+          "summaryDesc": "Lange Finanzberichte auf die wichtigsten Punkte kondensieren",
+          "budget": "Budget-Planung",
+          "budgetDesc": "Szenarien, Forecasts und Kommentare aufbereiten",
+          "bigdata": "Big Data Analyse",
+          "bigdataDesc": "CSV/Excel-Dateien strukturieren, auswerten und visualisieren",
+          "excel": "Excel-Tabellen",
+          "excelDesc": "Komplexe Kalkulationen aus einfachen Angaben generieren"
+        }
+      },
+      "operations": {
+        "title": "Operations",
+        "items": {
+          "intranet": "Intranet-Assistenten",
+          "intranetDesc": "Smarte Assistenten für Prozessnavigation und IT-Policies",
+          "support": "Support-Assistent",
+          "supportDesc": "Wiederkehrende Kundenanfragen automatisch beantworten",
+          "helpdesk": "IT-Helpdesk",
+          "helpdeskDesc": "Zentraler Assistent für häufige IT-Fragen und Troubleshooting",
+          "accounting": "Buchhaltungs-Assistent",
+          "accountingDesc": "Rückfragen zu Buchung und Rechnung beantworten"
+        }
+      },
+      "software": {
+        "title": "Softwareentwicklung",
+        "items": {
+          "code": "Code schreiben",
+          "codeDesc": "Code-Generierung in Python, JavaScript, SQL und mehr",
+          "bugs": "Bug-Identifikation",
+          "bugsDesc": "Fehler im Code automatisch erkennen und Fixes vorschlagen",
+          "review": "Code-Review",
+          "reviewDesc": "Code-Qualität prüfen und Verbesserungen vorschlagen",
+          "docs": "Dokumentation erstellen",
+          "docsDesc": "Technische Dokumentation aus Code automatisch generieren"
+        }
+      },
+      "management": {
+        "title": "Management",
+        "items": {
+          "strategy": "Strategische Entscheidungen",
+          "strategyDesc": "Datenbasierte Analysen für fundierte Managemententscheidungen",
+          "competition": "Wettbewerbsanalyse",
+          "competitionDesc": "Markt- und Konkurrenzanalysen aus öffentlichen Quellen",
+          "vision": "Vision schärfen",
+          "visionDesc": "Unternehmensvisionen und Strategien artikulieren"
+        }
+      },
+      "legal": {
+        "title": "Recht & Compliance",
+        "items": {
+          "contracts": "Vertragsanalyse",
+          "contractsDesc": "Verträge prüfen und kritische Klauseln identifizieren",
+          "clauses": "Klauseln vergleichen",
+          "clausesDesc": "Standardklauseln mit Vertragspassagen abgleichen",
+          "compliance": "Compliance-Checks",
+          "complianceDesc": "Dokumente auf Regelkonformität überprüfen",
+          "diligence": "Due Diligence",
+          "diligenceDesc": "Unternehmensdokumente systematisch analysieren"
+        }
+      }
+    }
+  },
+  "departmentUseCases": {
+    "headline": "Anwendungsfälle für jede Abteilung",
+    "subheadline": "Entdecken Sie, wie Nexary Ihr Unternehmen unterstützt",
+    "viewAll": "Alle Anwendungsfälle ansehen",
+    "pageSubheadline": "Von E-Mail-Erstellung bis Vertragsanalyse: Entdecken Sie konkrete Anwendungsfälle für Ihr Unternehmen.",
+    "sidebarTitle": "Use Cases für Alle",
+    "useCasesCount": "{count} Anwendungsfälle",
+    "ctaHeadline": "Bereit, diese Use Cases umzusetzen?",
+    "ctaDescription": "Starten Sie noch heute mit Nexary und transformieren Sie Ihre Arbeitsabläufe mit KI.",
+    "ctaButton": "Jetzt starten",
+    "badge": "50+ Anwendungsfälle",
+    "departments": {
+      "hr": {
+        "title": "HR & Personal",
+        "description": "Mitarbeiter stärken, Talente entwickeln – sicher mit KI",
+        "metrics": {
+          "0": {
+            "value": "75%",
+            "label": "schnelleres Onboarding"
+          },
+          "1": {
+            "value": "3h",
+            "label": "gespart pro Woche"
+          }
+        },
+        "useCases": {
+          "0": {
+            "title": "Onboarding automatisieren",
+            "desc": "Personalisierte Onboarding-Pläne und Begrüßungs-E-Mails für neue Mitarbeiter erstellen"
+          },
+          "1": {
+            "title": "Stellenanzeigen erstellen",
+            "desc": "Überzeugende Jobanzeigen für Social Recruiting und Karriereseiten generieren"
+          },
+          "2": {
+            "title": "Lebensläufe analysieren",
+            "desc": "Eingehende Bewerbungen automatisch vorfiltern, bewerten und zusammenfassen"
+          },
+          "3": {
+            "title": "Interview-Vorbereitung",
+            "desc": "Individuelle Interviewleitfäden basierend auf der Stelle und dem Kandidaten erstellen"
+          },
+          "4": {
+            "title": "Arbeitszeugnisse schreiben",
+            "desc": "Rechtssichere Zeugnisse mit dem richtigen Tonfall formulieren"
+          },
+          "5": {
+            "title": "HR-Wiki Bot",
+            "desc": "Fragen von Mitarbeitern zu Elternzeit, Benefits und Urlaub beantworten"
+          }
+        }
+      },
+      "it": {
+        "title": "IT & Dev",
+        "description": "Enterprise-Ready: Kontrollierte KI, die sich nahtlos integriert",
+        "metrics": {
+          "0": {
+            "value": "60%",
+            "label": "weniger Support-Tickets"
+          },
+          "1": {
+            "value": "5min",
+            "label": "Antwortzeit"
+          }
+        },
+        "useCases": {
+          "0": {
+            "title": "IT Helpdesk",
+            "desc": "Zentraler Assistent für gängige IT-Fragen und Fehlerbehebung"
+          },
+          "1": {
+            "title": "SAP Support",
+            "desc": "Fehlermeldungen erklären und Lösungen aus der Dokumentation finden"
+          },
+          "2": {
+            "title": "Code schreiben",
+            "desc": "Code-Generierung, Refactoring und Review mit integriertem Code Interpreter"
+          },
+          "3": {
+            "title": "Bug Identifizierung",
+            "desc": "Fehler im Code automatisch erkennen und Korrekturen vorschlagen"
+          },
+          "4": {
+            "title": "Doku erstellen",
+            "desc": "Technische Dokumentation aus Code und Kommentaren generieren"
+          },
+          "5": {
+            "title": "Intranet Assistent",
+            "desc": "Smarte Assistenten für Prozess-Navigation und IT-Richtlinien"
+          }
+        }
+      },
+      "service": {
+        "title": "Service",
+        "description": "Schneller helfen, besser verstehen – mit KI im Service",
+        "metrics": {
+          "0": {
+            "value": "40%",
+            "label": "schnellere Lösung"
+          },
+          "1": {
+            "value": "24/7",
+            "label": "Erreichbarkeit"
+          }
+        },
+        "useCases": {
+          "0": {
+            "title": "Support Assistent",
+            "desc": "Wiederkehrende Kundenanfragen automatisch und freundlich beantworten"
+          },
+          "1": {
+            "title": "Manuelle Suche",
+            "desc": "Erklärungen für Fehlercodes aus technischen Handbüchern extrahieren"
+          },
+          "2": {
+            "title": "Ticket Analyse",
+            "desc": "Ähnliche Tickets finden und bewährte Lösungen vorschlagen"
+          },
+          "3": {
+            "title": "Wartungs-Guides",
+            "desc": "Relevante Passagen aus Wartungshandbüchern für Techniker abrufen"
+          },
+          "4": {
+            "title": "Feedback Analyse",
+            "desc": "Stimmungsanalyse und Trend-Erkennung aus Kundenfeedback"
+          },
+          "5": {
+            "title": "Wissensdatenbank",
+            "desc": "FAQ und Hilfeartikel automatisch aktuell halten"
+          }
+        }
+      },
+      "sales": {
+        "title": "Vertrieb",
+        "description": "Effiziente Unterstützung von der Lead-Qualifizierung bis zum Abschluss",
+        "metrics": {
+          "0": {
+            "value": "25%",
+            "label": "mehr Abschlüsse"
+          },
+          "1": {
+            "value": "2x",
+            "label": "Lead-Konvertierung"
+          }
+        },
+        "useCases": {
+          "0": {
+            "title": "Lead Qualifizierung",
+            "desc": "Leads automatisch analysieren, bewerten und priorisieren"
+          },
+          "1": {
+            "title": "CRM Analyse",
+            "desc": "Verkaufspotenziale aus Salesforce/HubSpot Daten identifizieren"
+          },
+          "2": {
+            "title": "Meeting Vorbereitung",
+            "desc": "Unternehmensprofile und Argumentationsleitfäden erstellen"
+          },
+          "3": {
+            "title": "Angebotserstellung",
+            "desc": "Personalisierte Angebote und Präsentationen generieren"
+          },
+          "4": {
+            "title": "Kaltakquise",
+            "desc": "Personalisierte E-Mails für die Erstansprache formulieren"
+          },
+          "5": {
+            "title": "Wettbewerbsanalyse",
+            "desc": "Markt- und Wettbewerbsanalysen aus öffentlichen Quellen"
+          }
+        }
+      },
+      "marketing": {
+        "title": "Marketing",
+        "description": "Content, der wirkt – schneller von der Idee zur Kampagne",
+        "metrics": {
+          "0": {
+            "value": "80%",
+            "label": "schnellere Produktion"
+          },
+          "1": {
+            "value": "10x",
+            "label": "Content Output"
+          }
+        },
+        "useCases": {
+          "0": {
+            "title": "Content Generierung",
+            "desc": "Texte, Bilder, Videos für Social Media in Sekunden erstellen"
+          },
+          "1": {
+            "title": "Kampagnenideen",
+            "desc": "Kreative Konzepte, Claims und Strategien entwickeln"
+          },
+          "2": {
+            "title": "SEO Optimierung",
+            "desc": "Content für Suchmaschinen mit Keywords optimieren"
+          },
+          "3": {
+            "title": "Ad Skripte",
+            "desc": "Werbetexte für Google, LinkedIn, Meta erstellen"
+          },
+          "4": {
+            "title": "Übersetzungen",
+            "desc": "Content für neue Märkte lokalisieren und adaptieren"
+          },
+          "5": {
+            "title": "Newsletter",
+            "desc": "Personalisierte E-Mail-Kampagnen generieren"
+          }
+        }
+      },
+      "finance": {
+        "title": "Finanzwesen",
+        "description": "Fundierte Entscheidungen und bessere Verhandlungspositionen",
+        "metrics": {
+          "0": {
+            "value": "90%",
+            "label": "Zeitersparnis"
+          },
+          "1": {
+            "value": "0",
+            "label": "Fehler in Berichten"
+          }
+        },
+        "useCases": {
+          "0": {
+            "title": "Finanzreporting",
+            "desc": "Monats-, Quartals-, Jahresberichte automatisch erstellen"
+          },
+          "1": {
+            "title": "Budgetplanung",
+            "desc": "Szenarien, Prognosen und Kommentierungen vorbereiten"
+          },
+          "2": {
+            "title": "Big Data Analyse",
+            "desc": "CSV/Excel Dateien strukturieren, auswerten und visualisieren"
+          },
+          "3": {
+            "title": "Excel Tabellen",
+            "desc": "Komplexe Kalkulationen aus einfachen Eingaben generieren"
+          },
+          "4": {
+            "title": "Buchhaltungs-Assistent",
+            "desc": "Fragen zu Buchungen und Rechnungen beantworten"
+          },
+          "5": {
+            "title": "Risikoanalyse",
+            "desc": "Finanzielle Risiken identifizieren und bewerten"
+          }
+        }
+      },
+      "legal": {
+        "title": "Recht & Compliance",
+        "description": "Verträge prüfen, Risiken minimieren.",
+        "metrics": {
+          "0": {
+            "value": "50%",
+            "label": "schnellere Prüfung"
+          },
+          "1": {
+            "value": "€€€",
+            "label": "Kosteneinsparung"
+          }
+        },
+        "useCases": {
+          "0": {
+            "title": "Vertragsanalyse",
+            "desc": "Verträge prüfen und kritische Klauseln identifizieren"
+          },
+          "1": {
+            "title": "Klausel-Vergleich",
+            "desc": "Standardklauseln mit Vertragspassagen vergleichen"
+          },
+          "2": {
+            "title": "Compliance Checks",
+            "desc": "Dokumente auf Einhaltung von Regeln prüfen"
+          },
+          "3": {
+            "title": "Gesetzes-Recherche",
+            "desc": "Relevante Urteile und Gesetze finden"
+          },
+          "4": {
+            "title": "Due Diligence",
+            "desc": "Unternehmensunterlagen systematisch analysieren"
+          },
+          "5": {
+            "title": "NDA Generierung",
+            "desc": "Standardverträge erstellen und anpassen"
+          }
+        }
+      },
+      "purchasing": {
+        "title": "Einkauf",
+        "description": "Fundierte Entscheidungen und bessere Verhandlungspositionen",
+        "metrics": {
+          "0": {
+            "value": "15%",
+            "label": "Kostenreduktion"
+          },
+          "1": {
+            "value": "4h",
+            "label": "gespart/Woche"
+          }
+        },
+        "useCases": {
+          "0": {
+            "title": "Verhandlungsvorbereitung",
+            "desc": "Marktanalysen und Lieferantenvergleiche erstellen"
+          },
+          "1": {
+            "title": "Lieferantenbewertung",
+            "desc": "Lieferanten systematisch analysieren und bewerten"
+          },
+          "2": {
+            "title": "Preisoptimierung",
+            "desc": "Preisverhandlungen mit datenbasierten Insights führen"
+          },
+          "3": {
+            "title": "Vertragsprüfung",
+            "desc": "Lieferverträge auf Risiken analysieren"
+          },
+          "4": {
+            "title": "Bedarfsplanung",
+            "desc": "Bedarfe prognostizieren und Beschaffung optimieren"
+          },
+          "5": {
+            "title": "Reklamationsmanagement",
+            "desc": "Beschwerdeprozesse automatisieren"
+          }
+        }
+      },
+      "rd": {
+        "title": "R&D",
+        "description": "Innovationsmotor KI: Wissen verknüpfen, Erkenntnisse beschleunigen",
+        "metrics": {
+          "0": {
+            "value": "2x",
+            "label": "schnellere Recherche"
+          },
+          "1": {
+            "value": "30%",
+            "label": "mehr Innovation"
+          }
+        },
+        "useCases": {
+          "0": {
+            "title": "Patentrecherche",
+            "desc": "Relevante Patente und Stand der Technik analysieren"
+          },
+          "1": {
+            "title": "Wissen verknüpfen",
+            "desc": "Forschungsergebnisse durchsuchen und verbinden"
+          },
+          "2": {
+            "title": "Literaturanalyse",
+            "desc": "Wissenschaftliche Papers zusammenfassen"
+          },
+          "3": {
+            "title": "Innovation Tracking",
+            "desc": "Technologietrends und Wettbewerber überwachen"
+          },
+          "4": {
+            "title": "Tech Doku",
+            "desc": "Produktspezifikationen dokumentieren"
+          },
+          "5": {
+            "title": "Laborberichte",
+            "desc": "Versuchsprotokolle erstellen und auswerten"
+          }
+        }
+      }
+    }
+  },
+  "pricing": {
+    "headline": "Transparente Preise für jede Unternehmensgröße",
+    "subheadline": "Wählen Sie den Plan, der am besten zu Ihren Bedürfnissen passt. Alle Pläne beinhalten DSGVO-Konformität und deutsches Hosting.",
+    "monthly": "Monatlich",
+    "annual": "Jährlich",
+    "savePercent": "20% sparen",
+    "perMonth": "Monat",
+    "billedAnnually": "Jährlich abgerechnet",
+    "custom": "Individuell",
+    "mostPopular": "Am beliebtesten",
+    "getStarted": "Jetzt starten",
+    "contactSales": "Vertrieb kontaktieren",
+    "needHelp": "Nicht sicher, welcher Plan der richtige ist?",
+    "talkToUs": "Sprechen Sie mit unserem Team",
+    "tiers": {
+      "starter": {
+        "name": "Starter",
+        "description": "Perfekt für kleine Teams, die mit KI starten",
+        "priceMonthly": "€49",
+        "priceAnnual": "€39"
+      },
+      "professional": {
+        "name": "Professional",
+        "description": "Für wachsende Teams, die mehr Power benötigen",
+        "priceMonthly": "€149",
+        "priceAnnual": "€119"
+      },
+      "business": {
+        "name": "Business",
+        "description": "Für Organisationen mit erweiterten Anforderungen",
+        "priceMonthly": "€399",
+        "priceAnnual": "€319"
+      },
+      "enterprise": {
+        "name": "Enterprise",
+        "description": "Maßgeschneiderte Lösungen für große Unternehmen"
+      }
+    },
+    "features": {
+      "accessToGpt4": "Zugang zu GPT-4 und Claude",
+      "basicRag": "Basis RAG-Integration",
+      "upTo5Users": "Bis zu 5 Benutzer",
+      "emailSupport": "E-Mail-Support",
+      "gdprCompliant": "DSGVO-konform",
+      "allStarterFeatures": "Alle Starter-Funktionen",
+      "multiModelAccess": "Multi-Modell-Zugang",
+      "advancedRag": "Erweitertes RAG mit SharePoint, Confluence",
+      "upTo25Users": "Bis zu 25 Benutzer",
+      "prioritySupport": "Prioritäts-Support",
+      "customWorkflows": "Individuelle KI-Workflows",
+      "allProfessionalFeatures": "Alle Professional-Funktionen",
+      "upTo100Users": "Bis zu 100 Benutzer",
+      "ssoIntegration": "SSO-Integration (SAML, OIDC)",
+      "advancedAnalytics": "Erweitertes Analytics-Dashboard",
+      "dedicatedManager": "Dedizierter Success Manager",
+      "customIntegrations": "Individuelle Integrationen",
+      "allBusinessFeatures": "Alle Business-Funktionen",
+      "unlimitedUsers": "Unbegrenzte Benutzer",
+      "onPremiseDeployment": "On-Premise-Deployment",
+      "whiteLabeling": "White-Labeling-Optionen",
+      "priorityDevelopment": "Priorisierte Feature-Entwicklung",
+      "customSla": "Benutzerdefinierte SLA"
+    },
+    "comparison": {
+      "featureColumn": "Feature",
+      "unlimited": "Unbegrenzt",
+      "allModels": "Alle Modelle",
+      "allPlusCustom": "Alle + Custom",
+      "basic": "Basis",
+      "advanced": "Erweitert",
+      "dedicated": "Dediziert",
+      "labels": {
+        "users": "Nutzer",
+        "models": "KI-Modelle",
+        "rag": "RAG / Wissensintegration",
+        "workflows": "Custom Workflows",
+        "sso": "SSO Integration",
+        "analytics": "Analytics & Reporting",
+        "support": "Support",
+        "onpremise": "On-Premise Deployment",
+        "api": "API Zugang",
+        "audit": "Audit Logs"
+      }
+    }
+  },
+  "testimonials": {
+    "headline": "Das sagen unsere Kunden",
+    "subheadline": "Erfahren Sie, wie Unternehmen ihre Arbeitsabläufe mit Nexary transformieren",
+    "testimonial1": {
+      "quote": "Nexary hat die Art und Weise revolutioniert, wie unser Team mit KI arbeitet. Die DSGVO-Konformität gibt uns Sicherheit, und der Multi-Modell-Ansatz bedeutet, dass wir immer das beste Werkzeug für die Aufgabe haben.",
+      "author": "Dr. Michael Weber",
+      "role": "CTO"
+    },
+    "testimonial2": {
+      "quote": "Die Integration mit unseren bestehenden Systemen war nahtlos. Unsere Analysten sparen jetzt täglich Stunden dank der RAG-Funktionen, die direkt mit unserer Wissensdatenbank verbunden sind.",
+      "author": "Sandra Hoffmann",
+      "role": "Leiterin Innovation"
+    },
+    "testimonial3": {
+      "quote": "Endlich eine KI-Plattform, die unser Rechts-Team ohne Bedenken freigegeben hat. Die Transparenz und das deutsche Hosting waren Schlüsselfaktoren bei unserer Entscheidung.",
+      "author": "Dr. Thomas Müller",
+      "role": "Chief Compliance Officer"
+    },
+    "stats": {
+      "customers": {
+        "value": "150+",
+        "label": "Unternehmenskunden"
+      },
+      "users": {
+        "value": "10.000+",
+        "label": "Aktive Nutzer"
+      },
+      "rating": {
+        "value": "4,9/5",
+        "label": "Kundenzufriedenheit"
+      },
+      "uptime": {
+        "value": "99,9%",
+        "label": "Plattform-Verfügbarkeit"
+      }
+    }
+  },
+  "videoShowcase": {
+    "headline": "Nexary in Aktion erleben",
+    "subheadline": "Sehen Sie, wie Unternehmen ihre Arbeitsabläufe mit KI transformieren",
+    "watchDemo": "2-Minuten Demo ansehen",
+    "feature1": {
+      "title": "Schnelle Einrichtung",
+      "description": "Startklar in Minuten, nicht Monaten"
+    },
+    "feature2": {
+      "title": "Intuitive Oberfläche",
+      "description": "Keine KI-Expertise erforderlich"
+    },
+    "feature3": {
+      "title": "Sofortiger ROI",
+      "description": "Ergebnisse ab dem ersten Tag"
+    },
+    "cta": "Jetzt starten"
+  },
+  "featureShowcase": {
+    "headline": "Alles, was du für Enterprise-KI brauchst",
+    "subheadline": "Eine Plattform, unendliche Möglichkeiten. Sicher, konform und leistungsstark.",
+    "features": {
+      "chat": {
+        "title": "Sicherer Chat",
+        "description": "Chatte sicher mit führenden Sprachmodellen wie GPT-4, Claude 3 und mehr. Deine Daten bleiben privat.",
+        "point1": "Top LLMs (OpenAI, Anthropic, Google)",
+        "point2": "Hosting ausschließlich in der EU",
+        "point3": "Kein Training mit deinen Daten",
+        "visualLabel": "Chat Interface"
+      },
+      "knowledge": {
+        "title": "Internes Wissen",
+        "description": "Verbinde deine Dokumente und Datenquellen. Nexary findet die Antworten in deinem Unternehmenswissen.",
+        "point1": "Integrationen für SharePoint, Confluence etc.",
+        "point2": "Immer aktuelle Antworten (Live-Index)",
+        "point3": "Quellenangaben und Zitate",
+        "visualLabel": "Wissensdatenbank"
+      },
+      "assistants": {
+        "title": "Assistenten & Workflows",
+        "description": "Automatisiere Routineaufgaben mit spezialisierten KI-Assistenten für jedes Team.",
+        "point1": "Vorgefertigte Templates für HR, Marketing, etc.",
+        "point2": "Eigene Workflows ohne Code erstellen",
+        "point3": "Nahtlose Integration in Prozesse"
+      },
+      "multimodal": {
+        "title": "Multimodal",
+        "description": "Arbeite nicht nur mit Text. Nexary versteht Bilder, Dokumente und Audio.",
+        "point1": "Bildanalyse und -generierung",
+        "point2": "Dokumenten-Chat (PDF, Docx)",
+        "point3": "Audio-Transkription"
+      },
+      "platform": {
+        "title": "Plattform für Tools",
+        "description": "Die zentrale Steuerzentrale für deine KI-Initiative. Verwaltung, Sicherheit und Compliance an einem Ort.",
+        "point1": "SSO & Rollenmanagement",
+        "point2": "Detaillierte Nutzungsanalysen",
+        "point3": "Enterprise-Grade Security"
+      }
+    }
+  },
+  "ragBenefits": {
+    "headline": "Maximieren Sie Ihr KI-Potenzial mit RAG",
+    "subheadline": "Erst durch die Anbindung Ihrer Unternehmensdaten entfaltet generative KI ihr volles Potenzial. Nexary nutzt Retrieval-Augmented Generation für präzise, kontextbezogene Antworten.",
+    "benefits": {
+      "currentData": {
+        "title": "Aktualität der Daten",
+        "description": "Mit kontinuierlicher Datensynchronisation erhalten Sie jederzeit präzise und aktuelle Antworten – keine veralteten Trainigsdaten mehr."
+      },
+      "precision": {
+        "title": "Präzision und Zuverlässigkeit",
+        "description": "Die Einbindung von Unternehmenswissen maximiert die Genauigkeit und Verlässlichkeit generierter Inhalte."
+      },
+      "expertise": {
+        "title": "Fachspezifische Expertise",
+        "description": "Hochspezialisierte, kontextrelevante Ergebnisse durch die Kombination von Unternehmensdaten und leistungsstarken LLMs."
+      },
+      "efficiency": {
+        "title": "Effiziente Datennutzung",
+        "description": "Echtzeit-Zugriff auf Unternehmensinformationen aus verschiedenen Datenquellen, zentral in Ihrer KI-Lösung."
+      },
+      "acceptance": {
+        "title": "Nutzerakzeptanz",
+        "description": "Erhöhte Benutzerakzeptanz durch präzise Ergebnisse – stärkt das Vertrauen in Ihre Unternehmens-KI."
+      },
+      "flexibility": {
+        "title": "Flexibilität",
+        "description": "Flexible RAG-Architektur, die sich dynamisch an wechselnde Geschäftsbedingungen anpasst."
+      }
+    }
+  },
+  "training": {
+    "headline": "Ihr Partner für erfolgreiche KI-Einführung",
+    "subheadline": "Mit unserem modularen KI-Adoption Programm gelingt der Einstieg ebenso wie die Skalierung. Unsere erfahrenen KI-Consultants helfen Ihnen, KI nachhaltig zu verankern.",
+    "badge": "KI-Adoption Programm",
+    "cta": "Schulungsprogramm anfragen",
+    "modules": {
+      "basics": {
+        "title": "KI-Basics mit Nexary",
+        "description": "Befähigung zur Nutzung von KI-Tools im Allgemeinen und der Nexary-Plattform im Speziellen."
+      },
+      "prompting": {
+        "title": "Prompting Advanced",
+        "description": "Fähigkeiten im fortgeschrittenen Prompting und vertiefte Prompt-Engineering-Techniken."
+      },
+      "assistants": {
+        "title": "Assistenten erstellen",
+        "description": "Erfahren Sie, wie Assistenten zielführend erstellt, optimiert und im Unternehmensalltag eingesetzt werden."
+      },
+      "workshop": {
+        "title": "Assistenten-Werkstatt",
+        "description": "Praktisches Format zur Entwicklung eigener KI-Assistenten – hands-on und praxisnah."
+      },
+      "useCases": {
+        "title": "Use-Case-Workshop",
+        "description": "Identifizieren Sie die relevantesten KI-Anwendungsfälle für Ihr Unternehmen."
+      }
+    }
+  },
+  "enterpriseOnboarding": {
+    "headline": "Von ersten Schritten bis zur Skalierung",
+    "subheadline": "Wir begleiten Ihre KI-Reise – von der Strategie bis zur vollständigen Integration in Ihr Unternehmen.",
+    "phases": {
+      "foundation": {
+        "title": "Grundlagen",
+        "duration": "Woche 1-2",
+        "description": "Technologische und strategische Grundlagen für Ihre neue zentrale KI-Plattform.",
+        "items": {
+          "1": "KI-Potenzial Ihres Unternehmens analysieren",
+          "2": "Maßgeschneiderte Strategie entwickeln",
+          "3": "DSGVO-konforme Infrastruktur aufsetzen"
+        }
+      },
+      "integration": {
+        "title": "Integration",
+        "duration": "Woche 3-6",
+        "description": "Erste Anwendungsfälle entwickeln und in Ihre Prozesse integrieren.",
+        "items": {
+          "1": "Pilot-Use-Cases umsetzen",
+          "2": "Mitarbeiterschulungen durchführen",
+          "3": "Change Management etablieren"
+        }
+      },
+      "scaling": {
+        "title": "Skalierung",
+        "duration": "Ab Woche 7",
+        "description": "Spezialisierte KI-Systeme für Ihre spezifischen Anforderungen implementieren.",
+        "items": {
+          "1": "Auf alle Abteilungen ausrollen",
+          "2": "Maßgeschneiderte Assistenten erstellen",
+          "3": "Maximale Wertschöpfung erzielen"
+        }
+      }
+    }
+  },
+  "extendedFeatures": {
+    "headline": "Vielseitige AI-Werkzeuge für jeden Anwendungsfall",
+    "subheadline": "Von Multi-Modell-Auswahl über Bildgenerierung bis zur Code-Entwicklung – Nexary bietet alle Tools, die Ihr Unternehmen braucht.",
+    "features": {
+      "multiModel": {
+        "title": "Multi-Modell-Auswahl",
+        "description": "Alle führenden KI-Modelle auf einer Plattform – OpenAI, Anthropic, Google und Open-Source. Smart Select AI wählt automatisch das beste Modell."
+      },
+      "rag": {
+        "title": "RAG-Pipeline",
+        "description": "Direkter Zugriff auf SharePoint, Confluence und mehr mit automatischer Synchronisation Ihrer Unternehmensdaten."
+      },
+      "assistants": {
+        "title": "Assistenten-Bibliothek",
+        "description": "Konfigurieren Sie individuelle Assistenten mit eigenen Dateien, Dokumenten und Erweiterungen für Ihre spezifischen Bedürfnisse."
+      },
+      "webSearch": {
+        "title": "Web-Recherche",
+        "description": "Aktuelle Informationen über Google oder Perplexity mit automatischen Quellenangaben recherchieren."
+      },
+      "imageGen": {
+        "title": "Bildgenerierung",
+        "description": "Mit GPT Image 1 oder Gemini erstellen Sie aus natürlicher Sprache hochwertige digitale Bilder."
+      },
+      "codeInterpreter": {
+        "title": "Code Interpreter",
+        "description": "Code schreiben, verstehen und Fehler identifizieren – direkt in der Plattform mit interaktiver Ausführung."
+      },
+      "deepResearch": {
+        "title": "Deep Research",
+        "description": "Tiefgreifende Analysen durchführen, Quellen auswerten und fundierte Berichte erstellen."
+      },
+      "documentChat": {
+        "title": "Dokumenten-Chat",
+        "description": "PDFs, Word-Dokumente und Präsentationen analysieren und Fragen direkt zum Inhalt stellen."
+      },
+      "analytics": {
+        "title": "Analytics Dashboard",
+        "description": "Detaillierte Nutzungsanalysen, Kostenübersicht und Modellverteilung auf einen Blick."
+      }
+    }
+  }
+}

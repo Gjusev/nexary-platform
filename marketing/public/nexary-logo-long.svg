@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg id="uuid-af7cfa52-f413-458f-b6fa-0d4436405812" data-name="Ebene 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 231.05 78.84">
+  <defs>
+    <style>
+      .uuid-09375e0e-a0ad-49c6-ac1e-65278011953a {
+        font-family: Outfit-Regular, Outfit;
+        font-size: 72px;
+        font-variation-settings: 'wght' 400;
+      }
+
+      .uuid-b0d5ed6d-8ae4-460c-be6a-16e83f9e86ca {
+        letter-spacing: -.03em;
+      }
+
+      .uuid-de962fb7-e5c8-4455-be96-85b9d72d8014 {
+        letter-spacing: -.02em;
+      }
+    </style>
+  </defs>
+  <text class="uuid-09375e0e-a0ad-49c6-ac1e-65278011953a" transform="translate(0 60.34)"><tspan x="0" y="0">N</tspan><tspan class="uuid-de962fb7-e5c8-4455-be96-85b9d72d8014" x="51.12" y="0">ex</tspan><tspan x="123.84" y="0">a</tspan><tspan class="uuid-b0d5ed6d-8ae4-460c-be6a-16e83f9e86ca" x="165.74" y="0">r</tspan><tspan x="194.04" y="0">y</tspan></text>
+</svg>
