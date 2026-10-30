@@ -57,19 +57,22 @@ export async function POST(request: NextRequest) {
     const { teamSlug } = await ensureTeamExists(teamId, teamName, 'RAG Query');
     const userId = (user as any).id || '';
 
-    // Enforce usage limits and filter allowed RAGs for this user/team
-    try {
-      await checkAndIncrementUsage(teamSlug, 'queries', 1);
-    } catch {
-      return NextResponse.json({ success: false, error: 'QUERY_LIMIT_REACHED' }, { status: 403 });
-    }
-
-    // Fail closed: always filter against the granted ids. An empty grant
-    // set must yield an empty effective list (empty retrieval), never a
-    // pass-through of the raw client-supplied ids.
-    let effectivePackageIds: string[] = packageIds;
+    // Authorization must precede metering: never spend quota or LLM budget
+    // on a request we are about to refuse. Fail closed: always filter
+    // against the granted ids. An empty grant set must never pass through
+    // the raw client-supplied ids.
+    let effectivePackageIds: string[];
     try {
       const allowed = new Set(await allowedRagIds(teamSlug, userId));
+      if (allowed.size === 0) {
+        // Distinct from "no results found" so a zero-grant misconfiguration
+        // is visible to ops instead of looking like a benign empty answer.
+        console.warn('[RAG Query] Team/user holds no RAG query grants');
+        return NextResponse.json(
+          { success: false, error: 'NO_RAG_GRANTS' },
+          { status: 403 }
+        );
+      }
       effectivePackageIds = packageIds.filter((id: string) => allowed.has(id));
     } catch (e) {
       console.error('[RAG Query] Access check failed, refusing to query packages', e);
@@ -77,6 +80,28 @@ export async function POST(request: NextRequest) {
         { success: false, error: 'ACCESS_CHECK_FAILED' },
         { status: 403 }
       );
+    }
+
+    if (effectivePackageIds.length === 0) {
+      // Granted ids exist but none overlap the request: retrieval is
+      // guaranteed empty, so skip quota and LLM spend entirely. The
+      // response keeps the success shape (normalized query instead of the
+      // LLM rewrite; no consumer reads optimizedQuery).
+      return NextResponse.json({
+        success: true,
+        results: [],
+        query,
+        optimizedQuery: normalizeQuery(query),
+        packageIds: [],
+        totalResults: 0,
+      });
+    }
+
+    // Enforce usage limits only for queries that will actually retrieve
+    try {
+      await checkAndIncrementUsage(teamSlug, 'queries', 1);
+    } catch {
+      return NextResponse.json({ success: false, error: 'QUERY_LIMIT_REACHED' }, { status: 403 });
     }
 
     // Rewrite the query (spell‑check/normalize) and retrieve from Qdrant
