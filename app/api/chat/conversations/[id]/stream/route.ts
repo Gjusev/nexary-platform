@@ -11,6 +11,7 @@ import { chatRateLimiter } from "@/lib/rate-limit";
 import { logAudit } from "@/lib/audit/logger";
 import { logAiUsage } from "@/lib/ai/cost-tracker";
 import { query } from "@/lib/db";
+import { evaluateRagGate, gateTemplate, resolveAbstentionConfig, type GateResult } from "@/lib/rag/abstention";
 
 const stackServerApp = new StackServerApp({
   tokenStore: "nextjs-cookie",
@@ -1079,7 +1080,9 @@ export async function POST(
     }
 
     // 2. Get context from RAG packages
+    let ragGate: GateResult | null = null;
     if (conversation.ragPackageIds && conversation.ragPackageIds.length > 0) {
+      let ragResults: any[] = [];
       try {
         const internalUrl = `http://127.0.0.1:${process.env.PORT || 3000}`;
         const ragResponse = await fetch(`${internalUrl}/api/rag/query`, {
@@ -1104,6 +1107,7 @@ export async function POST(
             ragData.results.length > 0
           ) {
             const results = ragData.results.slice(0, 5);
+            ragResults = results;
             const ragPackageSources = results.map((r: any) => ({
               id:
                 r.id ||
@@ -1133,6 +1137,38 @@ export async function POST(
         }
       } catch (error) {
         console.error("[Chat Stream] Error fetching RAG packages:", error);
+      }
+
+      // Conformal abstention gate: "no answer without recoverable support."
+      // Web search results are their own recoverable support, so the gate
+      // only enforces against document-grounded generation.
+      try {
+        ragGate = await evaluateRagGate({
+          query: content,
+          results: ragResults,
+          userId: user.id,
+          conversationId: conversation.id,
+          packageIds: conversation.ragPackageIds,
+          skipLog: !!webSearchContext,
+        });
+      } catch (error) {
+        // Fail-closed: if the gate itself explodes, treat it as an abstention
+        // (only enforced when the deployment runs in enforce mode).
+        console.error("[Chat Stream] Abstention gate error:", error);
+        const fallbackConfig = resolveAbstentionConfig();
+        ragGate = {
+          gateEnabled: fallbackConfig.enabled,
+          enforce: fallbackConfig.enabled && fallbackConfig.mode === "enforce",
+          decision: "abstain",
+          support: { score: 0, top: 0, rank: 0, lexical: 0, candidates: 0 },
+          outcome: {
+            decision: "abstain",
+            threshold: 0,
+            thresholdSource: "prior",
+            clarifyBand: 0,
+          },
+          template: undefined,
+        };
       }
     }
 
@@ -1307,6 +1343,117 @@ No documents or web results are available for this conversation. Please answer b
 
 CRITICAL: You MUST respond in ${targetLanguage} (${targetLanguageCode}). This is required - do not respond in any other language.`;
 
+          // Conformal abstention enforcement (see lib/rag/abstention):
+          // "abstain" replaces free generation with the deterministic
+          // template; "clarify" prepends a low-confidence notice and keeps
+          // the model answer. Only applies to document-grounded
+          // conversations when the gate runs in enforce mode and no web
+          // search results are available.
+          let clarifyNotice = "";
+          let clarifyDirective = "";
+
+          const gateEnforces =
+            ragGate !== null &&
+            ragGate.gateEnabled &&
+            ragGate.enforce &&
+            ragGate.decision !== "answer" &&
+            !webSearchContext;
+
+          if (gateEnforces && ragGate!.decision === "clarify") {
+            const noticeText =
+              ragGate!.template ||
+              gateTemplate({
+                decision: "clarify",
+                query: content,
+                sources: sources.map((s) => ({ filename: s.filename })),
+                targetLanguageCode,
+              });
+
+            clarifyNotice = noticeText + "\n\n";
+            clarifyDirective = `
+
+The retrieved documents only partially support an answer. A low-confidence notice has already been shown to the user. Only state what the documents actually support, explicitly mark anything uncertain, and do not invent facts. Respond in ${targetLanguage} (${targetLanguageCode}).`;
+          }
+
+          if (gateEnforces && ragGate!.decision === "abstain") {
+            const gateText =
+              ragGate!.template ||
+              gateTemplate({
+                decision: "abstain",
+                query: content,
+                sources: sources.map((s) => ({ filename: s.filename })),
+                targetLanguageCode,
+              });
+
+            // Deterministic template instead of generation (fail-closed).
+            const chunkSize = 180;
+            for (let i = 0; i < gateText.length; i += chunkSize) {
+              controller.enqueue(
+                encoder.encode(
+                  `data: ${JSON.stringify({
+                    type: "content",
+                    content: gateText.slice(i, i + chunkSize),
+                  })
+                  } \n\n`
+                )
+              );
+            }
+
+            const savedMessage = await addMessage({
+              conversationId: conversation.id,
+              role: "assistant",
+              content: gateText,
+              metadata: {
+                model: selectedModel,
+                provider: selectedProvider,
+                abstention: {
+                  decision: "abstain",
+                  enforced: true,
+                  support: ragGate!.support.score,
+                  threshold: ragGate!.outcome.threshold,
+                  thresholdSource: ragGate!.outcome.thresholdSource,
+                },
+                searchQuery: content,
+                sources: sources.length > 0 ? sources : undefined,
+              },
+            });
+
+            await logAudit({
+              action: "CHAT_QUERY",
+              userId: user.id,
+              teamSlug: conversation.teamSlug,
+              targetType: "chat_conversation",
+              targetId: conversation.id,
+              metadata: {
+                model: selectedModel,
+                provider: selectedProvider,
+                messageLength: content.length,
+                responseLength: gateText.length,
+                ragEnabled: true,
+                webSearchEnabled: webSearchEnabled,
+                abstention: {
+                  decision: "abstain",
+                  enforced: true,
+                  support: ragGate!.support.score,
+                  threshold: ragGate!.outcome.threshold,
+                  thresholdSource: ragGate!.outcome.thresholdSource,
+                },
+              },
+            });
+
+            controller.enqueue(
+              encoder.encode(
+                `data: ${JSON.stringify({
+                  type: "done",
+                  messageId: savedMessage.id,
+                })
+                } \n\n`
+              )
+            );
+            controller.close();
+            return;
+          }
+
           // Use provider abstraction to call the appropriate API
           let llmResponse: Response;
           try {
@@ -1315,7 +1462,7 @@ CRITICAL: You MUST respond in ${targetLanguage} (${targetLanguageCode}). This is
               messages: [
                 {
                   role: "system",
-                  content: `${systemPrompt}
+                  content: `${systemPrompt}${clarifyDirective}
 
     REMINDER: You MUST respond in ${targetLanguage} (${targetLanguageCode}). This is your highest priority.
 Current Date: ${new Date().toLocaleDateString(targetLanguageCode, {
@@ -1539,11 +1686,13 @@ Current Date: ${new Date().toLocaleDateString(targetLanguageCode, {
             }
           }
 
-          // Save assistant message
+          // Save assistant message (clarify prepends the deterministic
+          // low-confidence notice to the generated answer)
+          const savedResponse = clarifyNotice + fullResponse;
           const savedMessage = await addMessage({
             conversationId: conversation.id,
             role: "assistant",
-            content: fullResponse,
+            content: savedResponse,
             metadata: {
               model: finalModel,
               modelName: finalModelName,
@@ -1553,6 +1702,17 @@ Current Date: ${new Date().toLocaleDateString(targetLanguageCode, {
               searchQuery: content,
               sources: sources.length > 0 ? sources : undefined,
               webSources: webSources.length > 0 ? webSources : undefined,
+              ...(ragGate && ragGate.gateEnabled
+                ? {
+                    abstention: {
+                      decision: ragGate.decision,
+                      enforced: gateEnforces,
+                      support: ragGate.support.score,
+                      threshold: ragGate.outcome.threshold,
+                      thresholdSource: ragGate.outcome.thresholdSource,
+                    },
+                  }
+                : {}),
             },
           });
 
@@ -1570,11 +1730,22 @@ Current Date: ${new Date().toLocaleDateString(targetLanguageCode, {
               model: selectedModel,
               provider: selectedProvider,
               messageLength: content.length,
-              responseLength: fullResponse.length,
+              responseLength: savedResponse.length,
               ragEnabled:
                 conversation.ragPackageIds &&
                 conversation.ragPackageIds.length > 0,
               webSearchEnabled: webSearchEnabled,
+              ...(ragGate && ragGate.gateEnabled
+                ? {
+                    abstention: {
+                      decision: ragGate.decision,
+                      enforced: gateEnforces,
+                      support: ragGate.support.score,
+                      threshold: ragGate.outcome.threshold,
+                      thresholdSource: ragGate.outcome.thresholdSource,
+                    },
+                  }
+                : {}),
             },
           });
 
