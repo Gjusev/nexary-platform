@@ -4,7 +4,7 @@ import { addMessage, getConversation } from '@/lib/chat';
 import { allowedRagIds } from '@/lib/authz';
 import { checkAndIncrementUsage, recordUsageEvent } from '@/lib/billing/limits';
 import { checkChatRateLimit } from '@/lib/middleware/api-rate-limit';
-import { evaluateRagGate } from '@/lib/rag/abstention';
+import { evaluateRagGate, internalEnrichmentHeaders } from '@/lib/rag/abstention';
 
 const stackServerApp = new StackServerApp({
   tokenStore: 'nextjs-cookie',
@@ -75,7 +75,7 @@ export async function POST(
             'Cookie': request.headers.get('Cookie') || '', // Forward session
             // Internal enrichment: /api/rag/query skips its annotate gate
             // evaluation; this route evaluates the gate itself below.
-            'x-internal-chat-enrichment': '1',
+            ...internalEnrichmentHeaders(),
           },
           body: JSON.stringify({
             query: content,

@@ -35,6 +35,12 @@ export { DEFAULT_PRIOR_THRESHOLD, gateTemplate, resolveGate } from './gate';
 export type { GateDecision, GateOutcome, ThresholdSource } from './gate';
 export { logGateDecision } from './log';
 export type { AbstentionLogEntry } from './log';
+export {
+  servesInternalChatEnrichment,
+  internalEnrichmentHeaders,
+  SECRET_HEADER as INTERNAL_ENRICHMENT_SECRET_HEADER,
+  type InternalRequestLike,
+} from './internal-enrichment';
 
 export interface GateContext {
   query: string;

@@ -31,6 +31,13 @@ export interface AbstentionLogEntry {
   conversationId?: string;
   packageIds?: string[];
   targetLanguageCode?: string;
+  /**
+   * Why this row exists outside the normal evaluateRagGate path — e.g.
+   * 'gate_error' for the fail-closed fallback a chat route persists when the
+   * gate itself throws. Lets auditors distinguish fallback abstains from
+   * scored ones.
+   */
+  fallback?: string;
 }
 
 export async function logGateDecision(entry: AbstentionLogEntry): Promise<void> {
@@ -52,6 +59,7 @@ export async function logGateDecision(entry: AbstentionLogEntry): Promise<void> 
     conversationId: entry.conversationId,
     packageIds: entry.packageIds,
     targetLanguageCode: entry.targetLanguageCode,
+    ...(entry.fallback ? { fallback: entry.fallback } : {}),
   };
 
   // Structured line for the SYSLOG pipeline.
@@ -65,6 +73,7 @@ export async function logGateDecision(entry: AbstentionLogEntry): Promise<void> 
       thresholdSource: entry.outcome.thresholdSource,
       teamSlug: entry.teamSlug,
       conversationId: entry.conversationId,
+      ...(entry.fallback ? { fallback: entry.fallback } : {}),
     })}`,
   );
 

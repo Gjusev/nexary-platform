@@ -11,7 +11,7 @@ import { chatRateLimiter } from "@/lib/rate-limit";
 import { logAudit } from "@/lib/audit/logger";
 import { logAiUsage } from "@/lib/ai/cost-tracker";
 import { query } from "@/lib/db";
-import { evaluateRagGate, gateTemplate, resolveAbstentionConfig, type GateResult } from "@/lib/rag/abstention";
+import { evaluateRagGate, gateTemplate, internalEnrichmentHeaders, logGateDecision, resolveAbstentionConfig, type GateResult } from "@/lib/rag/abstention";
 
 const stackServerApp = new StackServerApp({
   tokenStore: "nextjs-cookie",
@@ -1092,7 +1092,7 @@ export async function POST(
             Cookie: request.headers.get("Cookie") || "",
             // Internal enrichment: /api/rag/query skips its annotate gate
             // evaluation; this route evaluates the gate itself below.
-            "x-internal-chat-enrichment": "1",
+            ...internalEnrichmentHeaders(),
           },
           body: JSON.stringify({
             query: content,
@@ -1172,6 +1172,19 @@ export async function POST(
           },
           template: undefined,
         };
+        // Keep the audit trail gap-free: the normal path logs inside
+        // evaluateRagGate, which threw before reaching its log call, so the
+        // fallback abstain is persisted here (flagged as a gate-error row).
+        await logGateDecision({
+          outcome: ragGate.outcome,
+          support: ragGate.support,
+          decision: "abstain",
+          enforced: ragGate.enforce,
+          userId: user.id,
+          conversationId: conversation.id,
+          packageIds: conversation.ragPackageIds,
+          fallback: "gate_error",
+        });
       }
     }
 
