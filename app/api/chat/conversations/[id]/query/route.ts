@@ -4,6 +4,7 @@ import { addMessage, getConversation } from '@/lib/chat';
 import { allowedRagIds } from '@/lib/authz';
 import { checkAndIncrementUsage, recordUsageEvent } from '@/lib/billing/limits';
 import { checkChatRateLimit } from '@/lib/middleware/api-rate-limit';
+import { evaluateRagGate } from '@/lib/rag/abstention';
 
 const stackServerApp = new StackServerApp({
   tokenStore: 'nextjs-cookie',
@@ -57,6 +58,10 @@ export async function POST(
 
     let assistantResponse = '';
     let ragContext = '';
+    // Conformal abstention state (set inside the RAG branch below)
+    let clarifyNotice = '';
+    let clarifyDirective = '';
+    let abstentionMeta: Record<string, unknown> | undefined;
 
     // If conversation has RAG packages, search for relevant content
     if (conversation.ragPackageIds && conversation.ragPackageIds.length > 0) {
@@ -68,6 +73,9 @@ export async function POST(
           headers: {
             'Content-Type': 'application/json',
             'Cookie': request.headers.get('Cookie') || '', // Forward session
+            // Internal enrichment: /api/rag/query skips its annotate gate
+            // evaluation; this route evaluates the gate itself below.
+            'x-internal-chat-enrichment': '1',
           },
           body: JSON.stringify({
             query: content,
@@ -91,6 +99,62 @@ export async function POST(
             ragContext = results
               .map((result: RAGResult) => `[${result.metadata?.filename || 'Documento'}]: ${result.content}`)
               .join('\n\n');
+
+            // Conformal abstention gate: "no answer without recoverable
+            // support." On abstain (enforce mode) the deterministic template
+            // replaces generation; on clarify a low-confidence notice is
+            // prepended to the answer.
+            const gate = await evaluateRagGate({
+              query: content,
+              results,
+              userId: (user as any).id || '',
+              conversationId,
+              packageIds: conversation.ragPackageIds,
+            });
+
+            abstentionMeta = {
+              decision: gate.decision,
+              enforced: gate.decision !== 'answer' && gate.enforce,
+              support: gate.support.score,
+              threshold: gate.outcome.threshold,
+              thresholdSource: gate.outcome.thresholdSource,
+            };
+
+            if (gate.decision === 'abstain' && gate.enforce) {
+              const gateText =
+                gate.template ||
+                `Diese Frage beantworte ich aus den verknüpften Dokumenten nicht: Die gefundenen Belege bieten keine ausreichende Unterstützung.`;
+
+              const assistantMessage = await addMessage({
+                conversationId,
+                role: 'assistant',
+                content: gateText,
+                metadata: {
+                  ragContext: ragContext || undefined,
+                  ragPackageIds: conversation.ragPackageIds,
+                  searchQuery: content,
+                  abstention: abstentionMeta,
+                },
+              });
+
+              return NextResponse.json({
+                success: true,
+                userMessage,
+                assistantMessage,
+                ragContext: ragContext || null,
+                abstention: abstentionMeta,
+              });
+            }
+
+            if (gate.decision === 'clarify' && gate.enforce) {
+              const noticeText =
+                gate.template ||
+                `**Hinweis: geringe Konfidenz.** Die Dokumente unterstützen eine Antwort auf diese Frage nur teilweise.`;
+              clarifyNotice = `${noticeText}\n\n`;
+              clarifyDirective = `
+
+Die gefundenen Dokumente unterstützen eine Antwort nur teilweise. Ein Hinweis zur geringen Konfidenz wurde bereits angezeigt. Nenne nur, was die Dokumente tatsächlich belegen, markiere Unsicherheiten ausdrücklich und erfinde keine Fakten.`;
+            }
 
             // Generate response using LLM based on RAG context
             try {
@@ -122,7 +186,7 @@ Deine Aufgaben sind:
 4. Wenn die Information nicht in den Dokumenten vorhanden ist, dies klar zu erwähnen
 5. Markdown-Format zur besseren Lesbarkeit zu verwenden
 
-Antworte immer auf Deutsch, es sei denn, der Benutzer fragt ausdrücklich in einer anderen Sprache.`
+Antworte immer auf Deutsch, es sei denn, der Benutzer fragt ausdrücklich in einer anderen Sprache.${clarifyDirective}`
                     },
                     {
                       role: 'user',
@@ -261,11 +325,12 @@ Fehler: ${llmError instanceof Error ? llmError.message : 'Unbekannter Fehler'}`;
     const assistantMessage = await addMessage({
       conversationId,
       role: 'assistant',
-      content: assistantResponse,
+      content: clarifyNotice + assistantResponse,
       metadata: {
         ragContext: ragContext || undefined,
         ragPackageIds: conversation.ragPackageIds,
         searchQuery: content,
+        ...(abstentionMeta ? { abstention: abstentionMeta } : {}),
       },
     });
 
@@ -274,6 +339,7 @@ Fehler: ${llmError instanceof Error ? llmError.message : 'Unbekannter Fehler'}`;
       userMessage,
       assistantMessage,
       ragContext: ragContext || null,
+      ...(abstentionMeta ? { abstention: abstentionMeta } : {}),
     });
   } catch (error) {
     console.error('Error processing chat query:', error);
