@@ -64,16 +64,19 @@ export async function POST(request: NextRequest) {
       return NextResponse.json({ success: false, error: 'QUERY_LIMIT_REACHED' }, { status: 403 });
     }
 
+    // Fail closed: always filter against the granted ids. An empty grant
+    // set must yield an empty effective list (empty retrieval), never a
+    // pass-through of the raw client-supplied ids.
     let effectivePackageIds: string[] = packageIds;
     try {
       const allowed = new Set(await allowedRagIds(teamSlug, userId));
-
-      if (allowed.size > 0) {
-        effectivePackageIds = packageIds.filter((id: string) => allowed.has(id));
-      }
+      effectivePackageIds = packageIds.filter((id: string) => allowed.has(id));
     } catch (e) {
-      console.warn('[RAG Query] Access check failed, using original package list', e);
-      // If access check fails, default to original list
+      console.error('[RAG Query] Access check failed, refusing to query packages', e);
+      return NextResponse.json(
+        { success: false, error: 'ACCESS_CHECK_FAILED' },
+        { status: 403 }
+      );
     }
 
     // Rewrite the query (spell‑check/normalize) and retrieve from Qdrant
