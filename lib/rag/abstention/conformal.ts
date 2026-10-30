@@ -16,6 +16,8 @@
  * Edge cases are deliberately conservative:
  * - too few supported calibration points -> null (caller falls back to the
  *   configured prior threshold instead of pretending a guarantee exists)
+ * - sample size too small for the requested alpha -> null (the rank exceeds
+ *   n; returning the minimum observed score would under-cover)
  * - alpha in (0,1) required
  */
 
@@ -35,12 +37,21 @@ export interface CalibrationResult {
   reason?: 'no_supported_examples' | 'insufficient_sample';
 }
 
-/** Minimum number of supported examples before a quantile is meaningful. */
+/**
+ * Minimum number of supported examples before a quantile is meaningful.
+ * Note: the conformal rank is ceil((n+1)(1-alpha)), so at the default
+ * alpha of 0.1 a calibrated threshold needs at least 9 supported examples;
+ * below that calibrateThreshold() returns null and callers fall back to
+ * the prior threshold.
+ */
 export const MIN_SUPPORTED_SAMPLES = 8;
 
 /**
  * Finite-sample conformal quantile: the ceil((n+1)(1-alpha))-th smallest
- * supported score. With no calibration data returns null.
+ * supported score. Returns null when there is no calibration data, alpha is
+ * out of range, or alpha demands a rank beyond the sample size (no observed
+ * order statistic can keep the 1-alpha guarantee then — the caller falls
+ * back to the prior threshold instead of under-covering).
  */
 export function conformalQuantile(sortedScores: number[], alpha: number): number | null {
   const n = sortedScores.length;
@@ -49,9 +60,9 @@ export function conformalQuantile(sortedScores: number[], alpha: number): number
 
   const rank = Math.ceil((n + 1) * (1 - alpha));
   if (rank > n) {
-    // Alpha too small for this sample size: the honest answer is the most
-    // conservative threshold we can defend — the minimum observed score.
-    return clamp01(sortedScores[0]);
+    // Alpha too small for this sample size. The minimum observed score would
+    // under-cover (below 1-alpha), so the honest answer is no threshold.
+    return null;
   }
   return clamp01(sortedScores[rank - 1]);
 }
@@ -76,8 +87,13 @@ export function calibrateThreshold(
   }
 
   const threshold = conformalQuantile(supported, alpha);
+  if (threshold === null) {
+    // Enough rows, but alpha needs a rank beyond the sample size — too few
+    // supported points for this alpha to keep its coverage guarantee.
+    return { threshold: null, supportedCount: supported.length, totalCount: valid.length, reason: 'insufficient_sample' };
+  }
   return {
-    threshold: threshold === null ? null : clamp01(threshold),
+    threshold: clamp01(threshold),
     supportedCount: supported.length,
     totalCount: valid.length,
   };

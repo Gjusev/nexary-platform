@@ -1090,6 +1090,9 @@ export async function POST(
           headers: {
             "Content-Type": "application/json",
             Cookie: request.headers.get("Cookie") || "",
+            // Internal enrichment: /api/rag/query skips its annotate gate
+            // evaluation; this route evaluates the gate itself below.
+            "x-internal-chat-enrichment": "1",
           },
           body: JSON.stringify({
             query: content,
@@ -1140,8 +1143,9 @@ export async function POST(
       }
 
       // Conformal abstention gate: "no answer without recoverable support."
-      // Web search results are their own recoverable support, so the gate
-      // only enforces against document-grounded generation.
+      // The decision is persisted unconditionally — including turns where the
+      // web-search exemption below applies — so the RAG_ABSTENTION_GATE audit
+      // trail never has a gap.
       try {
         ragGate = await evaluateRagGate({
           query: content,
@@ -1149,7 +1153,6 @@ export async function POST(
           userId: user.id,
           conversationId: conversation.id,
           packageIds: conversation.ragPackageIds,
-          skipLog: !!webSearchContext,
         });
       } catch (error) {
         // Fail-closed: if the gate itself explodes, treat it as an abstention
@@ -1346,9 +1349,12 @@ CRITICAL: You MUST respond in ${targetLanguage} (${targetLanguageCode}). This is
           // Conformal abstention enforcement (see lib/rag/abstention):
           // "abstain" replaces free generation with the deterministic
           // template; "clarify" prepends a low-confidence notice and keeps
-          // the model answer. Only applies to document-grounded
-          // conversations when the gate runs in enforce mode and no web
-          // search results are available.
+          // the model answer. The prompt concatenates web results AND
+          // document context, so with both present the model can still
+          // answer from the weak document evidence the gate rejected —
+          // enforcement therefore applies whenever document context feeds
+          // the prompt. Only pure web-search turns (ragContext empty, the
+          // web results being their own recoverable support) are exempt.
           let clarifyNotice = "";
           let clarifyDirective = "";
 
@@ -1357,7 +1363,7 @@ CRITICAL: You MUST respond in ${targetLanguage} (${targetLanguageCode}). This is
             ragGate.gateEnabled &&
             ragGate.enforce &&
             ragGate.decision !== "answer" &&
-            !webSearchContext;
+            !ragContext;
 
           if (gateEnforces && ragGate!.decision === "clarify") {
             const noticeText =
@@ -1373,6 +1379,21 @@ CRITICAL: You MUST respond in ${targetLanguage} (${targetLanguageCode}). This is
             clarifyDirective = `
 
 The retrieved documents only partially support an answer. A low-confidence notice has already been shown to the user. Only state what the documents actually support, explicitly mark anything uncertain, and do not invent facts. Respond in ${targetLanguage} (${targetLanguageCode}).`;
+
+            // Stream the notice now so the live answer matches the saved
+            // message, which prepends clarifyNotice to the generated text.
+            const noticeChunkSize = 180;
+            for (let i = 0; i < clarifyNotice.length; i += noticeChunkSize) {
+              controller.enqueue(
+                encoder.encode(
+                  `data: ${JSON.stringify({
+                    type: "content",
+                    content: clarifyNotice.slice(i, i + noticeChunkSize),
+                  })
+                  } \n\n`
+                )
+              );
+            }
           }
 
           if (gateEnforces && ragGate!.decision === "abstain") {

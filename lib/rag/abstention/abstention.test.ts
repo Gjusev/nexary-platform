@@ -17,6 +17,8 @@ import { computeSupportScore } from './support';
 import { calibrateThreshold, conformalQuantile, MIN_SUPPORTED_SAMPLES } from './conformal';
 import { DEFAULT_PRIOR_THRESHOLD, gateTemplate, resolveGate } from './gate';
 import { evaluateRagGate } from './index';
+import { logGateDecision } from './log';
+import { logAuditEvent } from '@/lib/audit/audit-logger';
 
 const baseConfig = (overrides: Partial<ReturnType<typeof resolveAbstentionConfig>> = {}) => ({
   enabled: true,
@@ -50,10 +52,25 @@ describe('conformal calibration', () => {
     expect(conformalQuantile(scores, 0.5)).toBeCloseTo(0.5);
   });
 
-  it('falls back to the minimum score when alpha demands more data than available', () => {
+  it('returns null when alpha demands more data than available (under-covering guard)', () => {
     const scores = [0.4, 0.5, 0.6];
-    // rank = ceil(4*0.95) = 4 > n -> minimum observed
-    expect(conformalQuantile(scores, 0.05)).toBeCloseTo(0.4);
+    // rank = ceil((3+1)*0.95) = 4 > n -> no defensible threshold
+    expect(conformalQuantile(scores, 0.05)).toBeNull();
+    // Review finding F4 repro: rank = ceil((8+1)*0.9) = 9 > 8 — must not
+    // degrade to the minimum observed score (under-covers 1-alpha).
+    expect(
+      conformalQuantile([0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8], 0.1),
+    ).toBeNull();
+  });
+
+  it('rejects calibration sets whose sample size cannot support the requested alpha', () => {
+    const examples = Array.from({ length: MIN_SUPPORTED_SAMPLES }, (_, i) => ({
+      support: 0.4 + i * 0.05,
+      supported: true,
+    }));
+    const result = calibrateThreshold(examples, 0.1);
+    expect(result.threshold).toBeNull();
+    expect(result.reason).toBe('insufficient_sample');
   });
 
   it('returns null for empty input or out-of-range alpha', () => {
@@ -282,6 +299,32 @@ describe('evaluateRagGate', () => {
     expect(result.template).toBeTruthy();
   });
 
+  it('names route-shaped documents (metadata.filename) in the abstain template', async () => {
+    // Review finding F2 regression: chat routes pass /api/rag/query-shaped
+    // results where the filename lives at r.metadata.filename, not r.filename.
+    const original = process.env.RAG_ABSTENTION_THRESHOLD;
+    process.env.RAG_ABSTENTION_THRESHOLD = '0.9';
+    try {
+      const result = await evaluateRagGate({
+        query: 'Was steht über die Kündigungsfrist?',
+        results: [
+          {
+            score: 0.72,
+            content: 'Die Kündigungsfrist beträgt drei Monate zum Ende des Quartals.',
+            metadata: { filename: 'vertrag.pdf' },
+          },
+        ] as any,
+        skipLog: true,
+      });
+      expect(result.decision).toBe('abstain');
+      expect(result.template).toContain('vertrag.pdf');
+      expect(result.template).not.toContain('keine relevanten Dokumente');
+    } finally {
+      if (original === undefined) delete process.env.RAG_ABSTENTION_THRESHOLD;
+      else process.env.RAG_ABSTENTION_THRESHOLD = original;
+    }
+  });
+
   it('answers for well-supported retrieval', async () => {
     const result = await evaluateRagGate({
       query: 'Kündigungsfrist des Mietvertrags',
@@ -354,5 +397,33 @@ describe('evaluateRagGate', () => {
       if (original === undefined) delete process.env.RAG_ABSTENTION_ENABLED;
       else process.env.RAG_ABSTENTION_ENABLED = original;
     }
+  });
+
+  it('persists gate decisions to the audit sink without raw query text', async () => {
+    // Review finding F6 regression: the audit_logs sink must not carry the
+    // user query (not even truncated) — data minimization for the compliance
+    // table. Only scores, thresholds and identifiers belong in metadata.
+    await logGateDecision({
+      outcome: {
+        decision: 'abstain',
+        threshold: 0.45,
+        thresholdSource: 'prior',
+        clarifyBand: 0.08,
+      },
+      support: { score: 0.12, top: 0.3, rank: 0.1, lexical: 0, candidates: 2 },
+      decision: 'abstain',
+      enforced: true,
+      alpha: 0.1,
+      conversationId: 'conv-1',
+    });
+
+    expect(logAuditEvent).toHaveBeenCalledTimes(1);
+    const call = vi.mocked(logAuditEvent).mock.calls[0][0];
+    const metadata = (call.metadata ?? {}) as Record<string, unknown>;
+    expect(call.action).toBe('RAG_ABSTENTION_GATE');
+    expect(metadata).not.toHaveProperty('queryPreview');
+    expect(metadata).not.toHaveProperty('query');
+    expect(metadata.thresholdSource).toBe('prior');
+    expect(metadata.supportScore).toBeCloseTo(0.12);
   });
 });

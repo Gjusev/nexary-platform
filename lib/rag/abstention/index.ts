@@ -63,8 +63,9 @@ export async function evaluateRagGate(ctx: GateContext): Promise<GateResult> {
   const support = computeSupportScore({ query: ctx.query, results: ctx.results });
 
   if (!config.enabled) {
-    // Gate disabled: behave exactly like before, but still score so the
-    // decision log can be turned on later without a code change.
+    // Gate disabled: behave exactly like before — nothing is enforced and
+    // nothing is logged. The support score is still computed and returned so
+    // callers can annotate their responses without a code change.
     const outcome = resolveGate({ config, support: support.score, calibratedThreshold: null });
     return { gateEnabled: false, enforce: false, decision: 'answer', support, outcome };
   }
@@ -85,10 +86,17 @@ export async function evaluateRagGate(ctx: GateContext): Promise<GateResult> {
 
   let template: string | undefined;
   if (outcome.decision !== 'answer') {
+    // Filename may sit at the top level (legacy shapes) or under metadata
+    // (/api/rag/query route shape: { score, content, metadata: { filename } }).
+    const sources = (ctx.results || []).map((r) => ({
+      filename:
+        (r as { filename?: string })?.filename ??
+        (r as { metadata?: { filename?: string } })?.metadata?.filename,
+    }));
     template = gateTemplate({
       decision: outcome.decision,
       query: ctx.query,
-      sources: ctx.results?.map((r) => ({ filename: (r as { filename?: string }).filename })) || [],
+      sources,
       targetLanguageCode: ctx.targetLanguageCode,
     });
   }
@@ -100,7 +108,6 @@ export async function evaluateRagGate(ctx: GateContext): Promise<GateResult> {
       decision: outcome.decision,
       enforced: enforce && outcome.decision !== 'answer',
       alpha: config.alpha,
-      queryPreview: ctx.query,
       teamSlug: ctx.teamSlug,
       userId: ctx.userId,
       conversationId: ctx.conversationId,

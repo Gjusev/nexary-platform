@@ -26,7 +26,6 @@ export interface AbstentionLogEntry {
   enforced: boolean;
   /** Target risk alpha the threshold was calibrated/selected for. */
   alpha?: number;
-  queryPreview?: string;
   teamSlug?: string;
   userId?: string;
   conversationId?: string;
@@ -34,13 +33,10 @@ export interface AbstentionLogEntry {
   targetLanguageCode?: string;
 }
 
-function preview(text: string | undefined, max = 160): string | undefined {
-  if (!text) return undefined;
-  const t = text.replace(/\s+/g, ' ').trim();
-  return t.length <= max ? t : `${t.slice(0, max - 1)}…`;
-}
-
 export async function logGateDecision(entry: AbstentionLogEntry): Promise<void> {
+  // No query text here — not even truncated. audit_logs carries longer
+  // retention and broader auditor access than chat content, so raw user
+  // queries (personal data) must not land in its metadata (data minimization).
   const metadata = {
     decision: entry.decision,
     enforced: entry.enforced,
@@ -53,7 +49,6 @@ export async function logGateDecision(entry: AbstentionLogEntry): Promise<void> 
     thresholdSource: entry.outcome.thresholdSource,
     alpha: entry.alpha !== undefined ? round3(entry.alpha) : undefined,
     clarifyBand: round3(entry.outcome.clarifyBand),
-    queryPreview: preview(entry.queryPreview),
     conversationId: entry.conversationId,
     packageIds: entry.packageIds,
     targetLanguageCode: entry.targetLanguageCode,

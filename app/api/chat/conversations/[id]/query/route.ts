@@ -73,6 +73,9 @@ export async function POST(
           headers: {
             'Content-Type': 'application/json',
             'Cookie': request.headers.get('Cookie') || '', // Forward session
+            // Internal enrichment: /api/rag/query skips its annotate gate
+            // evaluation; this route evaluates the gate itself below.
+            'x-internal-chat-enrichment': '1',
           },
           body: JSON.stringify({
             query: content,

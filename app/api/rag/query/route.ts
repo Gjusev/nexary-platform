@@ -12,6 +12,36 @@ const stackServerApp = new StackServerApp({
   tokenStore: 'nextjs-cookie',
 });
 
+/**
+ * True when this request serves chat-context enrichment from one of the chat
+ * routes (loopback/internal fetch flagged with `x-internal-chat-enrichment`).
+ * Those routes evaluate the gate themselves against the exact context slice
+ * they prompt with; also running the annotate evaluation here would log a
+ * second, conflicting RAG_ABSTENTION_GATE entry per chat turn and double-count
+ * calibration data. The flag is only honored for internal hosts so external
+ * clients cannot silence the audit annotation.
+ */
+function servesInternalChatEnrichment(request: NextRequest): boolean {
+  if (request.headers.get('x-internal-chat-enrichment') !== '1') {
+    return false;
+  }
+  try {
+    const host = new URL(request.url).hostname;
+    const internalHost = process.env.INTERNAL_URL
+      ? new URL(process.env.INTERNAL_URL).hostname
+      : null;
+    return (
+      host === '127.0.0.1' ||
+      host === 'localhost' ||
+      host === '::1' ||
+      host === '[::1]' ||
+      (internalHost !== null && host === internalHost)
+    );
+  } catch {
+    return false;
+  }
+}
+
 export async function POST(request: NextRequest) {
   // Rate limiting check
   const rateLimitResponse = checkRagRateLimit(request);
@@ -86,31 +116,34 @@ export async function POST(request: NextRequest) {
 
     // Conformal abstention gate: score the evidence and log the decision.
     // This endpoint is search-only, so the gate annotates instead of
-    // enforcing; chat routes enforce against generation.
+    // enforcing; chat routes enforce against generation. Skip the annotate
+    // evaluation for internal chat enrichment (see servesInternalChatEnrichment).
     let abstention: Record<string, unknown> | undefined;
-    try {
-      const gate = await evaluateRagGate({
-        query,
-        results: retrieved,
-        teamSlug,
-        userId,
-        packageIds: effectivePackageIds,
-      });
-      abstention = {
-        enabled: gate.gateEnabled,
-        decision: gate.decision,
-        enforced: false,
-        support: {
-          score: gate.support.score,
-          top: gate.support.top,
-          lexical: gate.support.lexical,
-          candidates: gate.support.candidates,
-        },
-        threshold: gate.outcome.threshold,
-        thresholdSource: gate.outcome.thresholdSource,
-      };
-    } catch (gateError) {
-      console.warn('[RAG Query] Abstention gate failed, continuing without annotation:', gateError);
+    if (!servesInternalChatEnrichment(request)) {
+      try {
+        const gate = await evaluateRagGate({
+          query,
+          results: retrieved,
+          teamSlug,
+          userId,
+          packageIds: effectivePackageIds,
+        });
+        abstention = {
+          enabled: gate.gateEnabled,
+          decision: gate.decision,
+          enforced: false,
+          support: {
+            score: gate.support.score,
+            top: gate.support.top,
+            lexical: gate.support.lexical,
+            candidates: gate.support.candidates,
+          },
+          threshold: gate.outcome.threshold,
+          thresholdSource: gate.outcome.thresholdSource,
+        };
+      } catch (gateError) {
+        console.warn('[RAG Query] Abstention gate failed, continuing without annotation:', gateError);
+      }
     }
 
     const results: any[] = retrieved.map((r) => ({
