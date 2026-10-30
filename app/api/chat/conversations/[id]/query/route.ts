@@ -1,7 +1,6 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { StackServerApp } from '@stackframe/stack';
 import { addMessage, getConversation } from '@/lib/chat';
-import { allowedRagIds } from '@/lib/authz';
 import { checkAndIncrementUsage, recordUsageEvent } from '@/lib/billing/limits';
 import { checkChatRateLimit } from '@/lib/middleware/api-rate-limit';
 
@@ -62,7 +61,10 @@ export async function POST(
     if (conversation.ragPackageIds && conversation.ragPackageIds.length > 0) {
       try {
         const internalUrl = process.env.INTERNAL_URL || `http://127.0.0.1:${process.env.PORT || 3000}`;
-        // Use internal RAG API to search
+        // Use internal RAG API to search. Per-user RAG grants are enforced
+        // inside /api/rag/query (fail-closed); this route must not filter
+        // on its own, it only forwards the session-scoped conversation's
+        // package ids.
         const ragResponse = await fetch(`${internalUrl}/api/rag/query`, {
           method: 'POST',
           headers: {

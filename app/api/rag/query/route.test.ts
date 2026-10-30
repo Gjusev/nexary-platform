@@ -2,8 +2,10 @@
  * Regression tests for the authorization filtering in POST /api/rag/query.
  *
  * Covers MOK-77: the endpoint must fail closed. An empty grant set must
- * never fall through to the raw client-supplied package ids, and a failing
- * access check must never fall back to the unfiltered list.
+ * never fall through to the raw client-supplied package ids, a failing
+ * access check must never fall back to the unfiltered list, and
+ * authorization must precede metering (a refused request never spends
+ * quota or LLM budget).
  */
 
 import { describe, it, expect, vi, beforeEach } from 'vitest';
@@ -50,10 +52,13 @@ vi.mock('@/lib/db', () => ({
 }));
 
 import { allowedRagIds } from '@/lib/authz';
-import { retrieveFromQdrant } from '@/lib/rag/query-pipeline';
+import { checkAndIncrementUsage } from '@/lib/billing/limits';
+import { rewriteQuery, retrieveFromQdrant } from '@/lib/rag/query-pipeline';
 import { POST } from './route';
 
 const mockAllowedRagIds = allowedRagIds as unknown as ReturnType<typeof vi.fn>;
+const mockCheckAndIncrementUsage = checkAndIncrementUsage as unknown as ReturnType<typeof vi.fn>;
+const mockRewriteQuery = rewriteQuery as unknown as ReturnType<typeof vi.fn>;
 const mockRetrieveFromQdrant = retrieveFromQdrant as unknown as ReturnType<typeof vi.fn>;
 
 function makeRequest(body: unknown): NextRequest {
@@ -70,25 +75,39 @@ describe('POST /api/rag/query authorization filtering', () => {
     mockRetrieveFromQdrant.mockResolvedValue([]);
   });
 
-  it('fail closed on an empty grant set: no package ids are queried', async () => {
+  it('fail closed on an empty grant set: 403 NO_RAG_GRANTS, nothing queried or metered', async () => {
     // Zero grants used to skip filtering entirely, exposing every
-    // client-supplied id. It must yield an empty effective list instead.
+    // client-supplied id. It must refuse with a distinct signal instead of
+    // a benign empty answer that masks the misconfiguration.
     mockAllowedRagIds.mockResolvedValue([]);
 
     const response = await POST(makeRequest({ query: 'hello', packageIds: ['pkg-a', 'pkg-b'] }));
 
-    expect(response.status).toBe(200);
+    expect(response.status).toBe(403);
     const json = await response.json();
-    expect(mockRetrieveFromQdrant).toHaveBeenCalledWith(
-      expect.objectContaining({ packageIds: [] })
-    );
-    expect(json.success).toBe(true);
-    expect(json.packageIds).toEqual([]);
-    expect(json.results).toEqual([]);
-    expect(json.totalResults).toBe(0);
+    expect(json.success).toBe(false);
+    expect(json.error).toBe('NO_RAG_GRANTS');
+    expect(mockRetrieveFromQdrant).not.toHaveBeenCalled();
+    expect(mockRewriteQuery).not.toHaveBeenCalled();
+    // Authz precedes metering: a refused request never spends quota.
+    expect(mockCheckAndIncrementUsage).not.toHaveBeenCalled();
   });
 
-  it('keeps only granted ids when the grant set is non-empty', async () => {
+  it('fail closed when the grant list is null/undefined: treated as zero grants', async () => {
+    // `new Set(null)` is an empty Set; pin that a nullish grant list can
+    // never behave like an unrestricted one.
+    mockAllowedRagIds.mockResolvedValue(null as unknown as string[]);
+
+    const response = await POST(makeRequest({ query: 'hello', packageIds: ['pkg-a'] }));
+
+    expect(response.status).toBe(403);
+    const json = await response.json();
+    expect(json.error).toBe('NO_RAG_GRANTS');
+    expect(mockRetrieveFromQdrant).not.toHaveBeenCalled();
+    expect(mockCheckAndIncrementUsage).not.toHaveBeenCalled();
+  });
+
+  it('keeps only granted ids when the grant set is non-empty, retrieving exactly once', async () => {
     mockAllowedRagIds.mockResolvedValue(['pkg-allowed']);
 
     const response = await POST(
@@ -97,10 +116,34 @@ describe('POST /api/rag/query authorization filtering', () => {
 
     expect(response.status).toBe(200);
     const json = await response.json();
+    // toHaveBeenCalledTimes guards against a duplicate unfiltered call
+    // slipping past toHaveBeenCalledWith.
+    expect(mockRetrieveFromQdrant).toHaveBeenCalledTimes(1);
     expect(mockRetrieveFromQdrant).toHaveBeenCalledWith(
       expect.objectContaining({ packageIds: ['pkg-allowed'] })
     );
     expect(json.packageIds).toEqual(['pkg-allowed']);
+    // Authz before metering: the grant check runs before usage increment.
+    expect(mockCheckAndIncrementUsage).toHaveBeenCalledTimes(1);
+    expect(mockCheckAndIncrementUsage.mock.invocationCallOrder[0]).toBeLessThan(
+      mockRetrieveFromQdrant.mock.invocationCallOrder[0]
+    );
+  });
+
+  it('returns empty results without spending quota or LLM budget on no overlap', async () => {
+    mockAllowedRagIds.mockResolvedValue(['pkg-allowed']);
+
+    const response = await POST(makeRequest({ query: 'hello', packageIds: ['pkg-secret'] }));
+
+    expect(response.status).toBe(200);
+    const json = await response.json();
+    expect(json.success).toBe(true);
+    expect(json.results).toEqual([]);
+    expect(json.packageIds).toEqual([]);
+    expect(json.totalResults).toBe(0);
+    expect(mockRetrieveFromQdrant).not.toHaveBeenCalled();
+    expect(mockRewriteQuery).not.toHaveBeenCalled();
+    expect(mockCheckAndIncrementUsage).not.toHaveBeenCalled();
   });
 
   it('returns 403 and queries nothing when the access check throws', async () => {
@@ -114,5 +157,8 @@ describe('POST /api/rag/query authorization filtering', () => {
     expect(json.success).toBe(false);
     expect(json.error).toBe('ACCESS_CHECK_FAILED');
     expect(mockRetrieveFromQdrant).not.toHaveBeenCalled();
+    expect(mockRewriteQuery).not.toHaveBeenCalled();
+    // Authz precedes metering: a refused request never spends quota.
+    expect(mockCheckAndIncrementUsage).not.toHaveBeenCalled();
   });
 });
