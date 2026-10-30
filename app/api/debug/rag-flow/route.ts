@@ -165,9 +165,11 @@ export async function GET(request: NextRequest) {
           };
         }
       } catch (error) {
+        // MOK-94: el stack (y cualquier detalle interno) queda solo en el log
+        // del servidor, nunca en la respuesta.
+        console.error('[debug/rag-flow] step6 search failed', error);
         debugInfo.steps.step6_search.status = 'ERROR';
         debugInfo.steps.step6_search.error = error instanceof Error ? error.message : 'Unknown error';
-        debugInfo.steps.step6_search.stack = error instanceof Error ? error.stack : undefined;
       }
     } else {
       debugInfo.steps.step6_search = {
@@ -177,47 +179,94 @@ export async function GET(request: NextRequest) {
       };
     }
 
-    // PASO 7: Verificar Qdrant directamente
+    // PASO 7: Verificar Qdrant directamente (solo colecciones del team del caller)
+    // MOK-94: nunca se lista /collections a nivel de instancia — los nombres de
+    // colección exponen slugs y nombres de packages de OTROS teams — ni se
+    // devuelve QDRANT_URL (topología interna; credenciales embebidas en la URL
+    // se devolverían tal cual).
     debugInfo.steps.step7_qdrant = { name: 'Conexión Qdrant' };
     try {
       const qdrantUrl = process.env.QDRANT_URL || 'http://localhost:6333';
       const qdrantApiKey = process.env.QDRANT_API_KEY;
-      
+
       const headers: Record<string, string> = {
         'Content-Type': 'application/json',
       };
-      
+
       if (qdrantApiKey) {
         headers['api-key'] = qdrantApiKey;
       }
-      
-      const response = await fetch(`${qdrantUrl}/collections`, {
-        method: 'GET',
-        headers,
-      });
 
-      if (response.ok) {
-        const data = await response.json();
+      const ownPackages = await listPackages(teamSlug, false);
+
+      if (ownPackages.length === 0) {
+        debugInfo.steps.step7_qdrant.status = 'SKIPPED';
+        debugInfo.steps.step7_qdrant.reason = 'No hay colecciones propias que verificar';
+      } else {
+        const ownCollections = await Promise.all(
+          ownPackages.map(async (pkg) => {
+            try {
+              const response = await fetch(
+                `${qdrantUrl}/collections/${encodeURIComponent(pkg.collectionName)}`,
+                {
+                  method: 'GET',
+                  headers,
+                }
+              );
+
+              if (!response.ok) {
+                return {
+                  packageId: pkg.id,
+                  collection: pkg.collectionName,
+                  reachable: true,
+                  exists: false,
+                  error: `HTTP ${response.status}`,
+                };
+              }
+
+              const data = await response.json();
+              return {
+                packageId: pkg.id,
+                collection: pkg.collectionName,
+                reachable: true,
+                exists: true,
+                status: data.result?.status ?? 'unknown',
+                pointsCount: data.result?.points_count ?? null,
+              };
+            } catch {
+              // Mensaje genérico: el texto real del error podría incluir la
+              // QDRANT_URL (p. ej. un "Invalid URL").
+              return {
+                packageId: pkg.id,
+                collection: pkg.collectionName,
+                reachable: false,
+                exists: false,
+              };
+            }
+          })
+        );
+
         debugInfo.steps.step7_qdrant.status = 'SUCCESS';
         debugInfo.steps.step7_qdrant.data = {
-          qdrantUrl,
-          collections: data.result?.collections || [],
+          connected: ownCollections.some((c) => c.reachable),
+          collectionCount: ownCollections.length,
+          collections: ownCollections,
         };
-      } else {
-        debugInfo.steps.step7_qdrant.status = 'ERROR';
-        debugInfo.steps.step7_qdrant.error = `HTTP ${response.status}: ${response.statusText}`;
       }
     } catch (error) {
+      console.error('[debug/rag-flow] step7 qdrant check failed', error);
       debugInfo.steps.step7_qdrant.status = 'ERROR';
-      debugInfo.steps.step7_qdrant.error = error instanceof Error ? error.message : 'Unknown error';
+      debugInfo.steps.step7_qdrant.error = 'Qdrant request failed';
     }
 
     return NextResponse.json(debugInfo, { status: 200 });
 
   } catch (error) {
+    // MOK-94: sin message/stack del error en la respuesta — pueden incluir
+    // detalles de infraestructura (hosts de BD, URLs internas). Solo en el log.
+    console.error('[debug/rag-flow] unhandled error', error);
     debugInfo.error = {
-      message: error instanceof Error ? error.message : 'Unknown error',
-      stack: error instanceof Error ? error.stack : undefined,
+      message: 'Internal error',
     };
     return NextResponse.json(debugInfo, { status: 500 });
   }
