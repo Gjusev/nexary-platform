@@ -11,7 +11,9 @@ const stackServerApp = new StackServerApp({
 
 /**
  * GET /api/debug/rag-flow?query=test
- * Debug completo del flujo de RAG: autenticación, permisos, packages, búsqueda
+ * Debug completo del flujo de RAG: autenticación, permisos, packages, búsqueda.
+ * Solo opera sobre los packages concedidos al usuario (fail closed, MOK-85):
+ * un usuario sin grants no recibe listado ni texto de packages del team.
  */
 export async function GET(request: NextRequest) {
   const debugInfo: any = {
@@ -74,14 +76,57 @@ export async function GET(request: NextRequest) {
       teamName: teamResult.rows[0].name,
     };
 
-    // PASO 4: Listar RAG packages
+    // Gate de autorización (MOK-85): calcular los grants de este usuario una
+    // sola vez y fallar cerrado, igual que POST /api/rag/query. Los pasos
+    // siguientes solo pueden tocar packages concedidos: un set de grants
+    // vacío o un chequeo fallido jamás cae a la lista completa del team.
+    const userId = (user as any).id;
+    let allowedIds: string[] = [];
+    let grantCheckError: unknown = null;
+    try {
+      allowedIds = (await allowedRagIds(teamSlug, userId)) ?? [];
+    } catch (error) {
+      grantCheckError = error;
+    }
+
+    if (grantCheckError) {
+      debugInfo.steps.step5_permissions = {
+        name: 'Verificar Permisos RAG',
+        status: 'ERROR',
+        error: grantCheckError instanceof Error ? grantCheckError.message : 'Unknown error',
+      };
+      debugInfo.refused = 'ACCESS_CHECK_FAILED';
+      console.error('[Debug RAG Flow] Grant check failed, refusing to list or search packages');
+      return NextResponse.json(debugInfo, { status: 403 });
+    }
+    if (allowedIds.length === 0) {
+      // Antes caía a todos los packages del team; ahora se rechaza con una
+      // señal distinta de "sin resultados" para que ops vea la
+      // mala configuración en vez de una respuesta benigna vacía.
+      debugInfo.steps.step5_permissions = {
+        name: 'Verificar Permisos RAG',
+        status: 'SUCCESS',
+        data: { allowedPackageIds: allowedIds, count: 0 },
+      };
+      debugInfo.refused = 'NO_RAG_GRANTS';
+      console.warn('[Debug RAG Flow] Team/user holds no RAG query grants');
+      return NextResponse.json(debugInfo, { status: 403 });
+    }
+
+    const grantedIds = new Set(allowedIds);
+    let teamPackages: Awaited<ReturnType<typeof listPackages>> = [];
+
+    // PASO 4: Listar RAG packages (solo los concedidos a este usuario)
     debugInfo.steps.step4_packages = { name: 'Listar RAG Packages' };
     try {
-      const packages = await listPackages(teamSlug, false);
+      teamPackages = await listPackages(teamSlug, false);
+      const visiblePackages = teamPackages.filter(pkg => grantedIds.has(pkg.id));
       debugInfo.steps.step4_packages.status = 'SUCCESS';
       debugInfo.steps.step4_packages.data = {
-        count: packages.length,
-        packages: packages.map(pkg => ({
+        count: visiblePackages.length,
+        totalTeamPackages: teamPackages.length,
+        filteredByUserGrants: true,
+        packages: visiblePackages.map(pkg => ({
           id: pkg.id,
           name: pkg.name,
           teamSlug: pkg.teamSlug,
@@ -99,20 +144,15 @@ export async function GET(request: NextRequest) {
       debugInfo.steps.step4_packages.error = error instanceof Error ? error.message : 'Unknown error';
     }
 
-    // PASO 5: Verificar permisos RAG
-    debugInfo.steps.step5_permissions = { name: 'Verificar Permisos RAG' };
-    try {
-      const userId = (user as any).id;
-      const allowed = await allowedRagIds(teamSlug, userId);
-      debugInfo.steps.step5_permissions.status = 'SUCCESS';
-      debugInfo.steps.step5_permissions.data = {
-        allowedPackageIds: allowed,
-        count: allowed.length,
-      };
-    } catch (error) {
-      debugInfo.steps.step5_permissions.status = 'ERROR';
-      debugInfo.steps.step5_permissions.error = error instanceof Error ? error.message : 'Unknown error';
-    }
+    // PASO 5: Verificar permisos RAG (ya calculados en el gate de autorización)
+    debugInfo.steps.step5_permissions = {
+      name: 'Verificar Permisos RAG',
+      status: 'SUCCESS',
+      data: {
+        allowedPackageIds: allowedIds,
+        count: allowedIds.length,
+      },
+    };
 
     // PASO 6: Test de búsqueda (si se proporciona query)
     const url = new URL(request.url);
@@ -122,47 +162,52 @@ export async function GET(request: NextRequest) {
       debugInfo.steps.step6_search = { name: 'Test de Búsqueda RAG' };
       
       try {
-        // Obtener el primer package disponible
-        const packages = await listPackages(teamSlug, false);
-        if (packages.length === 0) {
+        if (teamPackages.length === 0) {
           debugInfo.steps.step6_search.status = 'SKIPPED';
           debugInfo.steps.step6_search.reason = 'No hay packages disponibles';
         } else {
-          const packageIds = packages.map(p => p.id);
-          
-          // Normalizar y reescribir query
-          const normalized = normalizeQuery(testQuery);
-          const { best } = await rewriteQuery(normalized);
-          const queries = [best]; // Solo usar la consulta optimizada
-          
-          debugInfo.steps.step6_search.queryProcessing = {
-            original: testQuery,
-            normalized,
-            rewritten: best,
-            changed: best !== normalized
-          };
+          // Solo buscar en packages concedidos a este usuario (MOK-85);
+          // nunca en la lista completa del team.
+          const packageIds = teamPackages.filter(p => grantedIds.has(p.id)).map(p => p.id);
 
-          // Buscar en Qdrant
-          const retrieved = await retrieveFromQdrant({ 
-            teamSlug, 
-            packageIds, 
-            queries 
-          });
+          if (packageIds.length === 0) {
+            debugInfo.steps.step6_search.status = 'SKIPPED';
+            debugInfo.steps.step6_search.reason = 'No hay packages concedidos a este usuario';
+          } else {
+            // Normalizar y reescribir query
+            const normalized = normalizeQuery(testQuery);
+            const { best } = await rewriteQuery(normalized);
+            const queries = [best]; // Solo usar la consulta optimizada
 
-          debugInfo.steps.step6_search.status = 'SUCCESS';
-          debugInfo.steps.step6_search.data = {
-            packagesSearched: packageIds,
-            queriesUsed: queries,
-            resultsCount: retrieved.length,
-            results: retrieved.slice(0, 5).map(r => ({
-              score: r.score,
-              packageId: r.packageId,
-              packageName: r.packageName,
-              documentId: r.documentId,
-              filename: r.filename,
-              textPreview: r.text?.substring(0, 200) + '...',
-            })),
-          };
+            debugInfo.steps.step6_search.queryProcessing = {
+              original: testQuery,
+              normalized,
+              rewritten: best,
+              changed: best !== normalized
+            };
+
+            // Buscar en Qdrant
+            const retrieved = await retrieveFromQdrant({
+              teamSlug,
+              packageIds,
+              queries
+            });
+
+            debugInfo.steps.step6_search.status = 'SUCCESS';
+            debugInfo.steps.step6_search.data = {
+              packagesSearched: packageIds,
+              queriesUsed: queries,
+              resultsCount: retrieved.length,
+              results: retrieved.slice(0, 5).map(r => ({
+                score: r.score,
+                packageId: r.packageId,
+                packageName: r.packageName,
+                documentId: r.documentId,
+                filename: r.filename,
+                textPreview: r.text?.substring(0, 200) + '...',
+              })),
+            };
+          }
         }
       } catch (error) {
         debugInfo.steps.step6_search.status = 'ERROR';
