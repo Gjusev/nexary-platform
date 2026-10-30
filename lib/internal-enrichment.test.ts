@@ -7,7 +7,7 @@
  * RAG_ABSTENTION_GATE audit annotation for direct /api/rag/query calls.
  */
 
-import { describe, it, expect, beforeEach, afterEach } from 'vitest';
+import { describe, it, expect, beforeEach, afterEach, vi } from 'vitest';
 
 import {
   INTERNAL_ENRICHMENT_HEADER,
@@ -56,6 +56,42 @@ describe('internal enrichment secret', () => {
       INTERNAL_ENRICHMENT_SECRET: 'deploy-shared-secret',
     });
     expect(internalEnrichmentHeaderValue()).toBe('deploy-shared-secret');
+  });
+
+  it('trims surrounding whitespace from the configured env secret', () => {
+    // Config tooling loves to leave a trailing newline on env values; the
+    // trimmed form must be sent AND verified, otherwise self-fetches break.
+    process.env = asEnv({
+      ...process.env,
+      INTERNAL_ENRICHMENT_SECRET: '  deploy-shared-secret\n',
+    });
+    expect(internalEnrichmentHeaderValue()).toBe('deploy-shared-secret');
+    expect(
+      servesInternalChatEnrichment(
+        request('http://127.0.0.1:3000/api/rag/query', 'deploy-shared-secret')
+      )
+    ).toBe(true);
+  });
+
+  it('falls back to the per-process secret and warns once on an unusable env secret', () => {
+    const warnSpy = vi.spyOn(console, 'warn').mockImplementation(() => {});
+    try {
+      // An interior newline makes the value unsuitable as a header value.
+      process.env = asEnv({
+        ...process.env,
+        INTERNAL_ENRICHMENT_SECRET: 'secret-with\nnewline-inside',
+      });
+      const fallback = internalEnrichmentHeaderValue();
+      expect(fallback.length).toBeGreaterThanOrEqual(32);
+      expect(internalEnrichmentHeaderValue()).toBe(fallback);
+      expect(warnSpy).toHaveBeenCalledTimes(1);
+      // The fallback still authenticates this process's own fetches.
+      expect(
+        servesInternalChatEnrichment(request('http://localhost/api/rag/query', fallback))
+      ).toBe(true);
+    } finally {
+      warnSpy.mockRestore();
+    }
   });
 
   it('falls back to a stable per-process random secret', () => {

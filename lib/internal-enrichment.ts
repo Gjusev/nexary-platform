@@ -26,6 +26,18 @@
  * The internal-host allowlist stays in place as a second factor: a guessed or
  * leaked secret alone is not sufficient, the request must also arrive with an
  * internal Host (as the in-process fetches always do).
+ *
+ * Operational notes:
+ * - The header value is a credential. Nothing logs request headers on the
+ *   internal path today (the audit logger records only x-forwarded-for and
+ *   user-agent) — keep it that way if header logging or APM is ever added.
+ * - Keep `INTERNAL_URL` on loopback or an https:// endpoint. A remote
+ *   http:// `INTERNAL_URL` carries the secret and the forwarded session
+ *   cookie across that hop in cleartext.
+ * - A configured `INTERNAL_ENRICHMENT_SECRET` that cannot be sent as an
+ *   HTTP header value (empty after trim, or not printable ASCII) is ignored
+ *   with a one-time warning and the per-process fallback secret is used, so
+ *   a misconfigured value cannot break the chat routes' self-fetch.
  */
 
 import crypto from 'crypto';
@@ -42,14 +54,34 @@ export interface InternalEnrichmentRequest {
 }
 
 let processSecret: string | null = null;
+let warnedAboutEnvSecret = false;
+
+/**
+ * Header values must survive the chat routes' fetch: the fetch spec rejects
+ * values with control characters (a trailing newline from config tooling is
+ * the usual offender) or non-ASCII bytes, and a thrown fetch silently costs
+ * the chat turn its RAG context.
+ */
+function isUsableHeaderValue(value: string): boolean {
+  return /^[\x20-\x7E]+$/.test(value);
+}
 
 /**
  * Secret the chat routes must present in `x-internal-chat-enrichment`.
  */
 export function internalEnrichmentHeaderValue(): string {
   const configured = process.env.INTERNAL_ENRICHMENT_SECRET;
-  if (configured && configured.length > 0) {
-    return configured;
+  if (configured !== undefined) {
+    const trimmed = configured.trim();
+    if (trimmed.length > 0 && isUsableHeaderValue(trimmed)) {
+      return trimmed;
+    }
+    if (!warnedAboutEnvSecret) {
+      warnedAboutEnvSecret = true;
+      console.warn(
+        '[internal-enrichment] INTERNAL_ENRICHMENT_SECRET is set but cannot be used as an HTTP header value (empty after trim, or contains non-printable/non-ASCII characters); using the per-process fallback secret instead. Multi-worker deployments will see doubled RAG_ABSTENTION_GATE entries until the env secret is replaced with printable ASCII without surrounding whitespace.'
+      );
+    }
   }
   if (processSecret === null) {
     processSecret = crypto.randomBytes(32).toString('base64url');
@@ -61,10 +93,10 @@ function isInternalHost(hostname: string): boolean {
   const internalHost = process.env.INTERNAL_URL
     ? new URL(process.env.INTERNAL_URL).hostname
     : null;
+  // URL.hostname keeps IPv6 hosts bracketed, so only '[::1]' is reachable.
   return (
     hostname === '127.0.0.1' ||
     hostname === 'localhost' ||
-    hostname === '::1' ||
     hostname === '[::1]' ||
     (internalHost !== null && hostname === internalHost)
   );
@@ -95,4 +127,5 @@ export function servesInternalChatEnrichment(
  */
 export function __resetInternalEnrichmentForTests(): void {
   processSecret = null;
+  warnedAboutEnvSecret = false;
 }
