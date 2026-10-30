@@ -426,4 +426,53 @@ describe('evaluateRagGate', () => {
     expect(metadata.thresholdSource).toBe('prior');
     expect(metadata.supportScore).toBeCloseTo(0.12);
   });
+
+  it('marks gate-error fallback rows in audit metadata', async () => {
+    // QA re-review follow-up: the chat routes persist the fail-closed
+    // fallback abstain themselves when evaluateRagGate throws (the normal
+    // path logs inside the gate, which never ran). Those rows must be
+    // distinguishable from scored abstentions.
+    vi.mocked(logAuditEvent).mockClear();
+    await logGateDecision({
+      outcome: {
+        decision: 'abstain',
+        threshold: 0,
+        thresholdSource: 'prior',
+        clarifyBand: 0,
+      },
+      support: { score: 0, top: 0, rank: 0, lexical: 0, candidates: 0 },
+      decision: 'abstain',
+      enforced: true,
+      userId: 'user-1',
+      conversationId: 'conv-1',
+      packageIds: ['pkg-1'],
+      fallback: 'gate_error',
+    });
+
+    expect(logAuditEvent).toHaveBeenCalledTimes(1);
+    const call = vi.mocked(logAuditEvent).mock.calls[0][0];
+    const metadata = (call.metadata ?? {}) as Record<string, unknown>;
+    expect(metadata.fallback).toBe('gate_error');
+    expect(metadata.decision).toBe('abstain');
+  });
+
+  it('omits the fallback marker for normal gate decisions', async () => {
+    vi.mocked(logAuditEvent).mockClear();
+    await logGateDecision({
+      outcome: {
+        decision: 'answer',
+        threshold: 0.2,
+        thresholdSource: 'calibrated',
+        clarifyBand: 0.08,
+      },
+      support: { score: 0.8, top: 0.9, rank: 1, lexical: 0.7, candidates: 5 },
+      decision: 'answer',
+      enforced: false,
+    });
+
+    expect(logAuditEvent).toHaveBeenCalledTimes(1);
+    const call = vi.mocked(logAuditEvent).mock.calls[0][0];
+    const metadata = (call.metadata ?? {}) as Record<string, unknown>;
+    expect(metadata).not.toHaveProperty('fallback');
+  });
 });
