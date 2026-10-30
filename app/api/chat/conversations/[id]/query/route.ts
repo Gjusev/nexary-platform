@@ -5,6 +5,7 @@ import { allowedRagIds } from '@/lib/authz';
 import { checkAndIncrementUsage, recordUsageEvent } from '@/lib/billing/limits';
 import { checkChatRateLimit } from '@/lib/middleware/api-rate-limit';
 import { evaluateRagGate } from '@/lib/rag/abstention';
+import { internalEnrichmentHeaderValue } from '@/lib/internal-enrichment';
 
 const stackServerApp = new StackServerApp({
   tokenStore: 'nextjs-cookie',
@@ -74,8 +75,10 @@ export async function POST(
             'Content-Type': 'application/json',
             'Cookie': request.headers.get('Cookie') || '', // Forward session
             // Internal enrichment: /api/rag/query skips its annotate gate
-            // evaluation; this route evaluates the gate itself below.
-            'x-internal-chat-enrichment': '1',
+            // evaluation; this route evaluates the gate itself below. The
+            // header carries the shared secret — a bare flag would let
+            // external callers spoof the Host header and silence the audit.
+            'x-internal-chat-enrichment': internalEnrichmentHeaderValue(),
           },
           body: JSON.stringify({
             query: content,
